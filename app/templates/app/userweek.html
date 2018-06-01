@@ -1,0 +1,15 @@
+<p1>{{ betset }}   {{ betset.id }}</p1>
+<br>
+<a>User: </a><a href="/app/user/{{ betset.user.id }}/">{{ betset.user }}</a>
+<br>
+<a>League: </a><a href="app/league/{{ betset.league.id }}/">{{ betset.league }}<a>
+<br>
+{% if my_bets %}
+	<ul>
+	{% for bet in my_bets %}
+		<li><a>{{ bet }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No Bets Made</p>
+{% endif %}

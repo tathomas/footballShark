@@ -1,0 +1,10 @@
+Run using:
+
+$ python3 manage.py runserver
+
+If you do not have python 3, you may need to install that.
+
+127.0.0.2:8000/app
+127.0.0.2:8000/app/user/1/
+
+

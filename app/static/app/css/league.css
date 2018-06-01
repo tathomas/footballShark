@@ -1,0 +1,12 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+.league-main > p > .btn {
+  margin: 5px 0;
+}
+
+.league-main .navbar .container {
+  width: auto;
+}
