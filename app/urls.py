@@ -5,11 +5,12 @@ from . import views
 app_name = 'app'
 urlpatterns = [
 	# /app/
-	url(r'^$', views.index, name='index'),
-	# /app/5/
-	url(r'^(?P<team_id>[0-9]+)/$', views.detail, name='detail'),
-
-	# /app/user/{{person.id}}
+	url(r'^$', views.home, name='home'),
+	# /app/faq
+	url(r'^faq$', views.faq, name='faq'),
+	# /app/login
+	url(r'^login$', views.log_in, name='log_in'),
+	# /app/{{person.id}}
 	url(r'^user/(?P<person_id>[0-9]+)/$', views.user, name='user'),
 	# /app/league/{{league.id}}
 	url(r'^league/(?P<league_id>[0-9]+)/$', views.league, name='league'),

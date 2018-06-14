@@ -44,13 +44,12 @@
           <a class="navbar-brand" href="/app/register">Sign Up</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form action="{% url 'app:log_in' %}" method="post" class="navbar-form navbar-right"> 
-			{% csrf_token %}           
-			<div class="form-group">
-              <input type="text" id="username" name="username" class="form-control">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" id="password" name="password" class="form-control">
+              <input type="password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>
@@ -61,12 +60,8 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Website name!</h1>
-        <p>Description Here</p>
-        <p>
-	  <a class="btn btn-primary btn-lg" href="/app/signin" role="button">Sign In</a>
-          <a class="btn btn-primary btn-lg" href="/app/register" role="button">Sign Up</a>
-	</p>
+        <h1>How it Works</h1>
+        <p>Questions Here</p>
       </div>
     </div>
 

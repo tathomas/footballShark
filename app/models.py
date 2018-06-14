@@ -29,20 +29,19 @@ class Person(models.Model):
 
 class League(models.Model):
 	members = models.ManyToManyField(
-		Person
+		User
 	)
 	name = models.CharField(max_length=100)
 
 	def __str__(self):
 		return self.name
 
-class BetSet(models.Model):
-	user = models.ForeignKey(Person)
-	league = models.ForeignKey(League)
-	set_num = models.IntegerField()
+class Week(models.Model):
+	year = models.IntegerField()
+	num = models.IntegerField()
+
 
 class GameBet(models.Model):
-	bet_set = models.ForeignKey(BetSet)
 	game = models.ForeignKey(Game)
 	line_val = models.IntegerField()
 	ou_val = models.IntegerField()
@@ -50,7 +49,9 @@ class GameBet(models.Model):
 	ou_bet = models.IntegerField()
 
 
-
-
-
+class BetSet(models.Model):
+	user = models.ForeignKey(User)
+	week = models.ForeignKey(Week)
+	bets = models.ManyToManyField(GameBet)
+	set_num = models.IntegerField()
 
