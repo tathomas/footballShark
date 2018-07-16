@@ -18,7 +18,7 @@
     <link href="{% static 'app/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'app/css/league.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -60,42 +60,17 @@
     </nav>
 
 
-    <div class="container league-main" role="main">
-    <div class="page-header">
-      <h1>{{ person }}</h1>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div>
+		<h2>Join a League</h2>
+		<form method="post">
+            {% csrf_token %}
+			{{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Join League</button>
+        </form>
     </div>
-{% if my_leagues %}
-    <div class="col-md-6">
-    <table class="table table-bordered">
-      <thead><tr>
-        <th class="col-md-8">My Leagues:</th>
-      </tr></thead>
-      <tbody>
-      {% for league in my_leagues %}
-        <tr>
-        <td><a href="/app/league/{{ league.id }}/">{{ league }}</a></td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    </div>
-{% else %}
-    <p>No League Available</p>
-{% endif %}
-
-    </div> <!-- league-main -->
-
-<div>
-	<a class="btn btn-primary btn-lg" href="/app/create_league" role="button">Create League</a>
-	<a class="btn btn-primary btn-lg" href="/app/join_league" role="button">Join League</a>
-</div>
 
 
-    <script>
-      function LinkFormatter(value, 
-
-
-    </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -106,11 +81,3 @@
     <script src="{% static 'app/js/ie10-viewport-bug-workaround.js' %}"></script>
   </body>
 </html>
-
-
-
-
-
-
-
-
