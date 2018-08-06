@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Title Page</title>
+    <title>FootballShark</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -38,18 +38,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Website Name</a>
+          <a class="navbar-brand">Football Shark (alpha)</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li>
               <a href="/app/user">My Account</a>
-            </li>
-            <li>
-              <a href="#">Leagues</a>
-            </li>
-            <li>
-              <a href="#">TBD</a>
             </li>
             <li>
               <a href="/app/logout">Log Out</a>
@@ -66,11 +60,22 @@
     <div class="page-header">
       <h1>League Name: {{ league }}</h1>
     </div>
+
     <div class="page-header">
-      <h3>League Key: {{ league.key }}</h1>
+      <h3>League Key: {{ league.key }}</h3>
     </div>
 
-{% if league.members %}
+	<br><br>
+
+{% if active_week_num %}
+	<div>
+		<a class="btn btn-primary btn-lg" href="/app/league_week/{{league.id}}/{{active_week_num}}" role="button">View This Weeks Picks</a>
+	</div>
+{% endif %}
+
+	<br><br>
+
+{% if my_users %}
     <div class="col-md-6">
     <h4>Standings</h4>
     <table class="table table-bordered">
@@ -80,11 +85,11 @@
         <th class="col-md-4">Name</th>
       </tr></thead>
       <tbody>
-      {% for member in league.members.all %}
+      {% for tuple in my_users %}
         <tr>
         <td>{{ forloop.counter }}</td>
-        <td>Todo</td>
-        <td>{{ member }}</td>
+        <td>{{ tuple.1 }}</td>
+        <td>{{ tuple.0 }}</td>
         </tr>
       {% endfor %}
       </tbody>
@@ -94,22 +99,8 @@
     <p>No League Available</p>
 {% endif %}
 
-{% if my_weeks %}
-    <div class="col-md-4">
-    <h4>Weeks</h4>
-    <table class="table table-bordered">
-      <tbody>
-      {% for week in my_weeks %}
-        <tr>
-        <td><a href="/app/league/week/{{ week }}/">Week {{ week }}</a></td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    </div>
-{% else %}
-    <p>No Weeks Available</p>
-{% endif %}
+	<br><br>
+
 
     </div> <!-- league-main -->
 

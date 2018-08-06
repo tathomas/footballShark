@@ -54,17 +54,38 @@
     </nav>
 
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div>
-		<h2>Create a League</h2>
-		<form method="post">
-            {% csrf_token %}
-			{{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Create League</button>
-        </form>
+    <div class="container league-main" role="main">
+
+    <div class="page-header">
+      <h1>Editing picks for Week {{ week.num }}</h1>
     </div>
 
+	<form method="post">
+        {% csrf_token %}
+		{{ edit_bet_formset.management_form }}
+		{% for form in edit_bet_formset %}
+			<div class="edit_bet_form">
+				<br>
+				{% for game in games %}
+					{% ifequal game.id form.game_id.value|add:"0" %}
+						<h4>{{ game.printSpreadInfo }}</h4>
+					{% endifequal %}
+				{% endfor %}
+				{{ form.game_id.as_hidden }}
+				<label for="line_bet">Line</label>
+				{{ form.line_bet }}
+				<label for="ou_bet">Over/Under</label>
+				{{ form.ou_bet }}
+			</div>
+		{% endfor %}
+		<button type="submit" class="btn btn-primary">Save Picks</button>
+	</form>
 
+    </div> <!-- league-main -->
+
+
+
+    </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

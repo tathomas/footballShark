@@ -22,12 +22,9 @@ urlpatterns = [
 	url(r'^create_league$', views.create_league, name='create_league'),
 	# /app/join_league
 	url(r'^join_league$', views.join_league, name='join_league'),
-	# /app/league/week/{{week.id}}
-	url(r'^league/week/(?P<betset_id>[0-9]+)/$', views.league_week, name='league_week'),
-	# /app/user/week/{{week.id}}
-	url(r'^user/week/(?P<betset_id>[0-9]+)/$', views.user_week, name='user_week'),
-
-	# /app/5/vote/
-	url(r'^(?P<game_id>[0-9]+)/vote/$', views.vote, name='vote'),
+	# /app/edit_bets/
+	url(r'^edit_picks/$', views.edit_picks, name='edit_picks'),
+	# /app/league_week/{{league.id}}/{{week}}
+	url(r'^league_week/(?P<league_id>[0-9]+)/(?P<week>[0-9]+)/$', views.league_week, name='league_week'),
 
 ]

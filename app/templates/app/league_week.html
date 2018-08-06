@@ -18,7 +18,7 @@
     <link href="{% static 'app/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/league.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -54,16 +54,19 @@
     </nav>
 
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div>
-		<h2>Create a League</h2>
-		<form method="post">
-            {% csrf_token %}
-			{{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Create League</button>
-        </form>
+
+    <div class="container league-main" role="main">
+
+    <div class="page-header">
+      <h1>This page is under Construction</h1>
+    </div>
+    <div class="page-header">
+      <h3>This page will eventually be the equivalent of the 'Week #' tab in the old spreadsheet.</h3>
     </div>
 
+
+
+    </div> <!-- league-main -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

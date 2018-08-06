@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Title Page</title>
+    <title>FootballShark</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -38,18 +38,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Website Name</a>
+          <a class="navbar-brand">Football Shark (alpha)</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active">
               <a href="/app/user">My Account</a>
-            </li>
-            <li>
-              <a href="#">Leagues</a>
-            </li>
-            <li>
-              <a href="#">TBD</a>
             </li>
             <li>
               <a href="/app/logout">Log Out</a>
@@ -61,9 +55,28 @@
 
 
     <div class="container league-main" role="main">
+
     <div class="page-header">
       <h1>{{ person }}</h1>
     </div>
+
+	<br><br>
+
+	<div>
+		<a class="btn btn-primary btn-lg" href="/app/create_league" role="button">Create League</a>
+		<a class="btn btn-primary btn-lg" href="/app/join_league" role="button">Join League</a>
+	</div>
+
+	<br><br>
+
+{% if active_week %}
+	<div>
+		<a class="btn btn-primary btn-lg" href="/app/edit_picks" role="button">Edit Your Picks</a>
+	</div>
+{% endif %}
+
+	<br><br>
+
 {% if my_leagues %}
     <div class="col-md-6">
     <table class="table table-bordered">
@@ -80,19 +93,45 @@
     </table>
     </div>
 {% else %}
-    <p>No League Available</p>
+    <h3>No League Available</h3>
 {% endif %}
+
+	<br><br>
+
+{% if active_bets %}
+    <div class="page-header">
+      <h3>This Week's Bets</h1>
+    </div>
+
+    <div class="col-md-10">
+    <table class="table table-bordered">
+      <thead><tr>
+        <th class="col-md-1">Away Score</th>
+        <th class="col-md-1">Home Score</th>
+        <th class="col-md-6">Game</th>
+        <th class="col-md-1">Line Bet</th>
+        <th class="col-md-1">Over/Under Bet</th>
+        <th class="col-md-1">Score</th>
+      </tr></thead>
+      <tbody>
+      {% for bet_game in active_bets %}
+        <tr>
+        <td>{{ bet_game.1.score_1 }}</td>
+        <td>{{ bet_game.1.score_2 }}</td>
+	    <td>{{ bet_game.1.printSpreadInfo }}</td>
+        <td>{{ bet_game.0.line_bet }}</td>
+        <td>{{ bet_game.0.ou_bet }}</td>
+        <td>{{ bet_game.0.score }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+{% endif %}
+
 
     </div> <!-- league-main -->
 
-<div>
-	<a class="btn btn-primary btn-lg" href="/app/create_league" role="button">Create League</a>
-	<a class="btn btn-primary btn-lg" href="/app/join_league" role="button">Join League</a>
-</div>
-
-
-    <script>
-      function LinkFormatter(value, 
 
 
     </script>
