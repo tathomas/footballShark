@@ -25,6 +25,6 @@ urlpatterns = [
 	# /app/edit_bets/
 	url(r'^edit_picks/$', views.edit_picks, name='edit_picks'),
 	# /app/league_week/{{league.id}}/{{week}}
-	url(r'^league_week/(?P<league_id>[0-9]+)/(?P<week>[0-9]+)/$', views.league_week, name='league_week'),
+	url(r'^league_week/(?P<league_id>[0-9]+)/(?P<week_num>[0-9]+)/$', views.league_week, name='league_week'),
 
 ]

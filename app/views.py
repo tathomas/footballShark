@@ -2,15 +2,15 @@ from collections import defaultdict
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 
 from django.http import Http404
 from django.utils.crypto import get_random_string
 
-from .models import Team, Game, League, Bet, Membership, Week, ScoreCard
+from .models import Team, Game, League, Membership, Week, Member
 from .forms import LeagueForm, JoinLeagueForm, EditBetForm
 from django.forms import formset_factory
 import datetime
@@ -42,14 +42,12 @@ def signup(request):
 		if form.is_valid():
 			username = form.cleaned_data.get('username')
 			raw_password = form.cleaned_data.get('password')
-			#form.save()
 			user = form.save()
-			#user = authenticate(username=username, password=raw_password)
 			user.backend = 'django.contrib.auth.backends.ModelBackend'
 			login(request, user)
 
-			#Create all user bet objects, and unlock the appropriate ones
-			_create_user_bets(user)
+			member = Member.objects.create(user=user, betCard=_get_initial_betcard())
+			member.save()
 			return redirect('/app/user')
 	else:
 		form = UserCreationForm()
@@ -65,29 +63,45 @@ def render_user(request, person_id):
 	locked_weeks = Week.objects.filter(status=2)
 	past_weeks = Week.objects.filter(status=3)
 
-	active_week = len(Week.objects.filter(status=1))
+	member = Member.objects.get(user=person)
 
-	active_bets = []
-	if active_week:
-		week = active_weeks[0]
-		games = Game.objects.filter(week=week)
-		for game in games:
-			bet = Bet.objects.get(betslip=person, game=game)
-			active_bets.append((bet,game))
+	betting_open = False
+	if len(active_weeks):
+		active_week = active_weeks[0]
+		betting_open = True
 	elif len(locked_weeks):
-		week = locked_weeks[0]
-		games = Game.objects.filter(week=week)
-		for game in games:
-			bet = Bet.objects.get(betslip=person, game=game)
-			active_bets.append((bet,game))
+		active_week = locked_weeks[0]
 
-	#TODO Add Past Weeks Here
+	past_week_tuples = []
+	active_games = []
+	results_scores = []
+	if len(past_weeks):
+		for week in past_weeks:
+			games = Game.objects.filter(week=week)
+			past_bets = []
+			for game in games:
+				line_bet, ou_bet = member.get_bet_tuple(game.index)
+				score = member.get_game_score(game.index)
+				past_bets.append((game, [line_bet, ou_bet, score]))
+			week_score = member.get_week_score(week)
+			past_week_tuples.append((week, past_bets))
+			results_scores.append((week, week_score))
+	if active_week:
+		games = Game.objects.filter(week=active_week)
+		for game in games:
+			line_bet, ou_bet = member.get_bet_tuple(game.index)
+			score = member.get_game_score(game.index)
+			active_games.append((game, [line_bet, ou_bet, score]))
+		week_score = member.get_week_score(active_week)
+		results_scores.append((active_week, week_score))
 
 	context = {
 		'person' : person,
 		'my_leagues' : my_leagues,
-		'active_week' : active_week,
-		'active_bets' : active_bets
+		'active_games' : active_games, 
+		'past_week_tuples' : past_week_tuples, 
+		'betting_open' : betting_open, 
+		'results_scores' : results_scores
 	}
 	return render(request, 'app/user.html', context)
 
@@ -99,22 +113,27 @@ def render_league(request, league_id):
 	if request.user not in my_users:
 		raise Http404("User is not a member of requested League.")
 
-	user_score_tuple = []
-	for user in my_users:
-		score = 0
-		score_cards = ScoreCard.objects.filter(user=user)
-		for card in score_cards:
-			score += card.score
-		user_score_tuple.append((user, score))
+	weeks = Week.objects.filter(status__in=[1,2,3])
+	members = Member.objects.filter(user__in=my_users)
 
-	active_weeks = Week.objects.filter(status=1)
-	if len(active_weeks):
-		active_week_num = active_weeks[0].num
+	results_scores = []
+	for week in weeks:
+		weekly_scores = []
+		for member in members:
+			week_score = member.get_week_score(week)
+			weekly_scores.append(week_score)
+		results_scores.append((week, weekly_scores))
+
+	standings = [0] * len(results_scores)
+	for week_tuple in results_scores:
+		for i, score in enumerate(week_tuple[1]):
+			standings[i] += score
 
 	context = {
 		'league' : league,
-		'my_users' : user_score_tuple,
-		'active_week_num' : active_week_num,
+		'my_users' : my_users,
+		'results_scores' : results_scores,
+		'standings' : standings
 	}
 	return render(request, 'app/league.html', context)	
 
@@ -191,6 +210,7 @@ def log_out(request):
 	logout(request)
 	return redirect('/app/')
 
+@login_required(login_url='/app/login')
 def edit_picks(request):
 	EditBetFormSet = formset_factory(EditBetForm, extra=0)
 
@@ -204,14 +224,15 @@ def edit_picks(request):
 	if request.method == 'POST':
 		formset = EditBetFormSet(request.POST, request.FILES)
 		if formset.is_valid():
+			member = Member.objects.get(user=request.user)			
 			for form in formset:
 				game_id = form.cleaned_data['game_id']
 				user = request.user
-				game = Game.objects.get(id=game_id)
-				bet = Bet.objects.get(betslip=user, game=game)
-				bet.line_bet = form.cleaned_data['line_bet']
-				bet.ou_bet = form.cleaned_data['ou_bet']
-				bet.save()
+				game = Game.objects.get(index=game_id)
+				line_bet = form.cleaned_data['line_bet']
+				ou_bet = form.cleaned_data['ou_bet']
+				member.set_betcard(game.index, line_bet, ou_bet)
+			member.save()
 		return redirect('/app/user')
 	else:
 		formset = EditBetFormSet(initial=_generate_form_info(request,games))
@@ -223,33 +244,60 @@ def edit_picks(request):
     }
 	return render(request, 'app/edit_picks.html', context)
 
-def league_week(request, league_id, week):
-	
+@login_required(login_url='/app/login')
+def league_week(request, league_id, week_num):
+
+	week = Week.objects.get(num=week_num)
+	league = League.objects.get(id=league_id)
+	my_users = league.members.all()
+	if request.user not in my_users:
+		raise Http404("User is not a member of requested League.")
+
+	games = Game.objects.filter(week=week)
+	members = Member.objects.filter(user__in=my_users)
+
+	bet_grid = []
+	for game in games:
+		game_columns = game.get_column_headers()
+		for ind, column in enumerate(game_columns):
+			user_bets = []
+			for member in members:
+				member_val = member.get_column_val(ind, game)
+				user_bets.append(member_val)
+			bet_grid.append((column, user_bets))
+
+	week_scores = []
+	for member in members:
+		week_score = member.get_week_score(week)
+		week_scores.append(week_score)
+
+	context = {
+		'league' : league,
+		'bet_grid' : bet_grid,
+		'week_scores' : week_scores,
+		'my_users' : my_users, 
+		'week': week
+	}
+
+	return render(request, 'app/league_week.html', context)
 
 
-	return render(request, 'app/league_week.html', {})
-
-
-def _create_user_bets(user):
-	games = Game.objects.all()
-	for my_game in games:
-		bet = Bet.objects.create(game=my_game,betslip=user)
-		bet.save()
-
-	weeks = Week.objects.all()
-	for week in weeks:
-		score_card = ScoreCard.objects.create(week=week, user=user)
-		score_card.save()
+def _get_initial_betcard():
+	to_ret = chr(32 + 44) * 400
+	return to_ret
 
 # Helper method to generate inital bet forms
 def _generate_form_info(request, games):
 	bet_list = []	
 	user = request.user
+	member = Member.objects.get(user=user)
 
 	for game in games:
-		bet = Bet.objects.get(betslip=user, game=game)
-		dict_entry = dict([("game_id", game.id), ("line_bet", bet.line_bet), ("ou_bet", bet.ou_bet)])
+		line_bet, ou_bet = member.get_bet_tuple(game.index)
+		dict_entry = dict([("game_id", game.index), ("line_bet", line_bet), ("ou_bet", ou_bet)])
 		bet_list.append(dict_entry)
+
+	print ("Generated Betlist: " + str(bet_list))
 
 	return bet_list
 

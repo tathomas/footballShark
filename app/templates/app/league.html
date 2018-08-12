@@ -75,30 +75,38 @@
 
 	<br><br>
 
-{% if my_users %}
-    <div class="col-md-6">
-    <h4>Standings</h4>
+    <div class="page-header">
+      <h3>Results</h3>
+    </div>
+
+
+
+    <div class="col-md-10">
     <table class="table table-bordered">
       <thead><tr>
         <th class="col-md-1"></th>
-        <th class="col-md-2">Points</th>
-        <th class="col-md-4">Name</th>
+		{% for user in my_users %}
+        <th class="col-md-1">{{ user }}</th>
+		{% endfor %}
       </tr></thead>
       <tbody>
-      {% for tuple in my_users %}
+      <tr>
+        <th class="col-md-1">Total: </th>
+		{% for score in standings %}
+        <th class="col-md-1">{{ score }}</th>
+		{% endfor %}
+      </tr>
+{% for results in results_scores %}
         <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ tuple.1 }}</td>
-        <td>{{ tuple.0 }}</td>
+        <td><a href="/app/league_week/{{league.id}}/{{results.0.num}}">Week {{ results.0.num }}:</a></td>
+		{% for score in results.1 %}
+        <td>{{ score }}</td>
+		{% endfor %}
         </tr>
-      {% endfor %}
+{% endfor %}
       </tbody>
     </table>
     </div>
-{% else %}
-    <p>No League Available</p>
-{% endif %}
-
 	<br><br>
 
 

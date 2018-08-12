@@ -67,7 +67,7 @@
 			<div class="edit_bet_form">
 				<br>
 				{% for game in games %}
-					{% ifequal game.id form.game_id.value|add:"0" %}
+					{% ifequal game.index form.game_id.value|add:"0" %}
 						<h4>{{ game.printSpreadInfo }}</h4>
 					{% endifequal %}
 				{% endfor %}

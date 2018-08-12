@@ -54,8 +54,7 @@
     </nav>
 
 
-    <div class="container league-main" role="main">
-
+    <main class="container league-main" role="main">
     <div class="page-header">
       <h1>{{ person }}</h1>
     </div>
@@ -69,13 +68,40 @@
 
 	<br><br>
 
-{% if active_week %}
+{% if betting_open %}
 	<div>
 		<a class="btn btn-primary btn-lg" href="/app/edit_picks" role="button">Edit Your Picks</a>
 	</div>
 {% endif %}
 
-	<br><br>
+
+<div class="clearfix"></div>
+
+    <div class="page-header">
+      <h3>Results</h3>
+    </div>
+
+
+
+    <div class="col-md-10">
+    <table class="table table-bordered">
+      <thead><tr>
+        <th class="col-md-1">Week</th>
+        <th class="col-md-1">Score</th>
+      </tr></thead>
+      <tbody>
+{% for results in results_scores %}
+        <tr>
+        <td>{{ results.0.num }}</td>
+        <td>{{ results.1 }}</td>
+        </tr>
+{% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+
+<div class="clearfix"></div>
 
 {% if my_leagues %}
     <div class="col-md-6">
@@ -96,11 +122,11 @@
     <h3>No League Available</h3>
 {% endif %}
 
-	<br><br>
+<div class="clearfix"></div>
 
-{% if active_bets %}
+{% if active_games %}
     <div class="page-header">
-      <h3>This Week's Bets</h1>
+      <h3>This Week's Bets</h3>
     </div>
 
     <div class="col-md-10">
@@ -114,14 +140,14 @@
         <th class="col-md-1">Score</th>
       </tr></thead>
       <tbody>
-      {% for bet_game in active_bets %}
+      {% for game in active_games %}
         <tr>
-        <td>{{ bet_game.1.score_1 }}</td>
-        <td>{{ bet_game.1.score_2 }}</td>
-	    <td>{{ bet_game.1.printSpreadInfo }}</td>
-        <td>{{ bet_game.0.line_bet }}</td>
-        <td>{{ bet_game.0.ou_bet }}</td>
-        <td>{{ bet_game.0.score }}</td>
+        <td>{{ game.0.score_1 }}</td>
+        <td>{{ game.0.score_2 }}</td>
+	    <td>{{ game.0.printSpreadInfo }}</td>
+        <td>{{ game.1.0 }}</td>
+        <td>{{ game.1.1 }}</td>
+        <td>{{ game.1.2 }}</td>
         </tr>
       {% endfor %}
       </tbody>
@@ -129,8 +155,43 @@
     </div>
 {% endif %}
 
+<div class="clearfix"></div>
 
-    </div> <!-- league-main -->
+{% for week_tuple in past_week_tuples %}
+    <div class="page-header">
+      <h3>Week {{ week_tuple.0.num }} Bets</h3>
+    </div>
+
+    <div class="col-md-10">
+    <table class="table table-bordered">
+      <thead><tr>
+        <th class="col-md-1">Away Score</th>
+        <th class="col-md-1">Home Score</th>
+        <th class="col-md-6">Game</th>
+        <th class="col-md-1">Line Bet</th>
+        <th class="col-md-1">Over/Under Bet</th>
+        <th class="col-md-1">Score</th>
+      </tr></thead>
+      <tbody>
+      {% for game in week_tuple.1 %}
+        <tr>
+        <td>{{ game.0.score_1 }}</td>
+        <td>{{ game.0.score_2 }}</td>
+	    <td>{{ game.0.printSpreadInfo }}</td>
+        <td>{{ game.1.0 }}</td>
+        <td>{{ game.1.1 }}</td>
+        <td>{{ game.1.2 }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+{% endfor %}
+
+
+	<br><br>
+
+    </main> <!-- league-main -->
 
 
 

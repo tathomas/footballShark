@@ -20,7 +20,7 @@ class Command(BaseCommand):
 		input_data = pd.read_csv("./app/management/Data/2018Games.csv", header=0).loc[:, :'Line']
 		my_data = input_data.drop(["Line"],axis=1)
 
-		for line in my_data.as_matrix():
+		for ind, line in enumerate(my_data.as_matrix()):
 			team1 = Team.objects.get(name = line[5])
 			team2 = Team.objects.get(name = line[6])
 			
@@ -29,10 +29,12 @@ class Command(BaseCommand):
 			date_string = (str(line[3]) + str(line[0]) + str(line[4]))
 			date_time = datetime.strptime(date_string, '%B %d%Y%I:%M %p')
 
+			print ("Creating game " + str(ind) + ", line: " + str(line))
+
 			game = Game.objects.create(team_1=team1,
 										team_2=team2,
 										date=date_time,
-										week=week)
+										week=week, index=ind)
 
 			game.save()
 

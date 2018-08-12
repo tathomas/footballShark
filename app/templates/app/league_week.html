@@ -58,11 +58,38 @@
     <div class="container league-main" role="main">
 
     <div class="page-header">
-      <h1>This page is under Construction</h1>
+      <h1>Week {{week.num}} Results</h1>
     </div>
-    <div class="page-header">
-      <h3>This page will eventually be the equivalent of the 'Week #' tab in the old spreadsheet.</h3>
+
+
+
+    <div class="col-md-10">
+    <table class="table table-bordered">
+      <thead><tr>
+        <th class="col-md-1"></th>
+		{% for user in my_users %}
+        <th class="col-md-1">{{ user }}</th>
+		{% endfor %}
+      </tr></thead>
+      <tbody>
+      <tr>
+        <th class="col-md-1">Total: </th>
+		{% for score in week_scores %}
+        <th class="col-md-1">{{ score }}</th>
+		{% endfor %}
+      </tr>
+{% for row in bet_grid %}
+        <tr>
+        <td>{{ row.0 }}</td>
+		{% for bet in row.1 %}
+        <td>{{ bet }}</td>
+		{% endfor %}
+        </tr>
+{% endfor %}
+      </tbody>
+    </table>
     </div>
+	<br><br>
 
 
 

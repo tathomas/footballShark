@@ -1,6 +1,78 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+class Member(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	betCard = models.CharField(max_length=400)
+
+	def __str__(self):
+		return super(Member, self).__str__()
+
+	def set_betcard(self, game_index, line_bet, ou_bet):
+		char_bet = 0
+		char_bet += (line_bet + 4) * 10
+		char_bet += ou_bet + 4
+
+		temp = self.betCard[:game_index] + chr(char_bet + 32) + self.betCard[game_index+1:]
+		self.betCard = temp
+
+	def get_week_score(self, week):
+		games = Game.objects.filter(week=week)
+		score = 0
+		for game in games:
+			score += self.get_game_score(game.index)
+		return score
+
+	def get_game_score(self, game_index):
+		line_bet, ou_bet = self.get_bet_tuple(game_index)
+
+		game = Game.objects.get(index=game_index)
+		if not game.score_updated:
+			return 0
+
+		score = 0
+		if (game.score_1 - game.score_2 < game.line_val):
+			print('1')
+			score += line_bet
+		elif (game.score_1 - game.score_2 > game.line_val):
+			print('2')
+			score -= line_bet
+		if (game.score_1 + game.score_2 > game.ou_val):
+			print('3')
+			score += ou_bet
+		elif (game.score_1 + game.score_2 < game.ou_val):
+			print('4')
+			score -= ou_bet
+		return score
+
+	def get_bet_tuple(self, game_index):
+		game = Game.objects.get(index=game_index)
+		
+		score_char = self.betCard[game_index]
+
+		score_int = ord(score_char) - 32
+		line_bet = (score_int // 10) - 4
+		ou_bet = (score_int % 10) - 4
+
+		return line_bet, ou_bet
+
+	def get_column_val(self, ind, game):
+		line_bet, ou_bet = self.get_bet_tuple(game.index)
+		if ind == 0:
+			if line_bet < 0:
+				return -1 * line_bet
+		elif ind == 1:
+			if line_bet > 0:
+				return line_bet
+		elif ind == 2:
+			if ou_bet > 0:
+				return ou_bet
+		elif ind == 3:
+			if ou_bet < 0:
+				return ou_bet * -1
+		return None
+
 class Team(models.Model):
 	name = models.CharField(max_length=50)
 
@@ -27,9 +99,11 @@ class Game(models.Model):
 	score_1 = models.IntegerField(default=0)
 	score_2 = models.IntegerField(default=0)
 	date = models.DateField()
+	index = models.IntegerField(default=0, unique=True)
 	week = models.ForeignKey(Week, on_delete=models.CASCADE)
 	line_val = models.IntegerField(default=0)
 	ou_val = models.IntegerField(default=0)
+	score_updated = models.BooleanField(default=False)
 
 
 	def __str__(self):
@@ -38,6 +112,13 @@ class Game(models.Model):
 	@property
 	def printSpreadInfo(self):
 		return str(self.team_1) + " @ " + str(self.team_2) + ", line=" + str(self.line_val) + "  ou=" + str(self.ou_val)
+
+	def get_column_headers(self):
+		col_1 = str(self.team_1) + " (" + str(-1*self.line_val) + ")"
+		col_2 = str(self.team_2) + " (" + str(self.line_val) + ")"
+		col_3 = "Over (" + str(self.ou_val) + ")"
+		col_4 = "Under (" + str(self.ou_val) + ")"
+		return col_1, col_2, col_3, col_4
 
 class League(models.Model):
 	members = models.ManyToManyField(User, through='Membership')
@@ -58,33 +139,5 @@ class Membership(models.Model):
 
 
 
-class Bet(models.Model):
-	game = models.ForeignKey(Game)
-	betslip = models.ForeignKey(User)
-	line_bet = models.IntegerField(default=0)
-	ou_bet = models.IntegerField(default=0)
-	score = models.IntegerField(default=0)
-
-	def updateScore(self, away, home, line, ou):
-		self.score = 0
-		if(away-home < line):
-			self.score += self.line_bet
-		elif(away-home > line):
-			self.score -= self.line_bet
-		if(away+home < ou):
-			self.score -= self.ou_bet
-		elif(away+home > ou):
-			self.score += self.ou_bet
-
-class ScoreCard(models.Model):
-	week = models.ForeignKey(Week, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	score = models.IntegerField(default=0)
-
-	def updateScore(self):
-		games = Game.objects.filter(week=self.week)
-		for game in games:
-			bet = Bet.objects.get(betslip=self.user, game=game)
-			self.score += bet.score
 
 
