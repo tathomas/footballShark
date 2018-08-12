@@ -11,3 +11,4 @@ psycopg2==2.7.5
 python-dateutil==1.5
 python-decouple==3.1
 whitenoise==4.0
+dateutil==2.5.0
