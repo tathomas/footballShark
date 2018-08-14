@@ -21,8 +21,8 @@ class Command(BaseCommand):
 		my_data = input_data.drop(["Line"],axis=1)
 
 		for ind, line in enumerate(my_data.as_matrix()):
-			team1 = Team.objects.get(name = line[5])
-			team2 = Team.objects.get(name = line[6])
+			team1 = Team.objects.get(name = line[6])
+			team2 = Team.objects.get(name = line[5])
 			
 			week, created = Week.objects.get_or_create(year=2018, num = line[1])
 
