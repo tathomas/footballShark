@@ -71,7 +71,7 @@ class Member(models.Model):
 		elif ind == 3:
 			if ou_bet < 0:
 				return ou_bet * -1
-		return None
+		return 0
 
 class Team(models.Model):
 	name = models.CharField(max_length=50)

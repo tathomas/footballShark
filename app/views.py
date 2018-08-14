@@ -4,14 +4,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
 from django.http import Http404
 from django.utils.crypto import get_random_string
 
 from .models import Team, Game, League, Membership, Week, Member
-from .forms import LeagueForm, JoinLeagueForm, EditBetForm
+from .forms import LeagueForm, JoinLeagueForm, EditBetForm, UserCreateForm
 from django.forms import formset_factory
 import datetime
 
@@ -38,7 +38,7 @@ def faq(request):
 
 def signup(request):
 	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
+		form = UserCreateForm(request.POST)
 		if form.is_valid():
 			username = form.cleaned_data.get('username')
 			raw_password = form.cleaned_data.get('password')
@@ -48,13 +48,13 @@ def signup(request):
 
 			member = Member.objects.create(user=user, betCard=_get_initial_betcard())
 			member.save()
-			return redirect('/app/user')
+			return redirect('/user')
 	else:
-		form = UserCreationForm()
+		form = UserCreateForm()
 	return render(request, 'app/signup.html', {'form': form})		
 
 # helper method to render user homepage
-@login_required(login_url='/app/login')
+@login_required(login_url='/login')
 def render_user(request, person_id):
 	person = User.objects.get(id=person_id)
 	my_leagues = League.objects.filter(members__id = person_id)
@@ -66,6 +66,7 @@ def render_user(request, person_id):
 	member = Member.objects.get(user=person)
 
 	betting_open = False
+	active_week = []
 	if len(active_weeks):
 		active_week = active_weeks[0]
 		betting_open = True
@@ -106,7 +107,7 @@ def render_user(request, person_id):
 	return render(request, 'app/user.html', context)
 
 # helper method to render league page
-@login_required(login_url='/app/login')
+@login_required(login_url='/login')
 def render_league(request, league_id):
 	league = League.objects.get(id=league_id)
 	my_users = league.members.all()
@@ -147,7 +148,7 @@ def _get_league_key():
 			return True, new_key
 	return False, ''
 
-@login_required(login_url='/app/login')
+@login_required(login_url='/login')
 def create_league(request):
 	if request.method == 'POST':
 		form = LeagueForm(request.POST)
@@ -167,7 +168,7 @@ def create_league(request):
 		form = LeagueForm()
 	return render(request, 'app/create_league.html', {'form':form})
 
-@login_required(login_url='/app/login')
+@login_required(login_url='/login')
 def join_league(request):
 	if request.method == 'POST':
 		form = JoinLeagueForm(request.POST)
@@ -201,16 +202,16 @@ def log_in(request):
 			user = authenticate(username=username, password=password)
 			if user is not None:
 				login(request, user)
-				return redirect('/app/user')
+				return redirect('/user')
 	else:
 		auth_form = AuthenticationForm()
 	return render(request, 'app/login.html', {'auth_form':auth_form})
 
 def log_out(request):
 	logout(request)
-	return redirect('/app/')
+	return redirect('/')
 
-@login_required(login_url='/app/login')
+@login_required(login_url='/login')
 def edit_picks(request):
 	EditBetFormSet = formset_factory(EditBetForm, extra=0)
 
@@ -233,7 +234,7 @@ def edit_picks(request):
 				ou_bet = form.cleaned_data['ou_bet']
 				member.set_betcard(game.index, line_bet, ou_bet)
 			member.save()
-		return redirect('/app/user')
+		return redirect('/user')
 	else:
 		formset = EditBetFormSet(initial=_generate_form_info(request,games))
 
@@ -244,7 +245,7 @@ def edit_picks(request):
     }
 	return render(request, 'app/edit_picks.html', context)
 
-@login_required(login_url='/app/login')
+@login_required(login_url='/login')
 def league_week(request, league_id, week_num):
 
 	week = Week.objects.get(num=week_num)

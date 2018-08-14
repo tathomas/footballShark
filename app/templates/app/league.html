@@ -43,10 +43,10 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li>
-              <a href="/app/user">My Account</a>
+              <a href="/user">My Account</a>
             </li>
             <li>
-              <a href="/app/logout">Log Out</a>
+              <a href="/logout">Log Out</a>
             </li>
           </ul>
         </div><!--/.navbar-collapse -->
@@ -69,7 +69,7 @@
 
 {% if active_week_num %}
 	<div>
-		<a class="btn btn-primary btn-lg" href="/app/league_week/{{league.id}}/{{active_week_num}}" role="button">View This Weeks Picks</a>
+		<a class="btn btn-primary btn-lg" href="/league_week/{{league.id}}/{{active_week_num}}" role="button">View This Weeks Picks</a>
 	</div>
 {% endif %}
 
@@ -98,7 +98,7 @@
       </tr>
 {% for results in results_scores %}
         <tr>
-        <td><a href="/app/league_week/{{league.id}}/{{results.0.num}}">Week {{ results.0.num }}:</a></td>
+        <td><a href="/league_week/{{league.id}}/{{results.0.num}}">Week {{ results.0.num }}:</a></td>
 		{% for score in results.1 %}
         <td>{{ score }}</td>
 		{% endfor %}

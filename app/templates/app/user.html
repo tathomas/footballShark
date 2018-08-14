@@ -43,10 +43,10 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active">
-              <a href="/app/user">My Account</a>
+              <a href="/user">My Account</a>
             </li>
             <li>
-              <a href="/app/logout">Log Out</a>
+              <a href="/logout">Log Out</a>
             </li>
           </ul>
         </div><!--/.navbar-collapse -->
@@ -62,15 +62,15 @@
 	<br><br>
 
 	<div>
-		<a class="btn btn-primary btn-lg" href="/app/create_league" role="button">Create League</a>
-		<a class="btn btn-primary btn-lg" href="/app/join_league" role="button">Join League</a>
+		<a class="btn btn-primary btn-lg" href="/create_league" role="button">Create League</a>
+		<a class="btn btn-primary btn-lg" href="/join_league" role="button">Join League</a>
 	</div>
 
 	<br><br>
 
 {% if betting_open %}
 	<div>
-		<a class="btn btn-primary btn-lg" href="/app/edit_picks" role="button">Edit Your Picks</a>
+		<a class="btn btn-primary btn-lg" href="/edit_picks" role="button">Edit Your Picks</a>
 	</div>
 {% endif %}
 
@@ -112,7 +112,7 @@
       <tbody>
       {% for league in my_leagues %}
         <tr>
-        <td><a href="/app/league/{{ league.id }}/">{{ league }}</a></td>
+        <td><a href="/league/{{ league.id }}/">{{ league }}</a></td>
         </tr>
       {% endfor %}
       </tbody>

@@ -73,13 +73,26 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
+env = os.environ.copy()
+db_url = env.get('DATABASE_URL', False)
+
+if db_url != False:
+	SECRET_KEY = config('SECRET_KEY')
+	DEBUG = config('DEBUG', default=False, cast=bool)
+	DATABASES = {
+		'default': dj_database_url.config(
+		    default=config('DATABASE_URL')
+		)
+	}
+else:
+	SECRET_KEY = '_w5f*5a%pjlwoe23vaut@-k5$xco@h7(1^5+quq_ob-e7igy1w'
+	DEBUG = True
+	DATABASES = {
+		'default': {
+		     'ENGINE': 'django.db.backends.sqlite3',
+		     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+		}
+	}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
