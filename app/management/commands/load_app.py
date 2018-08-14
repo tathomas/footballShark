@@ -29,7 +29,9 @@ class Command(BaseCommand):
 			date_string = (str(line[3]) + str(line[0]) + str(line[4]))
 			date_time = datetime.strptime(date_string, '%B %d%Y%I:%M %p')
 
-			print ("Creating game " + str(ind) + ", line: " + str(line))
+			if created:
+				print ("Week: " + str(week))
+			print ("Created: " + str (created) + "Creating game " + str(ind) + ", line: " + str(line))
 
 			game = Game.objects.create(team_1=team1,
 										team_2=team2,

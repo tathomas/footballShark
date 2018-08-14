@@ -11,7 +11,7 @@ class Command(BaseCommand):
 	def handle(self, *args, **options):
 
 		# Try to find that week
-		week_num = options['week'][0]
+		week_num = 0 + options['week'][0]
 		week = Week.objects.get(num=week_num)
 		try:
 			games = Game.objects.filter(week=week)
@@ -19,8 +19,9 @@ class Command(BaseCommand):
 			CommandError('That week could not be found')
 
 		# Set the Previous week as a past week
-		if week_num != 1:
-			past_week = Week.objects.get(num=week_num-1)
+		past_weeks = Week.objects.filter(num=week_num-1)
+		if len(past_weeks):
+			past_week = past_weeks[0]
 			past_week.SetPast()
 			past_week.save()
 

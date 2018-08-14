@@ -93,6 +93,9 @@ class Week(models.Model):
 	def SetPast(self):
 		self.status = 3
 
+	def __str__(self):
+		return "Week " + str(self.num) + ", " + str(self.year) + ". Status: " + str(self.status)
+
 class Game(models.Model):
 	team_1 = models.ForeignKey(Team, related_name='team_1')
 	team_2 = models.ForeignKey(Team, related_name='team_2')
