@@ -125,7 +125,7 @@ def render_league(request, league_id):
 			weekly_scores.append(week_score)
 		results_scores.append((week, weekly_scores))
 
-	standings = [0] * len(results_scores)
+	standings = [0] * len(members)
 	for week_tuple in results_scores:
 		for i, score in enumerate(week_tuple[1]):
 			standings[i] += score
