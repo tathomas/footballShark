@@ -13,12 +13,13 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'app/css/mdb.min.css' %}" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="{% static 'app/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'app/css/league.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -64,25 +65,43 @@
 
 
     <div class="col-md-10">
-    <table class="table table-bordered">
+    <table id="userTable" class="table table-striped table-bordered table-lg">
       <thead><tr>
-        <th class="col-md-1"></th>
-		{% for user in my_users %}
-        <th class="col-md-1">{{ user }}</th>
+		<th class="th-md"><i class="fa float-right" aria-hidden="true">Player</i></th>
+		<th class="th-md"><i class="fa fa-sort float-right" aria-hidden="true">Total</i></th>
+		{% for column in game_columns %}
+			<th class="bg-{{column.3}}">	
+			{% if column.0 == "Over" %}
+				O/U
+			{% else %}
+				<div>
+				{% with 'app/img/logos/'|add:column.0|add:'.svg' as image_static %}
+		    	<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:20px;height:24px;">{{column.1}}
+				{% endwith %}
+				</div>
+				<div>@</div>
+				<div>
+				{% with 'app/img/logos/'|add:column.2|add:'.svg' as image_static %}
+		    	{{column.3}}<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:20px;height:24px;">
+				</div>
+				{% endwith %}
+			{% endif %}
+			{{ column.4 }}<i class="fa  float-middle" aria-hidden="true"></i></th>
 		{% endfor %}
       </tr></thead>
       <tbody>
-      <tr>
-        <th class="col-md-1">Total: </th>
-		{% for score in week_scores %}
-        <th class="col-md-1">{{ score }}</th>
-		{% endfor %}
-      </tr>
 {% for row in bet_grid %}
         <tr>
-        <td>{{ row.0 }}</td>
-		{% for bet in row.1 %}
-        <td>{{ bet }}</td>
+        <td>{{ row.0.user }}</td>
+        <td class="bg-{{row.1.1}}">{{ row.1.0 }}</td>
+		{% for bet in row.2 %}
+        <td class="bg-{{bet.2}}">
+{% if bet.1 != '' %}
+{% with 'app/img/logos/'|add:bet.1|add:'.svg' as image_static %}
+<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:20px;height:24px;">
+{% endwith %}
+{% endif %}
+		{{ bet.0 }}</td>
 		{% endfor %}
         </tr>
 {% endfor %}
@@ -101,7 +120,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{% static 'app/js/mdb.min.js' %}"></script>
+     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{% static 'app/js/ie10-viewport-bug-workaround.js' %}"></script>
-  </body>
+	<script src="{% static 'app/js/addons/datatables.min.js' %}"></script>
+  <script>
+	$(document).ready(function () {
+	  $('#userTable').DataTable({
+			"scrollX": true,
+			"paging": false,
+			"order": [[ 1, "desc" ]],
+		});
+	  $('.dataTables_length').addClass('bs-select');
+	});
+  </script> 
+
+ </body>
 </html>

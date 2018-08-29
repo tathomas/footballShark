@@ -33,16 +33,12 @@ class Member(models.Model):
 
 		score = 0
 		if (game.score_1 - game.score_2 < game.line_val):
-			print('1')
 			score += line_bet
 		elif (game.score_1 - game.score_2 > game.line_val):
-			print('2')
 			score -= line_bet
 		if (game.score_1 + game.score_2 > game.ou_val):
-			print('3')
 			score += ou_bet
 		elif (game.score_1 + game.score_2 < game.ou_val):
-			print('4')
 			score -= ou_bet
 		return score
 
@@ -79,6 +75,9 @@ class Team(models.Model):
 	def __str__(self):
 		return self.name
 
+	def icon_name(self):
+		return str.split(self.name, " ")[-1].strip()
+
 class Week(models.Model):
 	year = models.IntegerField()
 	num = models.IntegerField()
@@ -104,8 +103,8 @@ class Game(models.Model):
 	date = models.DateField()
 	index = models.IntegerField(default=0, unique=True)
 	week = models.ForeignKey(Week, on_delete=models.CASCADE)
-	line_val = models.IntegerField(default=0)
-	ou_val = models.IntegerField(default=0)
+	line_val = models.FloatField(default=0)
+	ou_val = models.FloatField(default=0)
 	score_updated = models.BooleanField(default=False)
 
 
@@ -117,11 +116,30 @@ class Game(models.Model):
 		return str(self.team_1) + " @ " + str(self.team_2) + ", line=" + str(self.line_val) + "  ou=" + str(self.ou_val)
 
 	def get_column_headers(self):
-		col_1 = str(self.team_1) + " (" + str(-1*self.line_val) + ")"
-		col_2 = str(self.team_2) + " (" + str(self.line_val) + ")"
-		col_3 = "Over (" + str(self.ou_val) + ")"
-		col_4 = "Under (" + str(self.ou_val) + ")"
-		return col_1, col_2, col_3, col_4
+
+		col_1 = (str(self.team_1.icon_name()), str(self.score_1),  str(self.team_2.icon_name()) , str(self.score_2), " (" + str(-1*self.line_val) + ")")
+		col_2 = ("Over", str(self.score_1+self.score_2), "Under", str(self.score_1+self.score_2),  "(" + str(self.ou_val) + ")")
+		return [col_1, col_2]
+
+	def get_colors(self):
+
+		home_col = away_col = over_col = under_col = "white"
+
+		if self.score_updated:
+			if (self.score_1 - self.score_2 < self.line_val):
+				home_col="success"
+				away_col="danger"
+			elif (self.score_1 - self.score_2 > self.line_val):
+				away_col="success"
+				home_col="danger"
+			if (self.score_1 + self.score_2 > self.ou_val):
+				over_col ="success"
+				under_col="danger"
+			elif (self.score_1 + self.score_2 < self.ou_val):
+				under_col ="success"
+				over_col="danger"
+		return away_col, home_col, under_col, over_col
+
 
 class League(models.Model):
 	members = models.ManyToManyField(User, through='Membership')

@@ -124,7 +124,7 @@
 
 <div class="clearfix"></div>
 
-{% if active_games %}
+{% if active_week_tuples %}
     <div class="page-header">
       <h3>This Week's Bets</h3>
     </div>
@@ -132,24 +132,49 @@
     <div class="col-md-10">
     <table class="table table-bordered">
       <thead><tr>
-        <th class="col-md-1">Away Score</th>
-        <th class="col-md-1">Home Score</th>
-        <th class="col-md-6">Game</th>
-        <th class="col-md-1">Line Bet</th>
-        <th class="col-md-1">Over/Under Bet</th>
+        <th class="col-md-3">Away</th>
+        <th class="col-md-3">Home</th>
+        <th class="col-md-2">Lines</th>
+        <th class="col-md-2">Spread Bet</th>
+        <th class="col-md-2">OU Bet</th>
         <th class="col-md-1">Score</th>
       </tr></thead>
       <tbody>
-      {% for game in active_games %}
+{% for tup in active_week_tuples %}
         <tr>
-        <td>{{ game.0.score_1 }}</td>
-        <td>{{ game.0.score_2 }}</td>
-	    <td>{{ game.0.printSpreadInfo }}</td>
-        <td>{{ game.1.0 }}</td>
-        <td>{{ game.1.1 }}</td>
-        <td>{{ game.1.2 }}</td>
+        <td>
+{% with 'app/img/logos/'|add:tup.0.0.0|add:'.svg' as image_static %}
+<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+{% endwith %}
+		- {{ tup.0.0.1 }}
+		</td>
+        <td>
+{% with 'app/img/logos/'|add:tup.0.0.2|add:'.svg' as image_static %}
+<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+{% endwith %}
+		- {{ tup.0.0.3 }}
+		</td>
+		<td>
+		<div>Spread: {{tup.0.0.4}}</div>
+		<div>Over/Under: {{tup.0.1.4}}</div>
+		</td>
+	    <td class="bg-{{tup.1.0.2}}">
+{% if tup.1.0.1 != '' %}
+{% with 'app/img/logos/'|add:tup.1.0.1|add:'.svg' as image_static %}
+<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">  {{ tup.1.0.0 }}
+{% endwith %}
+{% endif %}
+		</td>
+	    <td class="bg-{{tup.1.1.2}}">
+{% if tup.1.1.1 != '' %}
+{% with 'app/img/logos/'|add:tup.1.1.1|add:'.svg' as image_static %}
+<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">  {{ tup.1.1.0 }}
+{% endwith %}
+{% endif %}
+		</td>
+        <td>{{ tup.2 }}</td>
         </tr>
-      {% endfor %}
+{% endfor %}
       </tbody>
     </table>
     </div>
@@ -157,7 +182,7 @@
 
 <div class="clearfix"></div>
 
-{% for week_tuple in past_week_tuples %}
+{% for week_tuple in past_week_data %}
     <div class="page-header">
       <h3>Week {{ week_tuple.0.num }} Bets</h3>
     </div>
@@ -165,22 +190,47 @@
     <div class="col-md-10">
     <table class="table table-bordered">
       <thead><tr>
-        <th class="col-md-1">Away Score</th>
-        <th class="col-md-1">Home Score</th>
-        <th class="col-md-6">Game</th>
-        <th class="col-md-1">Line Bet</th>
-        <th class="col-md-1">Over/Under Bet</th>
+        <th class="col-md-3">Away</th>
+        <th class="col-md-3">Home</th>
+        <th class="col-md-2">Lines</th>
+        <th class="col-md-2">Spread Bet</th>
+        <th class="col-md-2">OU Bet</th>
         <th class="col-md-1">Score</th>
       </tr></thead>
       <tbody>
-      {% for game in week_tuple.1 %}
+      {% for tup in week_tuple.1 %}
         <tr>
-        <td>{{ game.0.score_1 }}</td>
-        <td>{{ game.0.score_2 }}</td>
-	    <td>{{ game.0.printSpreadInfo }}</td>
-        <td>{{ game.1.0 }}</td>
-        <td>{{ game.1.1 }}</td>
-        <td>{{ game.1.2 }}</td>
+        <td>
+{% with 'app/img/logos/'|add:tup.0.0.0|add:'.svg' as image_static %}
+<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+{% endwith %}
+		- {{ tup.0.0.1 }}
+		</td>
+        <td>
+{% with 'app/img/logos/'|add:tup.0.0.2|add:'.svg' as image_static %}
+<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+{% endwith %}
+		- {{ tup.0.0.3 }}
+		</td>
+		<td>
+		<div>Spread: {{tup.0.0.4}}</div>
+		<div>Over/Under: {{tup.0.1.4}}</div>
+		</td>
+	    <td class="bg-{{tup.1.0.2}}">
+{% if tup.1.0.1 != '' %}
+{% with 'app/img/logos/'|add:tup.1.0.1|add:'.svg' as image_static %}
+<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">  {{ tup.1.0.0 }}
+{% endwith %}
+{% endif %}
+		</td>
+	    <td class="bg-{{tup.1.1.2}}">
+{% if tup.1.1.1 != '' %}
+{% with 'app/img/logos/'|add:tup.1.1.1|add:'.svg' as image_static %}
+<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">  {{ tup.1.1.0 }}
+{% endwith %}
+{% endif %}
+		</td>
+        <td>{{ tup.2 }}</td>
         </tr>
       {% endfor %}
       </tbody>

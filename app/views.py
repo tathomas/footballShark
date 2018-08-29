@@ -63,6 +63,8 @@ def render_user(request, person_id):
 	locked_weeks = Week.objects.filter(status=2)
 	past_weeks = Week.objects.filter(status=3)
 
+
+
 	member = Member.objects.get(user=person)
 
 	betting_open = False
@@ -73,34 +75,69 @@ def render_user(request, person_id):
 	elif len(locked_weeks):
 		active_week = locked_weeks[0]
 
-	past_week_tuples = []
-	active_games = []
+	past_week_data = []
+	active_week_tuples = []
 	results_scores = []
 	if len(past_weeks):
 		for week in past_weeks:
 			games = Game.objects.filter(week=week)
-			past_bets = []
+			past_week_tuples = []
 			for game in games:
+				user_bets = [(),()]
+				columns = game.get_column_headers()
+				cols = game.get_colors()
 				line_bet, ou_bet = member.get_bet_tuple(game.index)
-				score = member.get_game_score(game.index)
-				past_bets.append((game, [line_bet, ou_bet, score]))
+				if line_bet < 0:
+					user_bets[0] = (-1*line_bet, game.team_1.icon_name(), cols[0])
+				elif line_bet > 0:
+					user_bets[0] = (line_bet, game.team_2.icon_name(), cols[1])
+				else:
+					user_bets[0] = (0,'', "white")
+				if ou_bet < 0:
+					user_bets[1] = (-1*ou_bet, "Under", cols[2])
+				elif ou_bet > 0:
+					user_bets[1] = (ou_bet, "Over", cols[3])
+				else:
+					user_bets[1] = (0,'', "white")
+				past_week_tuples.append((columns, user_bets, member.get_game_score(game.index)))
+			past_week_data.append((week, past_week_tuples))
 			week_score = member.get_week_score(week)
-			past_week_tuples.append((week, past_bets))
 			results_scores.append((week, week_score))
 	if active_week:
 		games = Game.objects.filter(week=active_week)
 		for game in games:
+			user_bets = [(),()]
+			columns = game.get_column_headers()
+			cols = game.get_colors()
 			line_bet, ou_bet = member.get_bet_tuple(game.index)
-			score = member.get_game_score(game.index)
-			active_games.append((game, [line_bet, ou_bet, score]))
+			if line_bet < 0:
+				user_bets[0] = (-1*line_bet, game.team_1.icon_name(), cols[0])
+			elif line_bet > 0:
+				user_bets[0] = (line_bet, game.team_2.icon_name(), cols[1])
+			else:
+				user_bets[0] = (0,'', "white")
+			if ou_bet < 0:
+				user_bets[1] = (-1*ou_bet, "Under", cols[2])
+			elif ou_bet > 0:
+				user_bets[1] = (ou_bet, "Over", cols[3])
+			else:
+				user_bets[1] = (0,'', "white")
+			my_score = member.get_game_score(game.index)
+			if my_score > 0:
+				my_col = 'success'
+			elif my_score < 0:
+				my_col = 'danger'
+			else:
+				my_col = 'white'
+			active_week_tuples.append((columns, user_bets, (my_score, my_col)))
 		week_score = member.get_week_score(active_week)
 		results_scores.append((active_week, week_score))
 
 	context = {
 		'person' : person,
 		'my_leagues' : my_leagues,
-		'active_games' : active_games, 
-		'past_week_tuples' : past_week_tuples, 
+		'active_week_tuples' : active_week_tuples, 
+		'past_week_data' : past_week_data, 
 		'betting_open' : betting_open, 
 		'results_scores' : results_scores
 	}
@@ -117,24 +154,24 @@ def render_league(request, league_id):
 	weeks = Week.objects.filter(status__in=[1,2,3])
 	members = Member.objects.filter(user__in=my_users)
 
-	results_scores = []
+	inverted_weeks = []
 	for week in weeks:
-		weekly_scores = []
-		for member in members:
-			week_score = member.get_week_score(week)
-			weekly_scores.append(week_score)
-		results_scores.append((week, weekly_scores))
+		inverted_weeks.insert(0, week)
 
-	standings = [0] * len(members)
-	for week_tuple in results_scores:
-		for i, score in enumerate(week_tuple[1]):
-			standings[i] += score
+	results_scores = []
+	for player in members:
+		weekly_scores = []
+		total = 0
+		for week in weeks:
+			week_score = player.get_week_score(week)
+			total += week_score
+			weekly_scores.insert(0, week_score)
+		results_scores.append((player, total, weekly_scores))
 
 	context = {
 		'league' : league,
-		'my_users' : my_users,
+		'inverted_weeks' : inverted_weeks,
 		'results_scores' : results_scores,
-		'standings' : standings
 	}
 	return render(request, 'app/league.html', context)	
 
@@ -257,26 +294,45 @@ def league_week(request, league_id, week_num):
 	games = Game.objects.filter(week=week)
 	members = Member.objects.filter(user__in=my_users)
 
-	bet_grid = []
+	game_columns = []
 	for game in games:
-		game_columns = game.get_column_headers()
-		for ind, column in enumerate(game_columns):
-			user_bets = []
-			for member in members:
-				member_val = member.get_column_val(ind, game)
-				user_bets.append(member_val)
-			bet_grid.append((column, user_bets))
+		columns = game.get_column_headers()
+		for column in columns:
+			game_columns.append(column)
 
-	week_scores = []
+	bet_grid = []
 	for member in members:
 		week_score = member.get_week_score(week)
-		week_scores.append(week_score)
+		if week_score > 0:
+			week_score_tup = (week_score, "success")
+		elif week_score < 0:
+			week_score_tup = (week_score, "danger")
+		else:
+			week_score_tup = (week_score, "white")
+			
+		user_bets = []
+		for game in games:
+			cols = game.get_colors()
+			line_bet, ou_bet = member.get_bet_tuple(game.index)
+			if line_bet < 0:
+				user_bets.append((-1*line_bet, game.team_1.icon_name(), cols[0]))
+			elif line_bet > 0:
+				user_bets.append((line_bet, game.team_2.icon_name(), cols[1]))
+			else:
+				user_bets.append((0,'', "white"))
+			if ou_bet < 0:
+				user_bets.append((-1*ou_bet, "Under", cols[2]))
+			elif ou_bet > 0:
+				user_bets.append((ou_bet, "Over", cols[3]))
+			else:
+				user_bets.append((0,'', "white"))
+
+		bet_grid.append((member, week_score_tup, user_bets))
 
 	context = {
 		'league' : league,
 		'bet_grid' : bet_grid,
-		'week_scores' : week_scores,
-		'my_users' : my_users, 
+		'game_columns' : game_columns,
 		'week': week
 	}
 
