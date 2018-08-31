@@ -20,7 +20,8 @@
     <link href="{% static 'app/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
+    <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet"> 
+   <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,7 +40,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand">Football Shark (alpha)</a>
+          <a class="navbar-brand">Football Shark</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -58,19 +59,24 @@
 
     <div class="container league-main" role="main">
 
+
+
     <div class="page-header">
       <h1>Week {{week.num}} Results</h1>
     </div>
 
 
+	<div>
+		<a class="btn btn-primary btn-lg" href="/league/{{ league.id }}/" role="button">Back to {{league}}</a>
+	</div>
 
-    <div class="col-md-10">
+
     <table id="userTable" class="table table-striped table-bordered table-lg">
       <thead><tr>
-		<th class="th-md"><i class="fa float-right" aria-hidden="true">Player</i></th>
-		<th class="th-md"><i class="fa fa-sort float-right" aria-hidden="true">Total</i></th>
+		<th class="th-md-1"><i class="fa float-right" aria-hidden="true">Player</i></th>
+		<th class="th-md-1"><i class="fa fa-sort float-right" aria-hidden="true">Total</i></th>
 		{% for column in game_columns %}
-			<th class="bg-{{column.3}}">	
+			<th class="th-md-2">	
 			{% if column.0 == "Over" %}
 				O/U
 			{% else %}
@@ -83,8 +89,8 @@
 				<div>
 				{% with 'app/img/logos/'|add:column.2|add:'.svg' as image_static %}
 		    	{{column.3}}<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:20px;height:24px;">
-				</div>
 				{% endwith %}
+				</div>
 			{% endif %}
 			{{ column.4 }}<i class="fa  float-middle" aria-hidden="true"></i></th>
 		{% endfor %}
@@ -96,18 +102,23 @@
         <td class="bg-{{row.1.1}}">{{ row.1.0 }}</td>
 		{% for bet in row.2 %}
         <td class="bg-{{bet.2}}">
+{% if week.status > 1 %}
 {% if bet.1 != '' %}
 {% with 'app/img/logos/'|add:bet.1|add:'.svg' as image_static %}
 <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:20px;height:24px;">
 {% endwith %}
 {% endif %}
-		{{ bet.0 }}</td>
+		{{ bet.0 }}
+{% else %}
+		-
+{% endif %}
+		</td>
 		{% endfor %}
         </tr>
 {% endfor %}
       </tbody>
     </table>
-    </div>
+
 	<br><br>
 
 

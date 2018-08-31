@@ -99,6 +99,13 @@ def render_user(request, person_id):
 					user_bets[1] = (ou_bet, "Over", cols[3])
 				else:
 					user_bets[1] = (0,'', "white")
+				my_score = member.get_game_score(game.index)
+				if my_score > 0:
+					my_col = 'success'
+				elif my_score < 0:
+					my_col = 'danger'
+				else:
+					my_col = 'white'
 				past_week_tuples.append((columns, user_bets, member.get_game_score(game.index)))
 			past_week_data.append((week, past_week_tuples))
 			week_score = member.get_week_score(week)
@@ -258,9 +265,9 @@ def edit_picks(request):
 	except Week.DoesNotExist:
 		raise Http404("No games are currently open to betting.")
 	games = Game.objects.filter(week=week)
-	
+
 	if request.method == 'POST':
-		formset = EditBetFormSet(request.POST, request.FILES)
+		formset = EditBetFormSet(request.POST, request.FILES, initial=_generate_form_info(request,games))
 		if formset.is_valid():
 			member = Member.objects.get(user=request.user)			
 			for form in formset:
@@ -269,9 +276,10 @@ def edit_picks(request):
 				game = Game.objects.get(index=game_id)
 				line_bet = form.cleaned_data['line_bet']
 				ou_bet = form.cleaned_data['ou_bet']
+				print(game_id, user, game, line_bet, ou_bet)
 				member.set_betcard(game.index, line_bet, ou_bet)
 			member.save()
-		return redirect('/user')
+			return redirect('/user')
 	else:
 		formset = EditBetFormSet(initial=_generate_form_info(request,games))
 
@@ -353,8 +361,6 @@ def _generate_form_info(request, games):
 		line_bet, ou_bet = member.get_bet_tuple(game.index)
 		dict_entry = dict([("game_id", game.index), ("line_bet", line_bet), ("ou_bet", ou_bet)])
 		bet_list.append(dict_entry)
-
-	print ("Generated Betlist: " + str(bet_list))
 
 	return bet_list
 

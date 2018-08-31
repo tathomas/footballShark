@@ -113,7 +113,7 @@ class Game(models.Model):
 
 	@property
 	def printSpreadInfo(self):
-		return str(self.team_1) + " @ " + str(self.team_2) + ", line=" + str(self.line_val) + "  ou=" + str(self.ou_val)
+		return "Spread: " + str(self.line_val) + "  Over/Under: " + str(self.ou_val)
 
 	def get_column_headers(self):
 

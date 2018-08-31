@@ -18,7 +18,7 @@
     <link href="{% static 'app/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'app/css/league.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand">Football Shark (alpha)</a>
+          <a class="navbar-brand">Football Shark</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -59,15 +59,7 @@
       <h1>{{ person }}</h1>
     </div>
 
-	<br><br>
-
-	<div>
-		<a class="btn btn-primary btn-lg" href="/create_league" role="button">Create League</a>
-		<a class="btn btn-primary btn-lg" href="/join_league" role="button">Join League</a>
-	</div>
-
-	<br><br>
-
+	<br>
 {% if betting_open %}
 	<div>
 		<a class="btn btn-primary btn-lg" href="/edit_picks" role="button">Edit Your Picks</a>
@@ -101,6 +93,16 @@
     </div>
 
 
+<div class="clearfix"></div><br>
+<div class="clearfix"></div>
+
+	<div>
+		<a class="btn btn-primary btn-lg" href="/create_league" role="button">Create League</a>
+		<a class="btn btn-primary btn-lg" href="/join_league" role="button">Join League</a>
+	</div>
+
+<div class="clearfix"></div>
+<br>
 <div class="clearfix"></div>
 
 {% if my_leagues %}
@@ -236,6 +238,7 @@
       </tbody>
     </table>
     </div>
+<div class="clearfix"></div>
 {% endfor %}
 
 
