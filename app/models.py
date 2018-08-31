@@ -103,8 +103,8 @@ class Game(models.Model):
 	date = models.DateField()
 	index = models.IntegerField(default=0, unique=True)
 	week = models.ForeignKey(Week, on_delete=models.CASCADE)
-	line_val = models.FloatField(default=0)
-	ou_val = models.FloatField(default=0)
+	line_val = models.DecimalField(default=0.0, decimal_places=1, max_digits=3)
+	ou_val = models.DecimalField(default=0.0, decimal_places=1, max_digits=3)
 	score_updated = models.BooleanField(default=False)
 
 
@@ -117,7 +117,7 @@ class Game(models.Model):
 
 	def get_column_headers(self):
 
-		col_1 = (str(self.team_1.icon_name()), str(self.score_1),  str(self.team_2.icon_name()) , str(self.score_2), " (" + str(-1*self.line_val) + ")")
+		col_1 = (str(self.team_1.icon_name()), str(self.score_1),  str(self.team_2.icon_name()) , str(self.score_2), " (" + str(self.line_val) + ")")
 		col_2 = ("Over", str(self.score_1+self.score_2), "Under", str(self.score_1+self.score_2),  "(" + str(self.ou_val) + ")")
 		return [col_1, col_2]
 

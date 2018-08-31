@@ -111,7 +111,7 @@ def render_user(request, person_id):
 			week_score = member.get_week_score(week)
 			results_scores.append((week, week_score))
 	if active_week:
-		games = Game.objects.filter(week=active_week)
+		games = Game.objects.filter(week=active_week).order_by('index')
 		for game in games:
 			user_bets = [(),()]
 			columns = game.get_column_headers()
