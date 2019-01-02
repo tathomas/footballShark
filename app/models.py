@@ -40,7 +40,13 @@ class Member(models.Model):
 			score += ou_bet
 		elif (game.score_1 + game.score_2 < game.ou_val):
 			score -= ou_bet
-		return score
+
+		week_num = game.week.num
+		multiplier = 1
+		if week_num > 17:
+			multiplier += week_num - 17
+
+		return score * multiplier
 
 	def get_bet_tuple(self, game_index):
 		game = Game.objects.get(index=game_index)
