@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from app.models import Week, Game
+from app.models import Week, Game, BetCard
 
 class Command(BaseCommand):
 	help = 'Run the app. This contains commands to change the app\'s state'
@@ -28,6 +28,10 @@ class Command(BaseCommand):
 				game.score_2 = home_val
 				game.score_updated = True
 				game.save()
+
+				cards = BetCard.objects.filter(game=game)
+				for card in cards:
+					card.calculate_score()
 
 				print(game)
 				print("\n\n########################################################\n\n")
