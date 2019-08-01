@@ -146,7 +146,8 @@ def render_user(request, person_id):
 		'active_week_tuples' : active_week_tuples, 
 		'past_week_data' : past_week_data, 
 		'betting_open' : betting_open, 
-		'results_scores' : results_scores
+		'results_scores' : results_scores,
+        'active_week': active_week
 	}
 	return render(request, 'app/user.html', context)
 
