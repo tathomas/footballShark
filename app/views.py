@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.http import Http404
 from django.utils.crypto import get_random_string
 
-from .models import Team, Game, League, Membership, Week, Member
+from .models import Team, Game, League, Membership, Week, Member, BetCard
 from .forms import LeagueForm, JoinLeagueForm, EditBetForm, UserCreateForm
 from django.forms import formset_factory
 import datetime
@@ -46,8 +46,9 @@ def signup(request):
 			user.backend = 'django.contrib.auth.backends.ModelBackend'
 			login(request, user)
 
-			member = Member.objects.create(user=user, betCard=_get_initial_betcard())
+			member = Member.objects.create(user=user)
 			member.save()
+			_create_initial_betcards(member)
 			return redirect('/user')
 	else:
 		form = UserCreateForm()
@@ -276,7 +277,6 @@ def edit_picks(request):
 				game = Game.objects.get(index=game_id)
 				line_bet = form.cleaned_data['line_bet']
 				ou_bet = form.cleaned_data['ou_bet']
-				print(game_id, user, game, line_bet, ou_bet)
 				member.set_betcard(game.index, line_bet, ou_bet)
 			member.save()
 			return redirect('/user')
@@ -347,13 +347,16 @@ def league_week(request, league_id, week_num):
 	return render(request, 'app/league_week.html', context)
 
 
-def _get_initial_betcard():
-	to_ret = chr(32 + 44) * 400
-	return to_ret
+def _create_initial_betcards(member):
+	games = Game.objects.all()
+
+	for game in games:
+		card = BetCard.objects.create(user=member, game=game)
+		card.save()
 
 # Helper method to generate inital bet forms
 def _generate_form_info(request, games):
-	bet_list = []	
+	bet_list = []
 	user = request.user
 	member = Member.objects.get(user=user)
 

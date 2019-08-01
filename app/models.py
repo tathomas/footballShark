@@ -10,12 +10,15 @@ class Member(models.Model):
 		return super(Member, self).__str__()
 
 	def set_betcard(self, game_index, line_bet, ou_bet):
-		char_bet = 0
-		char_bet += (line_bet + 4) * 10
-		char_bet += ou_bet + 4
+		game = Game.objects.get(index=game_index)
+		try:
+			card = BetCard.objects.get(game=game, user=self)
+		except BetCard.DoesNotExist:
+			CommandError('Bet could not be found')
 
-		temp = self.betCard[:game_index] + chr(char_bet + 32) + self.betCard[game_index+1:]
-		self.betCard = temp
+		card.line_bet = line_bet
+		card.ou_bet = ou_bet
+		card.save()
 
 	def get_week_score(self, week):
 		games = Game.objects.filter(week=week)
@@ -25,55 +28,27 @@ class Member(models.Model):
 		return score
 
 	def get_game_score(self, game_index):
-		line_bet, ou_bet = self.get_bet_tuple(game_index)
-
 		game = Game.objects.get(index=game_index)
+		# game score not updated yet, return 0.
 		if not game.score_updated:
 			return 0
 
-		score = 0
-		if (game.score_1 - game.score_2 < game.line_val):
-			score += line_bet
-		elif (game.score_1 - game.score_2 > game.line_val):
-			score -= line_bet
-		if (game.score_1 + game.score_2 > game.ou_val):
-			score += ou_bet
-		elif (game.score_1 + game.score_2 < game.ou_val):
-			score -= ou_bet
+		try:
+			card = BetCard.objects.get(game=game, user=self)
+		except BetCard.DoesNotExist:
+			CommandError('Bet could not be found')
 
-		week_num = game.week.num
-		multiplier = 1
-		if week_num > 17:
-			multiplier += week_num - 17
-
-		return score * multiplier
+		return card.score
 
 	def get_bet_tuple(self, game_index):
-		game = Game.objects.get(index=game_index)
+		game = Game.objects.get(index=game_index)		
+		try:
+			card = BetCard.objects.get(game=game, user=self)
+		except BetCard.DoesNotExist:
+			CommandError('Bet could not be found')
+
+		return card.line_bet, card.ou_bet
 		
-		score_char = self.betCard[game_index]
-
-		score_int = ord(score_char) - 32
-		line_bet = (score_int // 10) - 4
-		ou_bet = (score_int % 10) - 4
-
-		return line_bet, ou_bet
-
-	def get_column_val(self, ind, game):
-		line_bet, ou_bet = self.get_bet_tuple(game.index)
-		if ind == 0:
-			if line_bet < 0:
-				return -1 * line_bet
-		elif ind == 1:
-			if line_bet > 0:
-				return line_bet
-		elif ind == 2:
-			if ou_bet > 0:
-				return ou_bet
-		elif ind == 3:
-			if ou_bet < 0:
-				return ou_bet * -1
-		return 0
 
 class Team(models.Model):
 	name = models.CharField(max_length=50)
@@ -162,7 +137,35 @@ class Membership(models.Model):
 	is_commish = models.BooleanField(default=False)
 
 	def __str__(self):
-		return str(user) + " joined " + str(league) + " on " + str(date_joined)	
+		return str(user) + " joined " + str(league) + " on " + str(date_joined)
+
+class BetCard(models.Model):
+	game = models.ForeignKey(Game, on_delete=models.CASCADE)
+	user = models.ForeignKey(Member, on_delete=models.CASCADE)
+	line_bet = models.IntegerField(default=0)
+	ou_bet = models.IntegerField(default=0)
+	score = models.IntegerField(default=0)
+
+	def calculate_score(self):
+		self.score = 0
+		if (self.game.score_1 - self.game.score_2 < self.game.line_val):
+			self.score += self.line_bet
+		elif (self.game.score_1 - self.game.score_2 > self.game.line_val):
+			self.score -= self.line_bet
+		if (self.game.score_1 + self.game.score_2 > self.game.ou_val):
+			self.score += self.ou_bet
+		elif (self.game.score_1 + self.game.score_2 < self.game.ou_val):
+			self.score -= self.ou_bet
+
+		week_num = self.game.week.num
+		multiplier = 1
+		if week_num > 17:
+			multiplier += week_num - 17
+
+		self.score *= multiplier
+
+		self.save()
+		
 
 
 
