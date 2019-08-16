@@ -12,14 +12,19 @@
     <title>FootballShark</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/bootstrap.css' %}" rel="stylesheet">
 
+    <link href="{% static 'app/css/custom.css' %}" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
     <link href="{% static 'app/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
+    
+
+      
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -29,7 +34,9 @@
   </head>
 
   <body>
+      
 
+<!--NavBar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -53,12 +60,13 @@
       </div>
     </nav>
 
-
+<!--Name of User -->
     <main class="container league-main" role="main">
     <div class="page-header">
       <h1>{{ person }}</h1>
     </div>
 
+<!--Edit Picks If Betting Open -->
 	<br>
 {% if betting_open %}
 	<div>
@@ -68,32 +76,11 @@
 
 
 <div class="clearfix"></div>
-
-    <div class="page-header">
-      <h3>Results</h3>
-    </div>
-
-
-
-    <div class="col-md-10">
-    <table class="table table-bordered">
-      <thead><tr>
-        <th class="col-md-1">Week</th>
-        <th class="col-md-1">Score</th>
-      </tr></thead>
-      <tbody>
-{% for results in results_scores %}
-        <tr>
-        <td>{{ results.0.num }}</td>
-        <td>{{ results.1 }}</td>
-        </tr>
-{% endfor %}
-      </tbody>
-    </table>
-    </div>
-
-
-<div class="clearfix"></div><br>
+<div class="clearfix"></div>
+<br>
+           
+        
+<!-- Create/Join League -->    
 <div class="clearfix"></div>
 
 	<div>
@@ -125,11 +112,45 @@
 {% endif %}
 
 <div class="clearfix"></div>
+<br>
+ <!--Results -->
+        
+    <div class="page-header">
+      <h3>Results</h3>
+    </div>
+
+    <div class="col-md-10">
+    <table class="table table-bordered">
+      <thead><tr>
+          <th class="col-md-1">Week</th>
+    {% for results in results_scores %}
+          <th><a href="#weekly{{ results.0.num }}">{{ results.0.num }}</a></th>
+    {% endfor %}
+      </tr></thead>
+     <tbody>
+    <tr>
+        <td class="col-md-1">Score</td>
+    {% for results in results_scores %}
+        <td>{{ results.1 }}</td>
+    {% endfor %}
+    </tr>
+      </tbody>
+    </table>
+    </div>
+
+    
+<div class="clearfix"></div>
+<br>
+        
+<!-- This Week's Bets -->
+<div class="clearfix"></div>
 
 {% if active_week_tuples %}
-    <div class="page-header">
-      <h3>This Week's Bets</h3>
-    </div>
+        
+    <div id="weekly{{ active_week.num }}"></div>
+    <br> 
+    <br>
+      <h3 >This Week's Bets</h3>
 
     <div class="col-md-10">
     <table class="table table-bordered">
@@ -185,8 +206,11 @@
 <div class="clearfix"></div>
 
 {% for week_tuple in past_week_data %}
-    <div class="page-header">
-      <h3>Week {{ week_tuple.0.num }} Bets</h3>
+    <div id="weekly{{ week_tuple.0.num }}"></div>
+    <br>    
+    <div class="page-header" >
+      <h3 >Week {{ week_tuple.0.num }} Bets</h3>
+
     </div>
 
     <div class="col-md-10">
@@ -248,7 +272,6 @@
 
 
 
-    </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -259,11 +282,3 @@
     <script src="{% static 'app/js/ie10-viewport-bug-workaround.js' %}"></script>
   </body>
 </html>
-
-
-
-
-
-
-
-
