@@ -145,14 +145,6 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-#EMAIL_HOST = ''
-#EMAIL_PORT = 587
-#EMAIL_HOST_USER = ''
-#EMAIL_HOST_PASSWORD = ''
-#EMAIL_USE_TLS = True
-#DEFAULT_FROM_EMAIL = 'FootballShark Team <admin@footballshark.net>'
-
-
 SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
 EMAIL_HOST = 'smtp.sendgrid.net'
