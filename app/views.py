@@ -36,6 +36,10 @@ def home(request):
 def faq(request):
 	return render(request, 'app/faq.html', {})
 
+@login_required(login_url='/login')
+def user_faq(request):
+	return render(request, 'app/faq.html', {})
+
 def signup(request):
 	if request.method == 'POST':
 		form = UserCreateForm(request.POST)

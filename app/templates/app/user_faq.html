@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>FootballShark</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="{% static 'app/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
+    <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+<!--NavBar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">Football Shark</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="/user">My Account</a>
+            </li>
+			<li>
+              <a href="/user/faq">How it Works</a>
+            </li>
+            <li>
+              <a href="/logout">Log Out</a>
+            </li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <main class="container league-main" role="main">
+
+    <div class="jumbotron">
+    <div class="container">
+        <h1>How it Works</h1>
+		<p>Spread: Since the teams are usually not evenly matched, we set the spread to make betting fair. The spread is applied to the home teams score at the end of the game. A negative spread means the home team is favored. -3 is generally the starting point with home field advantage taken into account.</p>
+		<p>Over/Under: This allows you to wager on how many total points are scored in the game. You can expect 90% of all games to fall between 40-50.</p>
+        <br><h3>Before the Games</h3>
+		<p>Betting: You will have a chance to bet three units on both the Spread and the Over/Under for each game this week. (The example below shows only three)</p>
+		<br>
+        <p>Game 1: Bills @ Vikings, spread:0 over/under:45. A spread of zero means the teams are evenly matched, with home field taken into account. This is also called pickum, and the team that wins on the field also wins against the spread. You can see that I bet two units on the Bills and two units on the Over. Meaning, I think the Bills will win, and that the total number of points scored will be above 45. </p>
+	    <p>Game 2: Colts @ Eagles, spread:-7.5 over/under:49.5. The spread is -7.5, which means the Eagles must win by more than a touchdown to cover. I bet 1 on the Colts and 1 on the Under. This means I think the Eagles may win, but not by more than 7.5 - and that the total number of points scores will be below 49.5. </p>
+	    <p>Game 3: Broncos @ Ravens, spread:-3 over/under:41. The spread is -3, which means the teams would be even on a neutral site. I bet three on the Ravens, and none on the over/under (You can bet 0 for as many games (or weeks) as you wish). This means I think the Ravens will win by at least three points, and that I have no opinion on the total.</p>
+
+		<div>
+		{% with 'app/img/logos/MockGames.png' as image_static %}
+		{{column.3}}<img src="{% static image_static %}" class="rounded mx-auto d-block">
+		{% endwith %}
+		</div>
+
+	<br><br><h3>After the Games</h3><br>
+		<p>Results:</p>
+		<p>Bills 7 Ravens 0</p>
+		<p>Colts 30 Eagles 37</p>
+		<p>Broncos 0 Ravens 17</p><br><br>
+
+		
+		<p>Game 1: Bills won by more than 0, and the total was Under because 7 + 0 < 45</p>
+		<p>Game 2: Eagles failed to win by more than 7.5, and therefore lost {Eagles score (37) - 7.5 = 29.5. Colts 30 > Eagles 29.5}. The total was Over because 30 + 37 > 49.5</p>
+		<p>Game 3: Ravens won by more than 3, and the total was Under because 0 + 17 < 41</p><br>
+		<p>As you can see below, my bets on Bills, Colts, and Ravens were all winners, while my bets on the Bills game Over and Colts game Under were not so good.</p>
+		<div>
+		{% with 'app/img/logos/MockResult.png' as image_static %}
+		{{column.3}}<img src="{% static image_static %}" class="rounded mx-auto d-block">
+		{% endwith %}
+		</div>
+
+    </div>
+	</div>
+
+	</main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'app/js/ie10-viewport-bug-workaround.js' %}"></script>
+  </body>
+</html>
