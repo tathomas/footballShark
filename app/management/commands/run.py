@@ -1,5 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
-from app.models import Week, Game, BetCard
+from app.models import Week, Game, BetCard, User, Member
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 
 class Command(BaseCommand):
 	help = 'Run the app. This contains commands to change the app\'s state'
@@ -67,6 +69,23 @@ class Command(BaseCommand):
 
 		return 0
 
+	def send_reminder_email(self, week):
+		for user in User.objects.all():
+			msg_plain = render_to_string('app/reminder_email.txt', {'user':user, 'week': week})
+			msg_html = render_to_string('app/reminder_email.html', {'user':user, 'week': week})
+
+			send_mail("Reminder! Lock in your picks for Week " + str(week.num), msg_plain, 'FootballShark Team <admin@footballshark.net>', [user.email], fail_silently=False, html_message=msg_html)
+
+	def send_update_email(self, week):
+		for user in User.objects.all():
+			member = Member.objects.get(user=user)
+			score = member.get_week_score(week)
+			msg_plain = render_to_string('app/update_email.txt', {'user':user, 'score':score, 'week': week})
+			msg_html = render_to_string('app/update_email.html', {'user':user, 'score':score, 'week': week})
+
+			send_mail("Week " + str(week.num) + " Update", msg_plain, 'FootballShark Team <admin@footballshark.net>', [user.email], fail_silently=False, html_message=msg_html)
+
+
 	def handle(self, *args, **options):
 
 		print("########################################################")
@@ -95,11 +114,21 @@ class Command(BaseCommand):
 
 		if state == 1:
 			answer = ""
-			while answer != "y" and answer != "n":
-				answer = input("Would you like to lock week " + str(active_week.num) + "? (y/n)")
-			if answer == "y":
-				active_week.Lock()
-				active_week.save()
+			while answer != "1" and answer != "2":
+				answer = input("Would you like to send reminder email or lock week " + str(active_week.num) + "? (1/2)")
+			if answer == "1":
+				while answer != "y" and answer != "n":
+					answer = input("Are you sure? (y/n)")
+				if answer == "y":
+					self.send_reminder_email(active_week)
+
+
+			if answer == "2":
+				while answer != "y" and answer != "n":
+					answer = input("Are you sure? (y/n)")
+				if answer == "y":
+					active_week.Lock()
+					active_week.save()
 			return 0
 		elif state == 2:
 			answer = ""
@@ -113,7 +142,8 @@ class Command(BaseCommand):
 					answer2 = input("Are you sure? This will set the previous week as past, and unlock next week. (y/n)")
 				if answer2 == "y":
 					next_week = Week.objects.get(num=active_week.num+1)
-					return self.add_new_lines(next_week)
+					self.add_new_lines(next_week)
+					self.send_update_email(active_week)
 			return 0
 
 		else:
