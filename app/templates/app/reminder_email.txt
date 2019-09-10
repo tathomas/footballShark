@@ -4,7 +4,7 @@
 
 Don't forget to lock in your picks for Week {{ week.num }}! In case you forgot how, here's the link:
 
-https://www.footballshark.net/edit_picks
+http://www.footballshark.net/edit_picks
 
 The link will expire at the start of the Thursday games, so be sure to get your picks in by then!
 
