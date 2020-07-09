@@ -1,9 +1,9 @@
-var nombrePage = $(".content").length;
+var nombrePage = $(".bet-content").length;
 
 showPage = function (pagination) {
     if (pagination < 0 || pagination >= nombrePage) return;
 
-    $(".content").hide().eq(pagination).show();
+    $(".bet-content").hide().eq(pagination).show();
     $("#pagin li").removeClass("active").eq(pagination).addClass("active");
 }
 
