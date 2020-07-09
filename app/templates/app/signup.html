@@ -51,19 +51,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/signup">Sign Up <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/faq">FAQ</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/faq">Contact</a>
+                  <a class="nav-link disabled" href="/faq">Contact</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/faq">Privacy Policy</a>
-                </li>
-                <li class="nav-item">
-                  <a class="navbar-brand" href="/signup">Sign Up</a>
+                  <a class="nav-link disabled" href="/faq">Privacy Policy</a>
                 </li>
               </ul>
               <form action="{% url 'app:log_in' %}" method="post" class="navbar-form navbar-right mr-4">
