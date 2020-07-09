@@ -1,0 +1,9 @@
+.DS_Store 
+.DS_Store? 
+._* .Trashes 
+ehthumbs.db 
+Thumbs.db
+*.log 
+*.sql 
+*.sqlite
+*.pyc
