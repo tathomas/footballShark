@@ -13,6 +13,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'app/css/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/bet-table.css' %}" rel="stylesheet">
     <link href="{% static 'app/css/customuser.css' %}" rel="stylesheet">
     <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
@@ -119,6 +120,51 @@
 
 <div class="clearfix"></div>
 <br>
+
+<!--BET TABLE CARD -->
+<section id="content-body">
+  <div class="content">
+    <h2>1 Content</h2>
+  </div>
+  <div class="content">
+    <h2>2 Content</h2>
+  </div>
+  <div class="content">
+    <h2>3 Content</h2>
+  </div>
+  <div class="content">
+    <h2>4 Content</h2>
+  </div>
+  <div class="content">
+    <h2>5 Content</h2>
+  </div>
+  <div class="content">
+    <h2>6 Content</h2>
+  </div>
+
+  <article id="pagin">
+    <nav>
+      <span><a class="prev" href="#"></a> &gt;&gt;</span> <ul>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            </ul>
+            <span><a class="next" href="#">>></a></span>
+    </nav>
+  </article>
+</section>
+
+
+
+
+
+
+
+<!--END BET TABLE CARD -->
+
  <!--Results -->
         
     <div class="page-header">
@@ -284,6 +330,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'app/js/custom.js' %}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="{% static 'app/js/ie10-viewport-bug-workaround.js' %}"></script>
   </body>
