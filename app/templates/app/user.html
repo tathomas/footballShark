@@ -70,211 +70,239 @@
     </header>
 
 <!--Name of User -->
-    <main class="container league-main" role="main">
-    <div class="page-header">
-      <h1>{{ person }}</h1>
-    </div>
+   <main class="container league-main" role="main">
+      <div class="page-header">
+        <h1>{{ person }}</h1>
+      </div>
 
-<!--Edit Picks If Betting Open -->
-	<br>
-{% if betting_open %}
-	<div>
-		<a class="btn btn-primary btn-lg" href="/edit_picks" role="button">Edit Your Picks</a>
-	</div>
-{% endif %}
-
-
-<div class="clearfix"></div>
-<div class="clearfix"></div>
-<br>
-           
-        
-<!-- Create/Join League -->    
-<div class="clearfix"></div>
-
-	<div>
-		<a class="btn btn-primary btn-lg" href="/create_league" role="button">Create League</a>
-		<a class="btn btn-primary btn-lg" href="/join_league" role="button">Join League</a>
-	</div>
-
-<div class="clearfix"></div>
-<br>
-<div class="clearfix"></div>
-
-{% if my_leagues %}
-    <div class="col-md-6">
-    <table class="table table-bordered">
-      <thead><tr>
-        <th class="col-md-8">My Leagues:</th>
-      </tr></thead>
-      <tbody>
-      {% for league in my_leagues %}
-        <tr>
-        <td><a href="/league/{{ league.id }}/">{{ league }}</a></td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    </div>
-{% else %}
-    <h3>No League Available</h3>
-{% endif %}
-
-<div class="clearfix"></div>
-<br>
-
-<!--BET TABLE CARD -->
-
-<section id="content-body">
-  <article id="pagin">
-    <nav>
-      <span><a class="prev" href="#">&lt;&lt;</a></span>
-      <ul>
-      {% for week_tuple in past_week_data %}
-        {% if active_week.num !=  week_tuple.0.num %}
-        <li class="active"><a href="#">Current (Week {{active_week.num}})</a></li>
-        {% endif %}
-        <li><a href="#"> Week {{ week_tuple.0.num }}</a></li>
-      {% endfor %}
-      </ul>
-      <span><a class="next" href="#">>></a></span>
-    </nav>
-  </article>
-
-  <div class="bet-content">
-    <!-- This Week's Bets -->
-    <div class="clearfix"></div>
-
-    {% if active_week_tuples %}
-
-    <div id="weekly{{ active_week.num }}"></div>
-    <br>
-    <br>
-    <h3>This Week's Bets</h3>
-
-    <div class="col-md-10">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="col-md-3">Away</th>
-            <th class="col-md-3">Home</th>
-            <th class="col-md-2">Lines</th>
-            <th class="col-md-2">Spread Bet</th>
-            <th class="col-md-2">OU Bet</th>
-            <th class="col-md-1">Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for tup in active_week_tuples %}
-          <tr>
-            <td>
-              {% with 'app/img/logos/'|add:tup.0.0.0|add:'.svg' as image_static %}
-              <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-              {% endwith %}
-              - {{ tup.0.0.1 }}
-            </td>
-            <td>
-              {% with 'app/img/logos/'|add:tup.0.0.2|add:'.svg' as image_static %}
-              <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-              {% endwith %}
-              - {{ tup.0.0.3 }}
-            </td>
-            <td>
-              <div>Spread: {{tup.0.0.4}}</div>
-              <div>Over/Under: {{tup.0.1.4}}</div>
-            </td>
-            <td class="bg-{{tup.1.0.2}}">
-              {% if tup.1.0.1 != '' %}
-              {% with 'app/img/logos/'|add:tup.1.0.1|add:'.svg' as image_static %}
-              <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-              {{ tup.1.0.0 }}
-              {% endwith %}
-              {% endif %}
-            </td>
-            <td class="bg-{{tup.1.1.2}}">
-              {% if tup.1.1.1 != '' %}
-              {% with 'app/img/logos/'|add:tup.1.1.1|add:'.svg' as image_static %}
-              <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-              {{ tup.1.1.0 }}
-              {% endwith %}
-              {% endif %}
-            </td>
-            <td class="bg-{{tup.2.1}}">{{ tup.2.0 }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+  <!--Edit Picks If Betting Open -->
+      <br>
+    {% if betting_open %}
+      <div>
+        <a class="btn btn-primary btn-lg" href="/edit_picks" role="button">Edit Your Picks</a>
+      </div>
     {% endif %}
-  </div>
-  <div class="bet-content">
-    <!-- Previous Week Bets -->
 
-    {% for week_tuple in past_week_data %}
-    <div id="weekly{{ week_tuple.0.num }}"></div>
-    <br>
-    <div class="page-header">
-      <h3>Week {{ week_tuple.0.num }} Bets</h3>
 
-    </div>
-
-    <div class="col-md-10">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="col-md-3">Away</th>
-            <th class="col-md-3">Home</th>
-            <th class="col-md-2">Lines</th>
-            <th class="col-md-2">Spread Bet</th>
-            <th class="col-md-2">OU Bet</th>
-            <th class="col-md-1">Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for tup in week_tuple.1 %}
-          <tr>
-            <td>
-              {% with 'app/img/logos/'|add:tup.0.0.0|add:'.svg' as image_static %}
-              <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-              {% endwith %}
-              - {{ tup.0.0.1 }}
-            </td>
-            <td>
-              {% with 'app/img/logos/'|add:tup.0.0.2|add:'.svg' as image_static %}
-              <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-              {% endwith %}
-              - {{ tup.0.0.3 }}
-            </td>
-            <td>
-              <div>Spread: {{tup.0.0.4}}</div>
-              <div>Over/Under: {{tup.0.1.4}}</div>
-            </td>
-            <td class="bg-{{tup.1.0.2}}">
-              {% if tup.1.0.1 != '' %}
-              {% with 'app/img/logos/'|add:tup.1.0.1|add:'.svg' as image_static %}
-              <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-              {{ tup.1.0.0 }}
-              {% endwith %}
-              {% endif %}
-            </td>
-            <td class="bg-{{tup.1.1.2}}">
-              {% if tup.1.1.1 != '' %}
-              {% with 'app/img/logos/'|add:tup.1.1.1|add:'.svg' as image_static %}
-              <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-              {{ tup.1.1.0 }}
-              {% endwith %}
-              {% endif %}
-            </td>
-            <td>{{ tup.2 }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
     <div class="clearfix"></div>
-    {% endfor %}
-  </div>
-</section>
+    <div class="clearfix"></div>
+    <br>
+              
+            
+    <!-- Create/Join League -->    
+    <div class="clearfix"></div>
+
+      <div>
+        <a class="btn btn-primary btn-lg" href="/create_league" role="button">Create League</a>
+        <a class="btn btn-primary btn-lg" href="/join_league" role="button">Join League</a>
+      </div>
+
+    <div class="clearfix"></div>
+    <br>
+    <div class="clearfix"></div>
+
+    {% if my_leagues %}
+        <div class="col-md-6">
+        <table class="table table-bordered">
+          <thead><tr>
+            <th class="col-md-8">My Leagues:</th>
+          </tr></thead>
+          <tbody>
+          {% for league in my_leagues %}
+            <tr>
+            <td><a href="/league/{{ league.id }}/">{{ league }}</a></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        </div>
+    {% else %}
+        <h3>No League Available</h3>
+    {% endif %}
+
+    <div class="clearfix"></div>
+    <br>
+
+       <!--Results -->
+
+       <div class="page-header">
+         <h3>Results</h3>
+       </div>
+
+       <div>
+         <table class="table table-bordered">
+           <thead>
+             <tr>
+               <th>Week</th>
+               {% for results in results_scores %}
+               <th><a href="#weekly{{ results.0.num }}">{{ results.0.num }}</a></th>
+               {% endfor %}
+             </tr>
+           </thead>
+           <tbody>
+             <tr>
+               <td>Score</td>
+               {% for results in results_scores %}
+               <td>{{ results.1 }}</td>
+               {% endfor %}
+             </tr>
+           </tbody>
+         </table>
+       </div>
+    
+
+    <!--BET TABLE CARD -->
+
+    <section id="content-body">
+      <article id="pagin">
+        <nav>
+          <span><a class="prev" href="#">&lt;&lt;</a></span>
+          <ul>
+          {% for week_tuple in past_week_data %}
+            {% if active_week.num !=  week_tuple.0.num %}
+            <li class="active"><a href="#">Current (Week {{active_week.num}})</a></li>
+            {% endif %}
+            <li><a href="#"> Week {{ week_tuple.0.num }}</a></li>
+          {% endfor %}
+          </ul>
+          <span><a class="next" href="#">>></a></span>
+        </nav>
+      </article>
+
+      <div class="bet-content">
+        <!-- This Week's Bets -->
+        <div class="clearfix"></div>
+
+        {% if active_week_tuples %}
+
+        <div id="weekly{{ active_week.num }}"></div>
+        <br>
+        <br>
+        <h3>This Week's Bets</h3>
+
+        <div class="col-md-10">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="col-md-3">Away</th>
+                <th class="col-md-3">Home</th>
+                <th class="col-md-2">Lines</th>
+                <th class="col-md-2">Spread Bet</th>
+                <th class="col-md-2">OU Bet</th>
+                <th class="col-md-1">Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tup in active_week_tuples %}
+              <tr>
+                <td>
+                  {% with 'app/img/logos/'|add:tup.0.0.0|add:'.svg' as image_static %}
+                  <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+                  {% endwith %}
+                  - {{ tup.0.0.1 }}
+                </td>
+                <td>
+                  {% with 'app/img/logos/'|add:tup.0.0.2|add:'.svg' as image_static %}
+                  <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+                  {% endwith %}
+                  - {{ tup.0.0.3 }}
+                </td>
+                <td>
+                  <div>Spread: {{tup.0.0.4}}</div>
+                  <div>Over/Under: {{tup.0.1.4}}</div>
+                </td>
+                <td class="bg-{{tup.1.0.2}}">
+                  {% if tup.1.0.1 != '' %}
+                  {% with 'app/img/logos/'|add:tup.1.0.1|add:'.svg' as image_static %}
+                  <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+                  {{ tup.1.0.0 }}
+                  {% endwith %}
+                  {% endif %}
+                </td>
+                <td class="bg-{{tup.1.1.2}}">
+                  {% if tup.1.1.1 != '' %}
+                  {% with 'app/img/logos/'|add:tup.1.1.1|add:'.svg' as image_static %}
+                  <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+                  {{ tup.1.1.0 }}
+                  {% endwith %}
+                  {% endif %}
+                </td>
+                <td class="bg-{{tup.2.1}}">{{ tup.2.0 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+      </div>
+      <div class="bet-content">
+        <!-- Previous Week Bets -->
+
+        {% for week_tuple in past_week_data %}
+        <div id="weekly{{ week_tuple.0.num }}"></div>
+        <br>
+        <div class="page-header">
+          <h3>Week {{ week_tuple.0.num }} Bets</h3>
+
+        </div>
+
+        <div class="col-md-10">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="col-md-3">Away</th>
+                <th class="col-md-3">Home</th>
+                <th class="col-md-2">Lines</th>
+                <th class="col-md-2">Spread Bet</th>
+                <th class="col-md-2">OU Bet</th>
+                <th class="col-md-1">Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tup in week_tuple.1 %}
+              <tr>
+                <td>
+                  {% with 'app/img/logos/'|add:tup.0.0.0|add:'.svg' as image_static %}
+                  <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+                  {% endwith %}
+                  - {{ tup.0.0.1 }}
+                </td>
+                <td>
+                  {% with 'app/img/logos/'|add:tup.0.0.2|add:'.svg' as image_static %}
+                  <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+                  {% endwith %}
+                  - {{ tup.0.0.3 }}
+                </td>
+                <td>
+                  <div>Spread: {{tup.0.0.4}}</div>
+                  <div>Over/Under: {{tup.0.1.4}}</div>
+                </td>
+                <td class="bg-{{tup.1.0.2}}">
+                  {% if tup.1.0.1 != '' %}
+                  {% with 'app/img/logos/'|add:tup.1.0.1|add:'.svg' as image_static %}
+                  <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+                  {{ tup.1.0.0 }}
+                  {% endwith %}
+                  {% endif %}
+                </td>
+                <td class="bg-{{tup.1.1.2}}">
+                  {% if tup.1.1.1 != '' %}
+                  {% with 'app/img/logos/'|add:tup.1.1.1|add:'.svg' as image_static %}
+                  <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
+                  {{ tup.1.1.0 }}
+                  {% endwith %}
+                  {% endif %}
+                </td>
+                <td>{{ tup.2 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="clearfix"></div>
+        {% endfor %}
+      </div>
+    </section>
 
 
 
@@ -282,167 +310,15 @@
 
 
 
-<!--END BET TABLE CARD -->
-
- <!--Results -->
-        
-    <div class="page-header">
-      <h3>Results</h3>
-    </div>
-
-    <div class="col-md-10">
-    <table class="table table-bordered">
-      <thead><tr>
-          <th class="col-md-1">Week</th>
-    {% for results in results_scores %}
-          <th><a href="#weekly{{ results.0.num }}">{{ results.0.num }}</a></th>
-    {% endfor %}
-      </tr></thead>
-     <tbody>
-    <tr>
-        <td class="col-md-1">Score</td>
-    {% for results in results_scores %}
-        <td>{{ results.1 }}</td>
-    {% endfor %}
-    </tr>
-      </tbody>
-    </table>
-    </div>
+    <!--END BET TABLE CARD -->
 
     
-<div class="clearfix"></div>
-<br>
-        
-<!-- This Week's Bets -->
-<div class="clearfix"></div>
 
-{% if active_week_tuples %}
         
-    <div id="weekly{{ active_week.num }}"></div>
-    <br> 
+    <div class="clearfix"></div>
     <br>
-      <h3 >This Week's Bets</h3>
 
-    <div class="col-md-10">
-    <table class="table table-bordered">
-      <thead><tr>
-        <th class="col-md-3">Away</th>
-        <th class="col-md-3">Home</th>
-        <th class="col-md-2">Lines</th>
-        <th class="col-md-2">Spread Bet</th>
-        <th class="col-md-2">OU Bet</th>
-        <th class="col-md-1">Score</th>
-      </tr></thead>
-      <tbody>
-{% for tup in active_week_tuples %}
-        <tr>
-        <td>
-{% with 'app/img/logos/'|add:tup.0.0.0|add:'.svg' as image_static %}
-<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-{% endwith %}
-		- {{ tup.0.0.1 }}
-		</td>
-        <td>
-{% with 'app/img/logos/'|add:tup.0.0.2|add:'.svg' as image_static %}
-<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-{% endwith %}
-		- {{ tup.0.0.3 }}
-		</td>
-		<td>
-		<div>Spread: {{tup.0.0.4}}</div>
-		<div>Over/Under: {{tup.0.1.4}}</div>
-		</td>
-	    <td class="bg-{{tup.1.0.2}}">
-{% if tup.1.0.1 != '' %}
-{% with 'app/img/logos/'|add:tup.1.0.1|add:'.svg' as image_static %}
-<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">  {{ tup.1.0.0 }}
-{% endwith %}
-{% endif %}
-		</td>
-	    <td class="bg-{{tup.1.1.2}}">
-{% if tup.1.1.1 != '' %}
-{% with 'app/img/logos/'|add:tup.1.1.1|add:'.svg' as image_static %}
-<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">  {{ tup.1.1.0 }}
-{% endwith %}
-{% endif %}
-		</td>
-        <td class="bg-{{tup.2.1}}">{{ tup.2.0 }}</td>
-        </tr>
-{% endfor %}
-      </tbody>
-    </table>
-    </div>
-{% endif %}
-
-<div class="clearfix"></div>
-
-
-<!-- Previous Week Bets -->
-
-{% for week_tuple in past_week_data %}
-    <div id="weekly{{ week_tuple.0.num }}"></div>
-    <br>    
-    <div class="page-header" >
-      <h3 >Week {{ week_tuple.0.num }} Bets</h3>
-
-    </div>
-
-    <div class="col-md-10">
-    <table class="table table-bordered">
-      <thead><tr>
-        <th class="col-md-3">Away</th>
-        <th class="col-md-3">Home</th>
-        <th class="col-md-2">Lines</th>
-        <th class="col-md-2">Spread Bet</th>
-        <th class="col-md-2">OU Bet</th>
-        <th class="col-md-1">Score</th>
-      </tr></thead>
-      <tbody>
-      {% for tup in week_tuple.1 %}
-        <tr>
-        <td>
-{% with 'app/img/logos/'|add:tup.0.0.0|add:'.svg' as image_static %}
-<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-{% endwith %}
-		- {{ tup.0.0.1 }}
-		</td>
-        <td>
-{% with 'app/img/logos/'|add:tup.0.0.2|add:'.svg' as image_static %}
-<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">
-{% endwith %}
-		- {{ tup.0.0.3 }}
-		</td>
-		<td>
-		<div>Spread: {{tup.0.0.4}}</div>
-		<div>Over/Under: {{tup.0.1.4}}</div>
-		</td>
-	    <td class="bg-{{tup.1.0.2}}">
-{% if tup.1.0.1 != '' %}
-{% with 'app/img/logos/'|add:tup.1.0.1|add:'.svg' as image_static %}
-<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">  {{ tup.1.0.0 }}
-{% endwith %}
-{% endif %}
-		</td>
-	    <td class="bg-{{tup.1.1.2}}">
-{% if tup.1.1.1 != '' %}
-{% with 'app/img/logos/'|add:tup.1.1.1|add:'.svg' as image_static %}
-<img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:60px;height:72px;">  {{ tup.1.1.0 }}
-{% endwith %}
-{% endif %}
-		</td>
-        <td>{{ tup.2 }}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    </div>
-<div class="clearfix"></div>
-{% endfor %}
-
-
-	<br><br>
-
-    </main> <!-- league-main -->
+  </main> <!-- league-main -->
 
 
 

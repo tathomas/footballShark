@@ -1,12 +1,11 @@
 
 #content-body {
-    width: 50%;
     outline: 2px solid red;
     font-weight: bold;
 }
 
 .bet-content {
-    display: block;
+    display: inline-block;
     overflow: hidden;
     padding: 10px;
 }
