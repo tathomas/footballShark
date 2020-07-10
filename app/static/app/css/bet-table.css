@@ -60,5 +60,5 @@ span {
 
 a[disabled] {
     pointer-events: none;
-    color: grey;
+    color: gray !important;
 }

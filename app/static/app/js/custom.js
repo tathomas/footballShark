@@ -10,20 +10,15 @@ showPage = function (pagination) {
     $("#pagin li").removeClass("active").eq(pagination).addClass("active");
 
     if (($("#pagin ul .active").index() + 1) < 0 || ($("#pagin ul .active").index() + 1) >= nombrePage) {
-        $(".next").attr("disabled", "disabled").on("click", function () {
-            return false;
-        });
+        $(".next").attr("disabled", "disabled");
     } else {
-        $(".next").each(function () {
-            this.attr("href", this.data("href")).removeAttr("disabled");
-        });
+        $(".next").removeAttr("disabled");
     }
     if (($("#pagin ul .active").index() - 1) < 0 || ($("#pagin ul .active").index() - 1) >= nombrePage) {
-        console.log("SORRY NOT GONNA WORK LEFT")
-         $(".prev").hide();
+         $(".prev").attr("disabled", "disabled");
     }
     else {
-        $(".prev").show();
+        $(".prev").removeAttr("disabled");
     }
 }
 
