@@ -57,3 +57,8 @@ span {
     transform: translateX(10px);
     border-bottom: none !important;
 }
+
+a[disabled] {
+    pointer-events: none;
+    color: grey;
+}

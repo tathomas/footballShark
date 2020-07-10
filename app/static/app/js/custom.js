@@ -3,12 +3,28 @@ var currentPage = $("#pagin ul .active").index();
 var leftPage = $("#pagin ul .active").index() -1;
 
 showPage = function (pagination) {
-    console.log("Current Page:")
-    console.log($(this).parent().index());
     if (pagination < 0 || pagination >= nombrePage) return;
+
 
     $(".bet-content").hide().eq(pagination).show();
     $("#pagin li").removeClass("active").eq(pagination).addClass("active");
+
+    if (($("#pagin ul .active").index() + 1) < 0 || ($("#pagin ul .active").index() + 1) >= nombrePage) {
+        $(".next").attr("disabled", "disabled").on("click", function () {
+            return false;
+        });
+    } else {
+        $(".next").each(function () {
+            this.attr("href", this.data("href")).removeAttr("disabled");
+        });
+    }
+    if (($("#pagin ul .active").index() - 1) < 0 || ($("#pagin ul .active").index() - 1) >= nombrePage) {
+        console.log("SORRY NOT GONNA WORK LEFT")
+         $(".prev").hide();
+    }
+    else {
+        $(".prev").show();
+    }
 }
 
 // Go to Left
