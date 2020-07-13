@@ -57,10 +57,15 @@ body {
     margin: 50px;
 }
 .flex-info-league {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
     margin-left: 50px;
     overflow: hidden;
 }
 .flex-item ul {
+    padding: 10px 5px 0px 0px;
+    text-align: center;
     list-style: none;
 }
 .league-info{
