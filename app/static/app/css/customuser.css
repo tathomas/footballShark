@@ -9,9 +9,9 @@ body {
 .container{
     outline: 2px solid green;
 }
-.col-md-5, .col-md-7{
+.col-md-5, .col-md-6{
     outline: 2px dotted red;
-    padding: 10px 10px 0px 15px;
+    padding: 10px;
 }
 
 .navbar {
@@ -39,9 +39,10 @@ body {
 .flex-info h1{
     display: inline-block;
 }
+.flex-info-left {
+    margin-left: 15px;
+}
 .flex-info-right {
-    display: flex;
-    align-items: center;
     justify-content: space-evenly;
 }
 .flex-item {
