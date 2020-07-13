@@ -1,8 +1,8 @@
 * {
     margin: 0;
     padding: 0;
-    /* box-sizing: border-box;
-    outline: 1px dotted red; */
+    box-sizing: border-box;
+    outline: 1px dotted red;
 }
 body {
     outline: 2px solid blue;
