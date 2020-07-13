@@ -10,7 +10,6 @@ body {
     outline: 2px solid green;
 }
 .col-md-5, .col-md-6{
-    outline: 2px dotted red;
     padding: 10px;
 }
 
@@ -31,13 +30,16 @@ body {
     height: 50px;
     display: inline-block;
 }
-
+.user-info {
+    margin: 10px;
+}
 .flex-info {
     display: flex;
     align-items: center;
 }
 .flex-info h1{
     display: inline-block;
+    margin: 10px;
 }
 .flex-info-left {
     margin-left: 15px;
@@ -47,5 +49,5 @@ body {
 }
 .flex-item {
     margin-left: 5px;
-    padding: 10px;
+    /* padding: 10px; */
 }
