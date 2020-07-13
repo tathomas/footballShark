@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* outline: 1px dotted red; */
 }
 body {
     outline: 2px solid blue;
@@ -48,6 +49,13 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
+    text-align: center;
+}
+.flex-info-league {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    text-align: center;
 }
 .flex-item {
     margin-left: 10px;
@@ -56,18 +64,26 @@ body {
 .league-info {
     margin: 50px;
 }
-.flex-info-league {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    margin-left: 50px;
-    overflow: hidden;
-}
+
 .flex-item ul {
     padding: 10px 5px 0px 0px;
-    text-align: center;
     list-style: none;
 }
 .league-info{
     height: 400px;
+}
+.league-box {
+    /* outline: 2px solid purple; */
+    height: 20rem;
+    width: 20rem;
+    overflow-y: auto;
+    text-align: left;
+    margin-top: 20px;
+}
+.result-box {
+    /* outline: 2px solid purple; */
+    height: 20rem;
+    width: 40rem;
+    text-align: center;
+    margin-top: 20px;
 }
