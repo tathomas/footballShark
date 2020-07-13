@@ -9,7 +9,7 @@ body {
 .container{
     outline: 2px solid green;
 }
-.col-md-5, .col-md-6{
+.col-md-4, .col-md-6{
     padding: 10px;
 }
 
@@ -45,6 +45,8 @@ body {
     margin-left: 0px;
 }
 .flex-info-right {
+    display: flex;
+    align-items: flex-start;
     justify-content: space-evenly;
 }
 .flex-item {
@@ -56,4 +58,11 @@ body {
 }
 .flex-info-league {
     margin-left: 50px;
+    overflow: hidden;
+}
+.flex-item ul {
+    list-style: none;
+}
+.league-info{
+    height: 400px;
 }
