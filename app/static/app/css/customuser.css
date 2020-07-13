@@ -35,8 +35,9 @@ body {
 .flex-info {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
-.flex-info h1{
+.flex-item h1{
     display: inline-block;
 }
 .flex-item {

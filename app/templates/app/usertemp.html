@@ -72,15 +72,19 @@
     
     <main class="container-fluid league-main m-3" role="main">
         <div class="row">
-            <div class="col-md-5 flex-info">
+            <div class="col-md-5">
                 <!--Name of User -->
-                <div class="flex-item user-icon"></div>
                 <div class="flex-item">
+                    <div class="user-icon"></div>
                     <h1>{{person}}</h1>
                 </div>
             </div>
-            <div class="col-md-7">
-                <h1>Right Content</h1>
+            <div class="col-md-7 flex-info">
+                <div class="btn-group btn-group-lg flex-item" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-secondary">Create League</button>
+                    <button type="button" class="btn btn-secondary">Join League</button>
+                    <button type="button" class="btn btn-secondary">Edit Picks</button>
+                </div>
             </div>
         </div>
 
