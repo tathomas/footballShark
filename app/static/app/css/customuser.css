@@ -11,7 +11,7 @@ body {
 }
 .col-md {
     outline: 2px dotted red;
-    padding: 10px;
+    padding: 10px 10px 10px 15px;
 }
 
 .navbar {
@@ -40,5 +40,6 @@ body {
     display: inline-block;
 }
 .flex-item {
+    margin-left: 5px;
     padding: 10px;
 }
