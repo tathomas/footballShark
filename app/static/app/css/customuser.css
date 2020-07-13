@@ -31,16 +31,18 @@ body {
     height: 50px;
     display: inline-block;
 }
+
 .flex-info {
     display: flex;
     align-items: center;
 }
-
-.flex-info-right {
-    justify-content: space-evenly;
-}
-.flex-item h1{
+.flex-info h1{
     display: inline-block;
+}
+.flex-info-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 .flex-item {
     margin-left: 5px;
