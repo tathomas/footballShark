@@ -40,7 +40,6 @@ body {
 .flex-info h1,
 .flex-info h2{
     display: inline-block;
-    margin: 10px;
 }
 .flex-info-left {
     margin-left: 0px;
@@ -49,7 +48,7 @@ body {
     justify-content: space-evenly;
 }
 .flex-item {
-    margin-left: 5px;
+    margin-left: 10px;
     /* padding: 10px; */
 }
 .flex-info-league {
