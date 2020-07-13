@@ -37,7 +37,8 @@ body {
     display: flex;
     align-items: center;
 }
-.flex-info h1{
+.flex-info h1,
+.flex-info h2{
     display: inline-block;
     margin: 10px;
 }
@@ -51,7 +52,9 @@ body {
     margin-left: 5px;
     /* padding: 10px; */
 }
-
 .flex-info-league {
     margin-left: 50px;
+}
+.league-info {
+    margin: 50px;
 }
