@@ -32,10 +32,13 @@ body {
     display: inline-block;
 }
 
-.user-info {
+.flex-info {
+    display: flex;
+    align-items: center;
+}
+.flex-info h1{
     display: inline-block;
 }
-
-.user-info h1{
-    display: inline-block;
+.flex-item {
+    padding: 10px;
 }
