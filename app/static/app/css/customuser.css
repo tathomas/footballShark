@@ -1,8 +1,8 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    /* outline: 1px dotted red; */
+    /* box-sizing: border-box;
+    outline: 1px dotted red; */
 }
 body {
     outline: 2px solid blue;
@@ -77,8 +77,9 @@ body {
 }
 .league-box {
     /* outline: 2px solid purple; */
-    height: 20rem;
-    width: 20rem;
+    height: 25rem;
+    width: 22rem;
+    padding-left: 10px;
     overflow-y: auto;
     text-align: left;
     margin-top: 15px;
@@ -86,4 +87,11 @@ body {
 .result-box {
     text-align: center;
     margin: 15px;
+}
+.result-chart {
+    background-image: url(../img/results-chart.png);
+    background-size: cover;
+    width: 500px;
+    height: 250px;
+    display: inline-block;
 }
