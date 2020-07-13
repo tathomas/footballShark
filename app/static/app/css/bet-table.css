@@ -1,6 +1,5 @@
 
 #content-body {
-    outline: 2px solid red;
     font-weight: bold;
 }
 
@@ -21,7 +20,7 @@ nav ul {
     display: flex;
     list-style-type: none;
     margin: 0px;
-    padding: 0px
+    padding: 0px;
 }
 
 #pagin a {
