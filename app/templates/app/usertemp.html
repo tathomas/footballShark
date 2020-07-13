@@ -80,9 +80,12 @@
             </div>
             <div class="col-md-6 flex-info flex-info-right">
                 <div class="btn-group btn-group-lg flex-item" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary">Create League</button>
-                    <button type="button" class="btn btn-secondary">Join League</button>
-                    <button type="button" class="btn btn-secondary">Edit Picks</button>
+                    <button type="button" class="btn btn-outline-success">Create League</button>
+                    <button type="button" class="btn btn-outline-success">Join League</button>
+                <!--Edit Picks If Betting Open -->
+                {% if betting_open %}
+                    <a class="btn btn-success btn-lg" href="/edit_picks" role="button">Edit Your Picks</a>
+                {% endif %}
                 </div>
             </div>
             <div class="col-md-1"></div>
