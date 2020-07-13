@@ -93,6 +93,8 @@
             <div class="col-md-1"></div>
         </div><!-- End Top User Info Row -->
 
+        <div class="clearfix"></div>
+
         <!--Middle My Leagues and Results Row -->
         <div class="row league-info">
             <div class="col-md-1"></div>
@@ -102,13 +104,14 @@
                     <h2>My Leagues</h2>
                     {% if my_leagues %}
                         {% for league in my_leagues %}
-                       <ul>
-                            <li><a href="/league/{{ league.id }}/">{{ league }}</a></li>
                         <ul>
-                        {% endfor %}
-                        {% else %}
-                        <h3>No League Available</h3>
-                        {% endif %}
+                            <li><a href="/league/{{ league.id }}/">{{ league }}</a></li>
+                            {% endfor %}
+                            {% else %}
+                            <h3>No League Available</h3>
+                        </ul>
+                    {% endif %}
+                        
                 </div>
             </div>
             <div class="col-md-6 flex-info flex-info-right">
