@@ -9,9 +9,9 @@ body {
 .container{
     outline: 2px solid green;
 }
-.col-md {
+.col-md-5, .col-md-7{
     outline: 2px dotted red;
-    padding: 10px 10px 10px 15px;
+    padding: 10px 10px 0px 15px;
 }
 
 .navbar {
