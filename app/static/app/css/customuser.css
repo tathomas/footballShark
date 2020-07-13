@@ -47,6 +47,12 @@ body {
 }
 .flex-info-right {
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+.flex-league-right {
+    display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
     text-align: center;
