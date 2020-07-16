@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* outline: 1px dotted red; */
+    outline: 1px dotted red;
 }
 /* .col-md-4, .col-md-6{
     padding: 10px;
@@ -55,7 +55,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
-    text-align: center;
+    text-align: left;
 }
 .flex-item {
     margin-left: 10px;
@@ -69,6 +69,10 @@
     padding: 10px 5px 0px 0px;
     list-style: none;
 }
+.flex-item h3 {
+    padding: none;
+    margin: none;
+}
 .league-info{
     height: 400px;
 }
@@ -76,7 +80,6 @@
     /* outline: 2px solid purple; */
     height: 25rem;
     width: 22rem;
-    padding-left: 10px;
     overflow-y: auto;
     text-align: left;
     margin-top: 15px;
