@@ -40,4 +40,4 @@ $("#pagin ul a").click(function (e) {
     showPage($(this).parent().index());
 });
 
-showPage(0)
+showPage(nombrePage -1)
