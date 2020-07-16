@@ -69,6 +69,9 @@
     padding: none;
     margin: none;
 }
+.flex-item h4 {
+    text-align: left;
+}
 .league-info{
     height: 400px;
 }
