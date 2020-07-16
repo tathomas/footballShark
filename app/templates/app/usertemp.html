@@ -154,7 +154,7 @@
                         <div id="pagin">
                             <nav class="justify-content-center">
                                 <span><a class="prev" href="#">&lt;&lt;</a></span>
-                                <ul class="bet-list">
+                                <ul class="">
                                     {% if active_week.num !=  week_tuple.0.num %}
                                     <li class="active"><a href="#">Current (Week{{active_week.num}})</a></li>
                                     {% endif %}
@@ -232,9 +232,9 @@
                             </div>
                             {% endif %}
                         </div>
+                        {% for week_tuple in past_week_data %}
                         <div class="bet-content">
                             <!-- Previous Week Bets -->
-                            {% for week_tuple in past_week_data %}
                             <div id="weekly{{ week_tuple.0.num }}"></div>
                             <h3>Week {{ week_tuple.0.num }} Bets</h3>
                             <div class="col-md-12">
@@ -295,8 +295,8 @@
                                 </table>
                             </div>
                             <div class="clearfix"></div>
-                            {% endfor %}
                         </div>
+                    {% endfor %}
                     </section>
                 </div>
 
