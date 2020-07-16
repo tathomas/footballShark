@@ -133,43 +133,39 @@
                 <!--BET TABLE CARD -->
                 <div class="bet-card-box">
                     <section id="content-body">
+                        <div id="pagin">
+                            <nav class="justify-content-center">
+                                <span><a class="prev" href="#">&lt;&lt;</a></span>
+                                <ul>
+                                    {% for week_tuple in past_week_data %}
+                                    {% if active_week.num !=  week_tuple.0.num %}
+                                    <li class="active"><a href="#">Current (Week
+                                            {{active_week.num}})</a></li>
+                                    {% endif %}
+                                    <li><a href="#"> Week {{ week_tuple.0.num }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                                <span><a class="next" href="#">>></a></span>
+                            </nav>
+                        </div>
 
                         <div class="bet-content">
-                            <div id="pagin">
-                                <nav>
-                                    <span><a class="prev" href="#">&lt;&lt;</a></span>
-                                    <ul>
-                                        {% for week_tuple in past_week_data %}
-                                        {% if active_week.num !=  week_tuple.0.num %}
-                                        <li class="active"><a href="#">Current (Week
-                                                {{active_week.num}})</a></li>
-                                        {% endif %}
-                                        <li><a href="#"> Week {{ week_tuple.0.num }}</a></li>
-                                        {% endfor %}
-                                    </ul>
-                                    <span><a class="next" href="#">>></a></span>
-                                </nav>
-                            </div>
                             <!-- This Week's Bets -->
-                            <div class="clearfix"></div>
-
                             {% if active_week_tuples %}
 
                             <div id="weekly{{ active_week.num }}"></div>
-                            <br>
-                            <br>
                             <h3>This Week's Bets</h3>
 
-                            <div class="col-md-10">
-                                <table class="table table-bordered">
+                            <div class="col-md-12">
+                                <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-3">Away</th>
-                                            <th class="col-md-3">Home</th>
-                                            <th class="col-md-2">Lines</th>
-                                            <th class="col-md-2">Spread Bet</th>
-                                            <th class="col-md-2">OU Bet</th>
-                                            <th class="col-md-1">Score</th>
+                                            <th >Away</th>
+                                            <th>Home</th>
+                                            <th>Lines</th>
+                                            <th >Spread Bet</th>
+                                            <th >OU Bet</th>
+                                            <th >Score</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -221,25 +217,19 @@
                         </div>
                         <div class="bet-content">
                             <!-- Previous Week Bets -->
-
                             {% for week_tuple in past_week_data %}
                             <div id="weekly{{ week_tuple.0.num }}"></div>
-                            <br>
-                            <div class="page-header">
-                                <h3>Week {{ week_tuple.0.num }} Bets</h3>
-
-                            </div>
-
-                            <div class="col-md-10">
-                                <table class="table table-bordered">
+                            <h3>Week {{ week_tuple.0.num }} Bets</h3>
+                            <div class="col-md-12">
+                                <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-3">Away</th>
-                                            <th class="col-md-3">Home</th>
-                                            <th class="col-md-2">Lines</th>
-                                            <th class="col-md-2">Spread Bet</th>
-                                            <th class="col-md-2">OU Bet</th>
-                                            <th class="col-md-1">Score</th>
+                                            <th>Away</th>
+                                            <th>Home</th>
+                                            <th>Lines</th>
+                                            <th>Spread Bet</th>
+                                            <th>OU Bet</th>
+                                            <th>Score</th>
                                         </tr>
                                     </thead>
                                     <tbody>

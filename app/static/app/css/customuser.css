@@ -95,3 +95,6 @@
 .bet-card-box {
     text-align: center;
 }
+.btn-outline-success {
+    border: green;
+}
