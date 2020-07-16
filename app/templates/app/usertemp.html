@@ -100,7 +100,7 @@
         <!--Middle My Leagues and Results Row -->
         <div class="row league-info">
             <div class="col-md-1"></div>
-            <div class="col-md-3 flex-info-league">
+            <div class="col-md-2 flex-info-league">
                 <!--My League -->
                 <div class="flex-item">
                     <h4>My Leagues</h4>
@@ -114,14 +114,30 @@
                             <h3>No League Available</h3>
                         </ul>
                         {% endif %}
-                    </div>  
+                    </div>
                 </div>
             </div>
-            <div class="col-md-7 flex-league-right">
+            <div class="col-md-5 flex-league-right">
                 <div class="flex-item">
                     <h3>Total Score: <span style="color: red;">-4</span></h3>
                     <div class="result-box">
                         <div class="result-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 flex-league-right">
+                <div class="flex-item">
+                    <h4>My Leagues</h4>
+                    <div class="league-box">
+                        {% if my_leagues %}
+                        {% for league in my_leagues %}
+                        <ul>
+                            <li><a href="/league/{{ league.id }}/">{{ league }}</a></li>
+                            {% endfor %}
+                            {% else %}
+                            <h3>No League Available</h3>
+                        </ul>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -162,10 +178,10 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th >Away</th>
+                                            <th>Away</th>
                                             <th>Home</th>
                                             <th>Lines</th>
-                                            <th >Spread Bet</th>
+                                            <th>Spread Bet</th>
                                             <th >OU Bet</th>
                                             <th >Score</th>
                                         </tr>
@@ -223,7 +239,7 @@
                             <div id="weekly{{ week_tuple.0.num }}"></div>
                             <h3>Week {{ week_tuple.0.num }} Bets</h3>
                             <div class="col-md-12">
-                                <table class="table">
+                                <table class="table" id="weeklyOne"></table>
                                     <thead>
                                         <tr>
                                             <th>Away</th>
