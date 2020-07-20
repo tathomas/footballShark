@@ -154,7 +154,7 @@ def render_user(request, person_id):
 		'results_scores' : results_scores,
         'active_week': active_week
 	}
-	return render(request, 'app/usertemp.html', context)
+	return render(request, 'app/user.html', context)
 
 # helper method to render league page
 @login_required(login_url='/login')
