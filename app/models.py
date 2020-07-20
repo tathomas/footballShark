@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+# Represents one member of the app. Wrapper of django User 
+# model in order to reuse Django authentication. 
 class Member(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	betCard = models.CharField(max_length=400)
@@ -9,6 +11,7 @@ class Member(models.Model):
 	def __str__(self):
 		return super(Member, self).__str__()
 
+	# Sets the bet for this user for a single game.
 	def set_betcard(self, game_index, line_bet, ou_bet):
 		game = Game.objects.get(index=game_index)
 		try:
@@ -20,6 +23,7 @@ class Member(models.Model):
 		card.ou_bet = ou_bet
 		card.save()
 
+	# Gets the score for this user for a given week.
 	def get_week_score(self, week):
 		games = Game.objects.filter(week=week)
 		score = 0
@@ -27,6 +31,7 @@ class Member(models.Model):
 			score += self.get_game_score(game.index)
 		return score
 
+	# Gets the score for this user for a given game.
 	def get_game_score(self, game_index):
 		game = Game.objects.get(index=game_index)
 		# game score not updated yet, return 0.
@@ -40,6 +45,7 @@ class Member(models.Model):
 
 		return card.score
 
+	# Helper to get the user's bet for a given game.
 	def get_bet_tuple(self, game_index):
 		game = Game.objects.get(index=game_index)		
 		try:
@@ -49,7 +55,7 @@ class Member(models.Model):
 
 		return card.line_bet, card.ou_bet
 		
-
+# Static data on a single NFL team
 class Team(models.Model):
 	name = models.CharField(max_length=50)
 
@@ -59,11 +65,20 @@ class Team(models.Model):
 	def icon_name(self):
 		return str.split(self.name, " ")[-1].strip()
 
+# Represents a single week of games.
 class Week(models.Model):
 	year = models.IntegerField()
 	num = models.IntegerField()
+	
+	# Current status of this week.
+	# 0 -> Not started
+	# 1 -> Lines added, betting in progress
+	# 2 -> Bets locked, games in progress
+	# 3 -> Scores locked, week is finished
+	# Note that only a single week at a time has status 1 or 2.
 	status = models.IntegerField(default=0)
 
+	# Setters for the week status.
 	def Unlock(self):
 		self.status = 1
 
@@ -76,6 +91,8 @@ class Week(models.Model):
 	def __str__(self):
 		return "Week " + str(self.num) + ", " + str(self.year) + ". Status: " + str(self.status)
 
+# Represents a single game. Contains the static information on the game, 
+# and is updated with line/o_u and then scores as the season progresses.
 class Game(models.Model):
 	team_1 = models.ForeignKey(Team, related_name='team_1')
 	team_2 = models.ForeignKey(Team, related_name='team_2')
@@ -96,12 +113,14 @@ class Game(models.Model):
 	def printSpreadInfo(self):
 		return "Spread: " + str(self.line_val) + "  Over/Under: " + str(self.ou_val)
 
+	# Generates column headers for this game. Used by User and League_Week views.
 	def get_column_headers(self):
 
 		col_1 = (str(self.team_1.icon_name()), str(self.score_1),  str(self.team_2.icon_name()) , str(self.score_2), " (" + str(self.line_val) + ")")
 		col_2 = ("Over", str(self.score_1+self.score_2), "Under", str(self.score_1+self.score_2),  "(" + str(self.ou_val) + ")")
 		return [col_1, col_2]
 
+	# Get background colors to use for this game. Returns four colors
 	def get_colors(self):
 
 		home_col = away_col = over_col = under_col = "white"
@@ -121,7 +140,7 @@ class Game(models.Model):
 				over_col="danger"
 		return away_col, home_col, under_col, over_col
 
-
+# Represents a set of users who have access to each other's bets.
 class League(models.Model):
 	members = models.ManyToManyField(User, through='Membership')
 	name = models.CharField(max_length=100)
@@ -130,6 +149,7 @@ class League(models.Model):
 	def __str__(self):
 		return self.name
 
+# Relationship between members and leagues
 class Membership(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	league = models.ForeignKey(League, on_delete=models.CASCADE)
@@ -139,6 +159,7 @@ class Membership(models.Model):
 	def __str__(self):
 		return str(user) + " joined " + str(league) + " on " + str(date_joined)
 
+# Represents a single bet per user, per game. 
 class BetCard(models.Model):
 	game = models.ForeignKey(Game, on_delete=models.CASCADE)
 	user = models.ForeignKey(Member, on_delete=models.CASCADE)

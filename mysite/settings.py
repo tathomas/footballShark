@@ -91,8 +91,8 @@ else:
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
 			'NAME': 'local',
-			'USER': 'postgres',
-			'PASSWORD': 'SoniaIsLord', 
+			'USER': 'local',
+			'PASSWORD': 'local', 
 			'HOST': 'localhost',
 			'PORT': '5432',
 		}
