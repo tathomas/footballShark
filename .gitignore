@@ -8,3 +8,4 @@ Thumbs.db
 *.sqlite
 *.pyc
 mysite/settings.py
+app/__pycache__/admin.cpython-35.pyc
