@@ -1,0 +1,64 @@
+
+#content-body {
+    font-weight: bold;
+}
+
+.bet-content {
+    display: inline-block;
+    overflow: hidden;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+#pagin nav {
+    width:90%;
+    margin: auto;
+    padding: 20px 0;
+    display: flex;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+#pagin a {
+    color: black;
+    padding: 0px 8px;
+    text-decoration: none;
+}
+
+#pagin .active a,
+#pagin a:hover {
+    color: #5f9254 !important;
+    border-bottom: 3px solid #5f9254;
+}
+
+span {
+    border-bottom: 3px solid transparent;
+}
+
+.prev,
+.next {
+    transition: all 600ms ease;
+}
+
+.prev:hover {
+    transition: all 600ms ease;
+    transform: translateX(-10px);
+    border-bottom: none !important;
+}
+
+.next:hover {
+    transition: all 600ms ease;
+    transform: translateX(10px);
+    border-bottom: none !important;
+}
+
+a[disabled] {
+    pointer-events: none;
+    color: gray !important;
+}
