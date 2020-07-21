@@ -169,6 +169,3 @@ EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'FootballShark Team <admin@footballshark.net>'
-
-
-
