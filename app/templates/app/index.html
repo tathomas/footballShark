@@ -13,7 +13,6 @@
 
      <!-- Custom styles for this template -->
      <link href="{% static 'app/css/customindex.css' %}" rel="stylesheet">
-     <link href="{% static 'app/css/custom.css' %}" rel="stylesheet">
      <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
      <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
@@ -78,18 +77,22 @@
       </nav>
     </header>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Football Shark</h1>
-        <p>
-	  	<a class="btn btn-primary btn-lg" href="/login" role="button">Sign In</a>
-        <a class="btn btn-primary btn-lg" href="/signup" role="button">Sign Up</a>
-		</p>
-		<p><a class="btn btn-primary btn-sm" href="/password_reset">Forgot your Password?<a></p>
-
-      </div>
-    </div>
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0 league-main">
+          <!-- Main jumbotron for a primary marketing message or call to action -->
+          <div class="jumbotron">
+            <div class="container">
+              <h1>Football Shark</h1>
+              <p>
+                <a class="btn btn-primary btn-lg" href="/login" role="button">Sign In</a>
+                <a class="btn btn-primary btn-lg" href="/signup" role="button">Sign Up</a>
+              </p>
+              <p>
+                <a class="btn btn-primary btn-sm" href="/password_reset">Forgot your Password?<a>
+              </p>
+            </div>
+          </div>
+    </main>
 
     <!-- Footer -->
     <footer class="footer mt-auto py-3">
