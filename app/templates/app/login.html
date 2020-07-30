@@ -51,7 +51,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+              <a class="nav-link disabled" href="/login">Sign In <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/faq">FAQ</a>
@@ -71,7 +71,7 @@
             <div class="form-group">
               <input type="password" name="password" class="form-control" placeholder="password">
             </div>
-            <button type="submit" class="btn btn-light">Log in</button>
+            <button type="submit" class="btn btn-light">Sign in</button>
           </form>
         </div>
         <!--/.navbar-collapse -->
@@ -81,11 +81,11 @@
     <main class="container league-main" role="main">
 
     <div>
-    <h2>Log In</h2>
+    <h2>Sign In</h2>
 		<form method="post">
             {% csrf_token %}
 			{{ auth_form.as_p }}
-            <button type="submit" class="btn btn-primary">Log In</button>
+            <button type="submit" class="btn btn-primary">Sign In</button>
         </form>
     </div>
 
