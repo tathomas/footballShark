@@ -12,7 +12,7 @@
     <title>FootballShark</title>
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'app/css/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/noscroll.css' %}" rel="stylesheet">
     <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
@@ -63,36 +63,34 @@
                   <a class="nav-link disabled" href="/faq">Privacy Policy</a>
                 </li>
               </ul>
-              <form action="{% url 'app:log_in' %}" method="post" class="navbar-form navbar-right mr-4">
-                {% csrf_token %}
-                <div class="form-group">
-                  <input type="text" name="username" class="form-control" placeholder="username">
-                </div>
-                <div class="form-group">
-                  <input type="password" name="password" class="form-control" placeholder="password">
-                </div>
-                <button type="submit" class="btn btn-light">Sign in</button>
-              </form>
             </div>
             <!--/.navbar-collapse -->
           </nav>
         </header>
 
-    <main class="container league-main" role="main">
 
-
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div>
-		<h2>Sign Up Here!</h2>
-		<form method="post">
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0 league-main">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h2>Sign Up</h2>
+          <p>Already have an account? <a href="/login" role="button">Sign In Here.</a></p>
+          <form method="post">
             {% csrf_token %}
-			{{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Sign up</button>
-        </form>
-    </div>
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Sign up</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </main>
 
-	</main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3">
+      <span class="text-muted">Copyright ©2020 FootballShark LLC. All rights reserved.</span>
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
