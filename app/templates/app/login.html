@@ -68,18 +68,24 @@
       </nav>
     </header>
 
-    <main class="container league-main" role="main">
-    <div>
-      <h2>Sign In</h2>
-      <form method="post">
-        <p>Don't have an account? <a href="/signup" role="button">Sign Up Here.</a></p>
-        {% csrf_token %}
-        {{ auth_form.as_p }}
-        <p><small><a href="/password_reset">Forgot your Password?<a></small></p>
-        <button type="submit" class="btn btn-success">Sign In</button>
-      </form>
-    </div>
-  </main>
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0 league-main">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h2>Sign In</h2>
+          <form method="post">
+            <p>Don't have an account? <a href="/signup" role="button">Sign Up Here.</a></p>
+            {% csrf_token %}
+            {{ auth_form.as_p }}
+            <p><small><a href="/password_reset">Forgot your Password?<a></small></p>
+            <button type="submit" class="btn btn-success">Sign In</button>
+          </form>
+        </div>
+        </div>
+      </div>
+    </main>
+
   
   <!-- Footer -->
   <footer class="footer mt-auto py-3">
