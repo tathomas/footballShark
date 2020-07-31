@@ -293,7 +293,7 @@ def edit_picks(request):
         'games': games,
         'edit_bet_formset': formset,
     }
-	return render(request, 'app/edit_picks.html', context)
+	return render(request, 'app/edit_picks_temp.html', context)
 
 @login_required(login_url='/login')
 def league_week(request, league_id, week_num):
