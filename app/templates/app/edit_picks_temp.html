@@ -132,23 +132,24 @@
             {{ edit_bet_formset.management_form }}
             {% for form in edit_bet_formset %}
             {{ form.errors }}
+
             <div class="edit_bet_form">
                 {{ form.game_id.as_hidden }}
                 {% for game in games %}
 
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+                <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({
                         google_ad_client: "ca-pub-7299084881599837",
                         enable_page_level_ads: true
                     });
-                </script>
+                </script> -->
 
                 {% ifequal game.index form.game_id.value|add:"0" %}
                 <h4>
                     {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
-                    <img src="{% static image_static %}" class="rounded mx-auto d-block"
-                        style="width:45px;height:54px;">
+                    <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:45px;height:54px;">
                     {% endwith %}
                     @
                     {% with 'app/img/logos/'|add:game.team_2.icon_name|add:'.svg' as image_static %}
