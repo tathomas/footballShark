@@ -12,7 +12,7 @@
     <title>FootballShark</title>
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'app/css/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/noscroll.css' %}" rel="stylesheet">
     <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
@@ -41,8 +41,6 @@
 
   <body>
 
-    <main class="container league-main" role="main">
-
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
         <a class="navbar-brand ml-4" href="/user">FootballShark</a>
@@ -54,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/join_league">Join League <span class="sr-only">(current)</span></a>
+              <a class="nav-link disabled" href="/join_league">Join League <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/user">Home</a>
@@ -71,17 +69,27 @@
       </nav>
     </header>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div>
-		<h2>Join a League</h2>
-		<form method="post">
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0 league-main">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h2>Join a League</h2>
+          <p>Don't have a Key? <a href="/create_league" role="button">Create New League.</a></p>
+          <form method="post">
             {% csrf_token %}
-			{{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Join League</button>
-        </form>
-    </div>
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Join League</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </main>
 
-	</main>
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3">
+      <span class="text-muted">Copyright ©2020 FootballShark LLC. All rights reserved.</span>
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
