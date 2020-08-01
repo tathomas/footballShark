@@ -13,7 +13,7 @@
     <title>FootballShark</title>
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'app/css/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/editpicks.css' %}" rel="stylesheet">
     <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
@@ -121,95 +121,94 @@
         </nav>
     </header>
 
-    <div class="container league-main" role="main">
+    <div class="container-fluid league-main" role="main">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="container-fluid text-center m-3">
+                    <h1>Editing picks for Week {{ week.num }}</h1>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ edit_bet_formset.management_form }}
+                        {% for form in edit_bet_formset %}
+                            {{ form.errors }}
+                            <div class="edit_bet_form">
+                                {{ form.game_id.as_hidden }}
+                                {% for game in games %}
+                                    {% ifequal game.index form.game_id.value|add:"0" %}
+                                    <h4>
+                                        {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
+                                        <img src="{% static image_static %}" class="rounded mx-auto d-block"
+                                            style="width:45px;height:54px;">
+                                        {% endwith %}
+                                        @
+                                        {% with 'app/img/logos/'|add:game.team_2.icon_name|add:'.svg' as image_static %}
+                                        <img src="{% static image_static %}" class="rounded mx-auto d-block"
+                                            style="width:45px;height:54px;">
+                                        {% endwith %}
+                                        {{game.printSpreadInfo }}
+                                    </h4>
 
-        <div class="page-header">
-            <h1>Editing picks for Week {{ week.num }}</h1>
-        </div>
+                                    <div class="col-md-6">
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td class="col-md-1"><label for="line_bet">{{my_game_id}}Spread:</label></td>
+                                                <td class="col-md-4">{{ form.line_bet }}</td>
+                                                <td class="col-md-1">
+                                                    <p id="{{form.game_id.value}}line_bet" style="display: inline"></p>
+                                                    {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
+                                                    <img id="{{form.game_id.value}}away" src="{% static image_static %}"
+                                                        class="rounded mx-auto d-block"
+                                                        style="display:none;width:30px;height:36px;">
+                                                    {% endwith %}
+                                                    {% with 'app/img/logos/'|add:game.team_2.icon_name|add:'.svg' as image_static %}
+                                                    <img id="{{form.game_id.value}}home" src="{% static image_static %}"
+                                                        class="rounded mx-auto d-block"
+                                                        style="display:none;width:30px;height:36px;">
+                                                    {% endwith %}
+                                                    {% with 'app/img/logos/Blank.svg' as image_static %}
+                                                    <img id="{{form.game_id.value}}blankspread" src="{% static image_static %}"
+                                                        class="rounded mx-auto d-block"
+                                                        style="display:none;width:30px;height:36px;">
+                                                    {% endwith %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-1"><label for="ou_bet">Over/Under: </label></td>
+                                                <td class="col-md-4">{{ form.ou_bet }}</td>
+                                                <td class="col-md-1">
 
-        <form method="post">
-            {% csrf_token %}
-            {{ edit_bet_formset.management_form }}
-            {% for form in edit_bet_formset %}
-            {{ form.errors }}
-
-            <div class="edit_bet_form">
-                {{ form.game_id.as_hidden }}
-                {% for game in games %}
-
-
-                <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({
-                        google_ad_client: "ca-pub-7299084881599837",
-                        enable_page_level_ads: true
-                    });
-                </script> -->
-
-                {% ifequal game.index form.game_id.value|add:"0" %}
-                <h4>
-                    {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
-                    <img src="{% static image_static %}" class="rounded mx-auto d-block" style="width:45px;height:54px;">
-                    {% endwith %}
-                    @
-                    {% with 'app/img/logos/'|add:game.team_2.icon_name|add:'.svg' as image_static %}
-                    <img src="{% static image_static %}" class="rounded mx-auto d-block"
-                        style="width:45px;height:54px;">
-                    {% endwith %}
-                    {{game.printSpreadInfo }}
-                </h4>
-
-                <div class="col-md-6">
-                    <table class="table table-bordered">
-                        <tr>
-                            <td class="col-md-1"><label for="line_bet">{{my_game_id}}Spread:</label></td>
-                            <td class="col-md-4">{{ form.line_bet }}</td>
-                            <td class="col-md-1">
-                                <p id="{{form.game_id.value}}line_bet" style="display: inline"></p>
-                                {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
-                                <img id="{{form.game_id.value}}away" src="{% static image_static %}"
-                                    class="rounded mx-auto d-block" style="display:none;width:30px;height:36px;">
-                                {% endwith %}
-                                {% with 'app/img/logos/'|add:game.team_2.icon_name|add:'.svg' as image_static %}
-                                <img id="{{form.game_id.value}}home" src="{% static image_static %}"
-                                    class="rounded mx-auto d-block" style="display:none;width:30px;height:36px;">
-                                {% endwith %}
-                                {% with 'app/img/logos/Blank.svg' as image_static %}
-                                <img id="{{form.game_id.value}}blankspread" src="{% static image_static %}"
-                                    class="rounded mx-auto d-block" style="display:none;width:30px;height:36px;">
-                                {% endwith %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-1"><label for="ou_bet">Over/Under: </label></td>
-                            <td class="col-md-4">{{ form.ou_bet }}</td>
-                            <td class="col-md-1">
-
-                                <p id="{{form.game_id.value}}ou_bet" style="display: inline"></p>
-                                {% with 'app/img/logos/Under.svg' as image_static %}
-                                <img id="{{form.game_id.value}}under" src="{% static image_static %}"
-                                    class="rounded mx-auto d-block" style="display:none;width:30px;height:36px;">
-                                {% endwith %}
-                                {% with 'app/img/logos/Over.svg' as image_static %}
-                                <img id="{{form.game_id.value}}over" src="{% static image_static %}"
-                                    class="rounded mx-auto d-block" style="display:none;width:30px;height:36px;">
-                                {% endwith %}
-                                {% with 'app/img/logos/Blank.svg' as image_static %}
-                                <img id="{{form.game_id.value}}blankou" src="{% static image_static %}"
-                                    class="rounded mx-auto d-block" style="display:none;width:30px;height:36px;">
-                                {% endwith %}
-                            </td>
-                        </tr>
-                    </table>
+                                                    <p id="{{form.game_id.value}}ou_bet" style="display: inline"></p>
+                                                    {% with 'app/img/logos/Under.svg' as image_static %}
+                                                    <img id="{{form.game_id.value}}under" src="{% static image_static %}"
+                                                        class="rounded mx-auto d-block"
+                                                        style="display:none;width:30px;height:36px;">
+                                                    {% endwith %}
+                                                    {% with 'app/img/logos/Over.svg' as image_static %}
+                                                    <img id="{{form.game_id.value}}over" src="{% static image_static %}"
+                                                        class="rounded mx-auto d-block"
+                                                        style="display:none;width:30px;height:36px;">
+                                                    {% endwith %}
+                                                    {% with 'app/img/logos/Blank.svg' as image_static %}
+                                                    <img id="{{form.game_id.value}}blankou" src="{% static image_static %}"
+                                                        class="rounded mx-auto d-block"
+                                                        style="display:none;width:30px;height:36px;">
+                                                    {% endwith %}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div> <!--col-md-6 END-->
+                                    {% endifequal %}
+                                {% endfor %}
+                            </div><!--edit bet form END-->
+                            <div class="clearfix"></div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary">Save Picks</button>
+                    </form>
                 </div>
-                {% endifequal %}
-                {% endfor %}
             </div>
-            <div class="clearfix"></div>
-            {% endfor %}
-            <button type="submit" class="btn btn-primary">Save Picks</button>
-        </form>
-
+            <div class="col-sm-1"></div>
+        </div>
     </div> <!-- league-main -->
 
     </script>
