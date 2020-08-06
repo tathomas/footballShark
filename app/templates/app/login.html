@@ -12,7 +12,7 @@
     <title>FootballShark</title>
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'app/css/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/noscroll.css' %}" rel="stylesheet">
     <link href="{% static 'app/css/jumbotron.css' %}" rel="stylesheet">
     <script src="{% static 'app/js/ie-emulation-modes-warning.js' %}"></script>
 
@@ -51,7 +51,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+              <a class="nav-link disabled" href="/login">Sign In <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/faq">FAQ</a>
@@ -63,33 +63,34 @@
               <a class="nav-link disabled" href="/faq">Privacy Policy</a>
             </li>
           </ul>
-          <form action="{% url 'app:log_in' %}" method="post" class="navbar-form navbar-right mr-4">
-            {% csrf_token %}
-            <div class="form-group">
-              <input type="text" name="username" class="form-control" placeholder="username">
-            </div>
-            <div class="form-group">
-              <input type="password" name="password" class="form-control" placeholder="password">
-            </div>
-            <button type="submit" class="btn btn-light">Log in</button>
-          </form>
         </div>
         <!--/.navbar-collapse -->
       </nav>
     </header>
 
-    <main class="container league-main" role="main">
-
-    <div>
-    <h2>Log In</h2>
-		<form method="post">
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0 league-main">
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h2>Sign In</h2>
+          <form method="post">
+            <p>Don't have an account? <a href="/signup" role="button">Sign Up Here.</a></p>
             {% csrf_token %}
-			{{ auth_form.as_p }}
-            <button type="submit" class="btn btn-primary">Log In</button>
-        </form>
-    </div>
+            {{ auth_form.as_p }}
+            <p><small><a href="/password_reset">Forgot your Password?<a></small></p>
+            <button type="submit" class="btn btn-success">Sign In</button>
+          </form>
+        </div>
+        </div>
+      </div>
+    </main>
 
-	</main>
+  
+  <!-- Footer -->
+  <footer class="footer mt-auto py-3">
+    <span class="text-muted">Copyright ©2020 FootballShark LLC. All rights reserved.</span>
+  </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
