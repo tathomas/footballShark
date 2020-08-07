@@ -37,3 +37,7 @@ main {
 p label {
     display: inline;
 }
+
+ul.errorlist {
+    color: red;
+}
