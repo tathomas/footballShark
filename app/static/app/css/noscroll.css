@@ -26,3 +26,14 @@ main {
     text-align: left;
     padding: 10px;
 }
+
+.password-form {
+    display: table-cell;
+    vertical-align: middle;
+    height: 50px;
+    border: 1px solid red;
+}
+
+p label {
+    display: inline;
+}
