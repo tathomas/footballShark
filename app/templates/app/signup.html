@@ -75,10 +75,23 @@
       <div class="jumbotron">
         <div class="container">
           <h2>Sign Up</h2>
-          <p>Already have an account? <a href="/login" role="button">Sign In Here.</a></p>
           <form method="post">
+            <p>Already have an account? <a href="/login" role="button">Sign In Here.</a></p>
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+            <div class="row">
+              <div class="col-md-2">
+                {{ field.label_tag }}
+                {% if field.help_text %}
+                <sup>{{ field.help_text }}</sup>
+                {% endif %}
+                {{ field.errors }}
+              </div>
+              <div class="col-md-10 pull-left">
+                {{ field }}
+              </div>
+            </div>
+            {% endfor %}
             <button type="submit" class="btn btn-success">Sign up</button>
           </form>
         </div>
