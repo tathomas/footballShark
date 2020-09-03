@@ -77,7 +77,21 @@
           <form method="post">
             <p>Don't have an account? <a href="/signup" role="button">Sign Up Here.</a></p>
             {% csrf_token %}
-            {{ auth_form.as_p }}
+            {{ auth_form.non_field_errors }}
+            {% for field in auth_form %}
+            <div class="row">
+              <div class="col-md-2">
+                {{ field.label_tag }}
+                {% if field.help_text %}
+                <sup>{{ field.help_text }}</sup>
+                {% endif %}
+                {{ field.errors }}
+              </div>
+              <div class="col-md-10 pull-left">
+                {{ field }}
+              </div>
+            </div>
+            {% endfor %}
             <p><small><a href="/password_reset">Forgot your Password?<a></small></p>
             <button type="submit" class="btn btn-success">Sign In</button>
           </form>
