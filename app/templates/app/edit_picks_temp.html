@@ -140,20 +140,19 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="container edit-picks-form">
-                                                <h1>HI</h1>
+                                                {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
+                                                    <img src="{% static image_static %}" class="rounded"
+                                                        style="width:45px;height:54px;">
+                                                    {% endwith %}
+                                                    <h1>@</h1>
+                                                    {% with 'app/img/logos/'|add:game.team_2.icon_name|add:'.svg' as image_static %}
+                                                    <img src="{% static image_static %}" class="rounded"
+                                                        style="width:45px;height:54px;">
+                                                    {% endwith %}
+  
                                             </div>
                                             <h4>
-                                                {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
-                                                <img src="{% static image_static %}"
-                                                    class="rounded mx-auto d-block"
-                                                    style="width:45px;height:54px;">
-                                                {% endwith %}
-                                                @
-                                                {% with 'app/img/logos/'|add:game.team_2.icon_name|add:'.svg' as image_static %}
-                                                <img src="{% static image_static %}"
-                                                    class="rounded mx-auto d-block"
-                                                    style="width:45px;height:54px;">
-                                                {% endwith %}
+                                                
                                                 {{game.printSpreadInfo }}
                                             </h4>
                                         </div>
