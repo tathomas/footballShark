@@ -12,6 +12,10 @@
     display: inline-block;
     margin: 10px;
 }
-.edit-picks-form h1 {
+.edit-picks-form h4 {
     display: inline-block;
+}
+
+.edit-picks-form .container {
+    /* border: 2px solid blue; */
 }
