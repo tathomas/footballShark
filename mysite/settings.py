@@ -86,7 +86,7 @@ if db_url != False:
 	}
 else:
 	SECRET_KEY = '_w5f*5a%pjlwoe23vaut@-k5$xco@h7(1^5+quq_ob-e7igy1w'
-	DEBUG = False
+	DEBUG = True
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
