@@ -1,0 +1,21 @@
+* {
+    /* outline: 2px solid red; */
+}
+.edit-picks-form {
+    /* border: 2px solid red; */
+    display:  flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.edit-picks-form img {
+    display: inline-block;
+    margin: 10px;
+}
+.edit-picks-form h4 {
+    display: inline-block;
+}
+
+.edit-picks-form .container {
+    /* border: 2px solid blue; */
+}
