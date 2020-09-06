@@ -8,3 +8,4 @@ Thumbs.db
 *.sqlite
 *.pyc
 mysite/settings.py
+.vscode/settings.json
