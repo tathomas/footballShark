@@ -86,13 +86,13 @@ if db_url != False:
 	}
 else:
 	SECRET_KEY = '_w5f*5a%pjlwoe23vaut@-k5$xco@h7(1^5+quq_ob-e7igy1w'
-	DEBUG = True
+	DEBUG = False
 	DATABASES = {
 		'default': {
 			'ENGINE': 'django.db.backends.postgresql_psycopg2',
 			'NAME': 'local',
-			'USER': 'postgres',
-			'PASSWORD': 'SoniaIsLord', 
+			'USER': 'local',
+			'PASSWORD': 'local', 
 			'HOST': 'localhost',
 			'PORT': '5432',
 		}
