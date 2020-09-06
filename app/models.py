@@ -75,6 +75,7 @@ class Week(models.Model):
 	# 1 -> Lines added, betting in progress
 	# 2 -> Bets locked, games in progress
 	# 3 -> Scores locked, week is finished
+	# 4 -> Archived from previous year.
 	# Note that only a single week at a time has status 1 or 2.
 	status = models.IntegerField(default=0)
 
@@ -87,6 +88,9 @@ class Week(models.Model):
 
 	def SetPast(self):
 		self.status = 3
+
+	def SetArchived(self):
+		self.status = 4
 
 	def __str__(self):
 		return "Week " + str(self.num) + ", " + str(self.year) + ". Status: " + str(self.status)

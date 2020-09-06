@@ -293,11 +293,12 @@ def edit_picks(request):
         'games': games,
         'edit_bet_formset': formset,
     }
-	return render(request, 'app/edit_picks_temp.html', context)
+	return render(request, 'app/edit_picks.html', context)
 
 @login_required(login_url='/login')
 def league_week(request, league_id, week_num):
 
+	# TODO change to year=2020
 	week = Week.objects.get(num=week_num)
 	league = League.objects.get(id=league_id)
 	my_users = league.members.all()

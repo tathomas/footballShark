@@ -47,7 +47,7 @@ class Command(BaseCommand):
 			CommandError('That week could not be found')
 
 		# Set the Previous week as a past week
-		past_weeks = Week.objects.filter(num=week.num-1)
+		past_weeks = Week.objects.filter(num=week.num-1, year=2020)
 		if len(past_weeks):
 			past_week = past_weeks[0]
 			past_week.SetPast()
@@ -109,7 +109,7 @@ class Command(BaseCommand):
 			
 		if state == 0:
 			print("This is a newly loaded app - please add lines for Week 1")
-			week = Week.objects.get(num=1)
+			week = Week.objects.get(num=1, year=2020)
 			return self.add_new_lines(week)
 
 		if state == 1:
@@ -141,7 +141,7 @@ class Command(BaseCommand):
 				while answer2 != "y" and answer2 != "n":
 					answer2 = input("Are you sure? This will set the previous week as past, and unlock next week. (y/n)")
 				if answer2 == "y":
-					next_week = Week.objects.get(num=active_week.num+1)
+					next_week = Week.objects.get(num=active_week.num+1, year=2020)
 					self.add_new_lines(next_week)
 					self.send_update_email(active_week)
 			return 0
