@@ -9,3 +9,4 @@ Thumbs.db
 *.pyc
 mysite/settings.py
 .vscode/settings.json
+mysite/settings.py
