@@ -149,7 +149,6 @@
     </div><!-- End Top User Info Row -->
 
     <!-- Bottom Bet Card -->
-    {% if past_week_data %}
     <div class="row league-info">
       <div class="col-md-1"></div>
       <div class="col-md-10">
@@ -163,9 +162,7 @@
                   {% for week_tuple in past_week_data %}
                   <li><a href="#"> Week {{ week_tuple.0.num }}</a></li>
                   {% endfor %}
-                  {% if active_week.num !=  week_tuple.0.num %}
                   <li class="active"><a href="#"> Week {{active_week.num}} (Current)</a></li>
-                  {% endif %}
                 </ul>
                 <span><a class="next" href="#">>></a></span>
               </nav>
@@ -309,7 +306,6 @@
       </div>
       <div class="col-md-1"></div>
     </div><!-- End Bottom Bet Card-->
-    {% endif %}
   </main> <!-- league-main -->
 
 
