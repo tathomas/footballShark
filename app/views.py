@@ -298,8 +298,7 @@ def edit_picks(request):
 @login_required(login_url='/login')
 def league_week(request, league_id, week_num):
 
-	# TODO change to year=2020
-	week = Week.objects.get(num=week_num)
+	week = Week.objects.get(num=week_num, year=2020)
 	league = League.objects.get(id=league_id)
 	my_users = league.members.all()
 	if request.user not in my_users:
