@@ -101,3 +101,9 @@
 .btn-outline-success {
     border: green;
 }
+th {
+    text-align: center !important;
+}
+td {
+    vertical-align: middle !important;
+}

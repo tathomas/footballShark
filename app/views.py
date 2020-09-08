@@ -68,7 +68,7 @@ def render_user(request, person_id):
 	locked_weeks = Week.objects.filter(status=2)
 	past_weeks = Week.objects.filter(status=3)
 
-
+	total_score = 0
 
 	member = Member.objects.get(user=person)
 
@@ -114,6 +114,7 @@ def render_user(request, person_id):
 				past_week_tuples.append((columns, user_bets, member.get_game_score(game.index)))
 			past_week_data.append((week, past_week_tuples))
 			week_score = member.get_week_score(week)
+			total_score += week_score
 			results_scores.append((week, week_score))
 	if active_week:
 		games = Game.objects.filter(week=active_week).order_by('index')
@@ -143,6 +144,7 @@ def render_user(request, person_id):
 				my_col = 'white'
 			active_week_tuples.append((columns, user_bets, (my_score, my_col)))
 		week_score = member.get_week_score(active_week)
+		total_score += week_score
 		results_scores.append((active_week, week_score))
 
 	context = {
@@ -152,7 +154,8 @@ def render_user(request, person_id):
 		'past_week_data' : past_week_data, 
 		'betting_open' : betting_open, 
 		'results_scores' : results_scores,
-        'active_week': active_week
+        'active_week': active_week,
+		'total_score': total_score
 	}
 	return render(request, 'app/user.html', context)
 
