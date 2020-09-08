@@ -9,6 +9,7 @@
     display: inline-block;
     margin: 10px;
 }
-.edit-picks-form h4 {
-    display: inline-block;
+.team-title {
+    display: flex;
+    justify-content: center;
 }
