@@ -1,6 +1,3 @@
-* {
-    /* outline: 2px solid red; */
-}
 .edit-picks-form {
     /* border: 2px solid red; */
     display:  flex;
@@ -12,10 +9,7 @@
     display: inline-block;
     margin: 10px;
 }
-.edit-picks-form h4 {
-    display: inline-block;
-}
-
-.edit-picks-form .container {
-    /* border: 2px solid blue; */
+.team-title {
+    display: flex;
+    justify-content: center;
 }
