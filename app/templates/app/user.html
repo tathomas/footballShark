@@ -123,13 +123,13 @@
       <div class="col-md-8 flex-league-right flex-item">
           <div>
             {% if total_score < 0 %}
-            <h3>Results: <span style="color:red"> {{total_score }}</span> </h3>
+            <h3>Total Score: <span style="color:red"> {{total_score }}</span> </h3>
             {% endif %}
             {% if total_score > 0 %}
-            <h3>Results: <span style="color:green"> {{total_score}}</span></h3>
+            <h3>Total Score: <span style="color:green"> {{total_score}}</span></h3>
             {% endif %}
             {% if total_score = 0 %}
-            <h3>Results: {{total_score }}</h3>
+            <h3>Total Score: {{total_score }}</h3>
             {% endif %}
             <table class="table table-bordered">
               <thead>
@@ -158,9 +158,11 @@
     <div class="row league-info">
       <div class="col-md-1"></div>
       <div class="col-md-10">
+
         <!--BET TABLE CARD -->
         <div class="bet-card-box">
           <section id="content-body">
+            <!--BET TABLE NAVIGATION-->
             <div id="pagin">
               <nav class="justify-content-center">
                 <span><a class="prev" href="#">&lt;&lt;</a></span>
