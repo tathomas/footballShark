@@ -122,14 +122,14 @@
        <!--Results -->
       <div class="col-md-8 flex-league-right flex-item">
           <div>
-            {% if results_scores.0.1 < 0 %}
-            <h3>Results: <span style="color:red"> {{results_scores.0.1 }}</span> </h3>
+            {% if total_score < 0 %}
+            <h3>Results: <span style="color:red"> {{total_score }}</span> </h3>
             {% endif %}
-            {% if results_scores.0.1 > 0 %}
-            <h3>Results: <span style="color:green"> {{results_scores.0.1 }}</span></h3>
+            {% if total_score > 0 %}
+            <h3>Results: <span style="color:green"> {{total_score}}</span></h3>
             {% endif %}
-            {% if results_scores.0.1 = 0 %}
-            <h3>Results: {{results_scores.0.1 }}</h3>
+            {% if total_score = 0 %}
+            <h3>Results: {{total_score }}</h3>
             {% endif %}
             <table class="table table-bordered">
               <thead>
