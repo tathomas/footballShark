@@ -98,12 +98,11 @@
     </div><!-- End Top User Info Row -->
 
     <div class="clearfix"></div>
-
-    <!--Middle My Leagues and Results Row -->
     <div class="row league-info">
       <div class="col-md-1"></div>
+
+      <!--My League -->
       <div class="col-md-2 flex-info-league">
-        <!--My League -->
         <div class="flex-item">
           <h4>My Leagues</h4>
           <div class="league-box">
@@ -119,11 +118,12 @@
           </div>
         </div>
       </div>
-      <div class="col-md-8 flex-league-right">
-        <div class="flex-item">
-          <!--Results -->
+
+       <!--Results -->
+      <div class="col-md-8 flex-league-right flex-item">
           <h3>Results</h3>
           <div>
+            <h4>Total: {{ results_scores }}</h4>
             <table class="table table-bordered">
               <thead>
                 <tr>
@@ -144,7 +144,6 @@
             </table>
           </div>
         </div>
-      </div>
       <div class="col-md-1"></div>
     </div><!-- End Top User Info Row -->
 
