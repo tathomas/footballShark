@@ -138,7 +138,7 @@
                                 {% for game in games %}
                                     {% ifequal game.index form.game_id.value|add:"0" %}
                                     <div class="row edit-picks-form">
-                                            <div class="container">
+                                            <div class="col-xs-12 team-title">
                                                 {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
                                                     <img src="{% static image_static %}" class="rounded"
                                                         style="width:45px;height:54px;">
@@ -156,9 +156,9 @@
                                             <div class="container">
                                                 <table class="table table-bordered">
                                                     <tr>
-                                                        <td class="col-md-1"><label for="line_bet">Spread:</label></td>
-                                                        <td class="col-md-4">{{ form.line_bet }}</td>
-                                                        <td class="col-md-1">
+                                                        <td class="col-xs-1"><label for="line_bet">Spread:</label></td>
+                                                        <td class="col-xs-4">{{ form.line_bet }}</td>
+                                                        <td class="col-xs-1">
                                                             <p id="{{form.game_id.value}}line_bet" style="display: inline"></p>
                                                         {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
                                                             <img id="{{form.game_id.value}}away"
@@ -181,9 +181,9 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="col-md-1"><label for="ou_bet">Over/Under:</label></td>
-                                                        <td class="col-md-4">{{ form.ou_bet }}</td>
-                                                        <td class="col-md-1">
+                                                        <td class="col-xs-1"><label for="ou_bet">Over/Under:</label></td>
+                                                        <td class="col-xs-4">{{ form.ou_bet }}</td>
+                                                        <td class="col-xs-1">
                                                             <p id="{{form.game_id.value}}ou_bet" style="display: inline"></p>
                                                             {% with 'app/img/logos/Under.svg' as image_static %}
                                                             <img id="{{form.game_id.value}}under"
