@@ -1,0 +1,15 @@
+{% autoescape off %}
+
+{{ user.get_username }},
+
+It's the start of the season, and that means a clean slate. As a reminder, the lines will be posted on Tuesday morning each week and will lock at the start of the first game each week, usually on Thursday evening. 
+
+Here's the link to make your picks this week:
+
+http://www.footballshark.net/edit_picks
+
+The link will expire at the start of the game, so be sure to get your picks in by then! Go Bills!
+
+Sincerely,
+The Football Shark Team
+{% endautoescape %}

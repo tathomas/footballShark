@@ -85,6 +85,14 @@ class Command(BaseCommand):
 
 			send_mail("Week " + str(week.num) + " Update", msg_plain, 'FootballShark Team <admin@footballshark.net>', [user.email], fail_silently=False, html_message=msg_html)
 
+	def send_new_season_email(self, week):
+		for user in User.objects.all():
+			member = Member.objects.get(user=user)
+			msg_plain = render_to_string('app/new_season_email.txt', {'user':user, 'week': week})
+			msg_html = render_to_string('app/new_season_email.html', {'user':user, 'week': week})
+
+			send_mail("Week " + str(week.num) + " Update", msg_plain, 'FootballShark Team <admin@footballshark.net>', [user.email], fail_silently=False, html_message=msg_html)
+
 
 	def handle(self, *args, **options):
 
@@ -110,7 +118,8 @@ class Command(BaseCommand):
 		if state == 0:
 			print("This is a newly loaded app - please add lines for Week 1")
 			week = Week.objects.get(num=1, year=2020)
-			return self.add_new_lines(week)
+			self.add_new_lines(week)
+			self.send_new_season_email(week)
 
 		if state == 1:
 			answer = ""
