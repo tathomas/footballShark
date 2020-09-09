@@ -4,7 +4,7 @@
     box-sizing: border-box;
     /* outline: 1px dotted red; */
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767.98px) {
 
     /* For mobile phones: */
     .flex-info-left {
@@ -12,6 +12,14 @@
     }
     .flex-item {
         text-align: center;
+    }
+    .table-custom th,
+    .table-custom td {
+        padding: .3em !important;
+    }
+    .icon-img {
+        width: 30px;
+        height: 36px;
     }
 }
 .navbar {
@@ -86,9 +94,9 @@
 .flex-item h4 {
     text-align: center;
 }
-.league-info{
+/* .league-info{
     height: 400px;
-}
+} */
 .league-box {
     /* outline: 2px solid purple; */
     /* height: 25rem;
@@ -119,4 +127,8 @@ th {
 }
 td {
     vertical-align: middle !important;
+}
+.icon-img {
+    width:60px;
+    height:72px;
 }
