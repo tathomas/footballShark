@@ -13,3 +13,11 @@
     display: flex;
     justify-content: center;
 }
+th {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+td {
+    vertical-align: middle !important;
+}

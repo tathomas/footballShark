@@ -151,7 +151,7 @@
                                                 <h4> Over/Under: {{game.printOvUnInfo }}</h4>
                                             </div>
                                             <div class="container">
-                                                <table class="table table-bordered">
+                                                <table>
                                                     <tr>
                                                         <td class="col-xs-1"><label for="line_bet">Spread:</label></td>
                                                         <td class="col-xs-4">{{ form.line_bet }}</td>
@@ -161,19 +161,19 @@
                                                             <img id="{{form.game_id.value}}away"
                                                                 src="{% static image_static %}"
                                                                 class="rounded"
-                                                                style="display:none;width:30px;height:36px;">
+                                                                style="display:none;width:30px;height:36px;border:none;">
                                                         {% endwith %}
                                                         {% with 'app/img/logos/'|add:game.team_2.icon_name|add:'.svg' as image_static %}
                                                             <img id="{{form.game_id.value}}home"
                                                                 src="{% static image_static %}"
                                                                 class="rounded"
-                                                                style="display:none;width:30px;height:36px;">
+                                                                style="display:none;width:30px;height:36px;border:none;">
                                                         {% endwith %}
                                                         {% with 'app/img/logos/Blank.svg' as image_static %}
                                                             <img id="{{form.game_id.value}}blankspread"
                                                                 src="{% static image_static %}"
                                                                 class="rounded"
-                                                                style="display:none;width:30px;height:36px;">
+                                                                style="display:none;width:30px;height:36px;border:none;">
                                                         {% endwith %}
                                                         </td>
                                                     </tr>
