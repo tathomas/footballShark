@@ -155,7 +155,7 @@
                                                     <tr>
                                                         <td class="col-xs-1"><label for="line_bet">Spread:</label></td>
                                                         <td class="col-xs-4">{{ form.line_bet }}</td>
-                                                        <td class="col-xs-2">
+                                                        <td class="col-xs-2 col-md-1">
                                                             <p id="{{form.game_id.value}}line_bet" style="display: inline"></p>
                                                             {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
                                                             <img id="{{form.game_id.value}}away" src="{% static image_static %}" class="rounded"
@@ -174,7 +174,7 @@
                                                     <tr>
                                                         <td class="col-xs-1"><label for="ou_bet">Over/Under:</label></td>
                                                         <td class="col-xs-4">{{ form.ou_bet }}</td>
-                                                        <td class="col-xs-2">
+                                                        <td class="col-xs-2 col-md-1">
                                                             <p id="{{form.game_id.value}}ou_bet" style="display: inline"></p>
                                                             {% with 'app/img/logos/Under.svg' as image_static %}
                                                             <img id="{{form.game_id.value}}under" src="{% static image_static %}" class="rounded"
