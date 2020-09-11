@@ -139,7 +139,17 @@
                                             <div class="col-xs-12 team-title">
                                                 <table>
                                                     <tr>
-                                                        <td><sup>{{ game.printSpreadInfo }}</sup></td>
+                                                        <td>
+                                                            {% if game.printAwaySpreadInfo < 0 %}
+                                                            <sup><span
+                                                                    style="color: red;">{{ game.printAwaySpreadInfo }}</span></sup>
+                                                            {% elif game.printAwaySpreadInfo > 0 %}
+                                                            <sup><span style="color: green;">+
+                                                                    {{ game.printAwaySpreadInfo }}</span></sup>
+                                                            {% elif game.printAwaySpreadInfo = 0 %}
+                                                            <sup>{{ game.printSpreadInfo }}</sup>
+                                                            {% endif %}
+                                                        </td>
                                                         <td>
                                                             {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
                                                             <img src="{% static image_static %}"
@@ -157,7 +167,15 @@
                                                                 style="width:45px;height:54px;">
                                                             {% endwith %}
                                                         </td>
-                                                        <td><sup>{{ game.printAwaySpreadInfo }}</sup></td>
+                                                        <td> 
+                                                            {% if game.printSpreadInfo < 0 %}
+                                                            <sup><span style="color: red;">{{ game.printSpreadInfo }}</span></sup>
+                                                            {% elif game.printSpreadInfo > 0 %}
+                                                            <sup><span style="color: green;">+ {{ game.printSpreadInfo }}</span></sup>
+                                                            {% elif game.printSpreadInfo = 0 %}
+                                                            <sup>{{ game.printSpreadInfo }}</sup>
+                                                            {% endif %}
+                                                        </td>      
                                                     </tr>
                                                 </table>
                                             </div>
