@@ -115,10 +115,10 @@ class Game(models.Model):
 
 	@property
 	def printSpreadInfo(self):
-		return str(self.line_val)
+		return (self.line_val)
 
 	def printOvUnInfo(self):
-		return  str(self.ou_val)
+		return  (self.ou_val)
 
 	# Generates column headers for this game. Used by User and League_Week views.
 	def get_column_headers(self):
