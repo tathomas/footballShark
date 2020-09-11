@@ -179,13 +179,15 @@
                                                     </tr>
                                                 </table>
                                             </div>
+                                            <div class="col-xs-12">
+                                                <p>Total Points: <b>{{game.printOvUnInfo }}</b></p>
+                                            </div>
 
                                             <div class="container">
                                                 <table class="table table-bordered">
                                                     <tr>
                                                         <td class="col-xs-1">
                                                             <label for="line_bet">Spread</label>
-                                                            <p>{{game.printSpreadInfo }}</p>
                                                          </td>
                                                         <td class="col-xs-4">{{ form.line_bet }}</td>
                                                         <td class="col-xs-2 col-md-1">
@@ -207,7 +209,6 @@
                                                     <tr>
                                                         <td class="col-xs-1">
                                                             <label for="ou_bet">Over/Under</label>
-                                                            <p>{{game.printOvUnInfo }}</p>
                                                             </td>
                                                         <td class="col-xs-4">{{ form.ou_bet }}</td>
                                                         <td class="col-xs-2 col-md-1">
