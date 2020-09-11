@@ -139,6 +139,7 @@
                                             <div class="col-xs-12 team-title">
                                                 <table>
                                                     <tr>
+                                                        <td><sup>{{ game.printSpreadInfo }}</sup></td>
                                                         <td>
                                                             {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
                                                             <img src="{% static image_static %}"
@@ -156,6 +157,7 @@
                                                                 style="width:45px;height:54px;">
                                                             {% endwith %}
                                                         </td>
+                                                        <td><sup>{{ game.printAwaySpreadInfo }}</sup></td>
                                                     </tr>
                                                 </table>
                                             </div>
