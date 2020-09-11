@@ -140,6 +140,17 @@
                                                 <table>
                                                     <tr>
                                                         <td>
+                                                            {% if game.printAwaySpreadInfo < 0 %}
+                                                            <sup><span
+                                                                    style="color: red;">{{ game.printAwaySpreadInfo }}</span></sup>
+                                                            {% elif game.printAwaySpreadInfo > 0 %}
+                                                            <sup><span style="color: green;">+
+                                                                    {{ game.printAwaySpreadInfo }}</span></sup>
+                                                            {% elif game.printAwaySpreadInfo = 0 %}
+                                                            <sup>{{ game.printSpreadInfo }}</sup>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>
                                                             {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
                                                             <img src="{% static image_static %}"
                                                                 class="rounded"
@@ -156,8 +167,20 @@
                                                                 style="width:45px;height:54px;">
                                                             {% endwith %}
                                                         </td>
+                                                        <td> 
+                                                            {% if game.printSpreadInfo < 0 %}
+                                                            <sup><span style="color: red;">{{ game.printSpreadInfo }}</span></sup>
+                                                            {% elif game.printSpreadInfo > 0 %}
+                                                            <sup><span style="color: green;">+ {{ game.printSpreadInfo }}</span></sup>
+                                                            {% elif game.printSpreadInfo = 0 %}
+                                                            <sup>{{ game.printSpreadInfo }}</sup>
+                                                            {% endif %}
+                                                        </td>      
                                                     </tr>
                                                 </table>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <p>Total Points: <b>{{game.printOvUnInfo }}</b></p>
                                             </div>
 
                                             <div class="container">
@@ -165,7 +188,6 @@
                                                     <tr>
                                                         <td class="col-xs-1">
                                                             <label for="line_bet">Spread</label>
-                                                            <p>{{game.printSpreadInfo }}</p>
                                                          </td>
                                                         <td class="col-xs-4">{{ form.line_bet }}</td>
                                                         <td class="col-xs-2 col-md-1">
@@ -187,7 +209,6 @@
                                                     <tr>
                                                         <td class="col-xs-1">
                                                             <label for="ou_bet">Over/Under</label>
-                                                            <p>{{game.printOvUnInfo }}</p>
                                                             </td>
                                                         <td class="col-xs-4">{{ form.ou_bet }}</td>
                                                         <td class="col-xs-2 col-md-1">

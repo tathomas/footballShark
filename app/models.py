@@ -116,6 +116,9 @@ class Game(models.Model):
 	@property
 	def printSpreadInfo(self):
 		return (self.line_val)
+	
+	def printAwaySpreadInfo(self):
+		return ((self.line_val)*(-1))
 
 	def printOvUnInfo(self):
 		return  (self.ou_val)
