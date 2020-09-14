@@ -1,19 +1,17 @@
 {% autoescape off %}
 
-{{ user.get_username }},
+*{{user.get_username}},*
 
-It's the playoffs! And that means things are a little different. Here's how:
+Don't forget to lock in your picks for *Week {{ week.num }}!*
+Picks close at the start of the Thursday Games, so be sure to get your bets in by then.
 
-1. We think playoff games should be more valuable than regular season games. To make that happen, we multiply your scores at the end of the week. Each round the multiplier will increase, starting at two this for the wildcard round, and ending at five for the superbowl.
+Edit Your Picks ( http://www.footballshark.net/edit_picks )
 
-2. Games will lock at the start of the first game each week (since there are no Thursday games). The lines will continue to be posted on Tuesday morning each week. 
-
-Here's the link to make your picks this week:
+In case you forgot how, click the image above or follow this link:
 
 http://www.footballshark.net/edit_picks
 
-The link will expire at the start of the game, so be sure to get your picks in by then!
-
 Sincerely,
 The Football Shark Team
+
 {% endautoescape %}
