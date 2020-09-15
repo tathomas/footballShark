@@ -1,19 +1,366 @@
 {% autoescape off %}
 
-{{ user.get_username }},
-<br><br>
-It's the playoffs! And that means things are a little different. Here's how:
-<br><br>
-1. We think playoff games should be more valuable than regular season games. To make that happen, we multiply your scores at the end of the week. Each round the multiplier will increase, starting at two this for the wildcard round, and ending at five for the superbowl.
-<br><br>
-2. Games will lock at the start of the first game each week (since there are no Thursday games). The lines will continue to be posted on Tuesday morning each week. 
-<br><br>
-Here's the link to make your picks this week:
-<br><br>
-<a href="http://www.footballshark.net/edit_picks">Edit Picks</a>
-<br><br>
-The link will expire at the start of the game, so be sure to get your picks in by then!
-<br><br>
-Sincerely,<br>
-The Football Shark Team
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:o="urn:schemas-microsoft-com:office:office">
+{% load static %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <!--<![endif]-->
+    <!--[if (gte mso 9)|(IE)]>
+      <xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG/>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml>
+      <![endif]-->
+    <!--[if (gte mso 9)|(IE)]>
+  <style type="text/css">
+    body {width: 600px;margin: 0 auto;}
+    table {border-collapse: collapse;}
+    table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
+    img {-ms-interpolation-mode: bicubic;}
+  </style>
+<![endif]-->
+    <style type="text/css">
+        body,
+        p,
+        div {
+            font-family: arial, helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        body {
+            color: #000000;
+        }
+
+        body a {
+            color: #1188E6;
+            text-decoration: none;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        table.wrapper {
+            width: 100% !important;
+            table-layout: fixed;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        img.max-width {
+            max-width: 100% !important;
+        }
+
+        .column.of-2 {
+            width: 50%;
+        }
+
+        .column.of-3 {
+            width: 33.333%;
+        }
+
+        .column.of-4 {
+            width: 25%;
+        }
+
+        @media screen and (max-width:480px) {
+
+            .preheader .rightColumnContent,
+            .footer .rightColumnContent {
+                text-align: left !important;
+            }
+
+            .preheader .rightColumnContent div,
+            .preheader .rightColumnContent span,
+            .footer .rightColumnContent div,
+            .footer .rightColumnContent span {
+                text-align: left !important;
+            }
+
+            .preheader .rightColumnContent,
+            .preheader .leftColumnContent {
+                font-size: 80% !important;
+                padding: 5px 0;
+            }
+
+            table.wrapper-mobile {
+                width: 100% !important;
+                table-layout: fixed;
+            }
+
+            img.max-width {
+                height: auto !important;
+                max-width: 100% !important;
+            }
+
+            a.bulletproof-button {
+                display: block !important;
+                width: auto !important;
+                font-size: 80%;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+
+            .columns {
+                width: 100% !important;
+            }
+
+            .column {
+                display: block !important;
+                width: 100% !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            .social-icon-column {
+                display: inline-block !important;
+            }
+        }
+    </style>
+    <!--user entered Head Start-->
+    <!--End Head user entered-->
+</head>
+
+<body>
+    <center class="wrapper" data-link-color="#1188E6"
+        data-body-style="font-size:14px; font-family:arial,helvetica,sans-serif; color:#000000; background-color:#FFFFFF;">
+        <div class="webkit">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#FFFFFF">
+                <tr>
+                    <td valign="top" bgcolor="#FFFFFF" width="100%">
+                        <table width="100%" role="content-container" class="outer" align="center" cellpadding="0"
+                            cellspacing="0" border="0">
+                            <tr>
+                                <td width="100%">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                        <tr>
+                                            <td>
+                                                <!--[if mso]>
+    <center>
+    <table><tr><td width="600">
+  <![endif]-->
+                                                <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                                                    style="width:100%; max-width:600px;" align="center">
+                                                    <tr>
+                                                        <td role="modules-container"
+                                                            style="padding:0px 0px 0px 0px; color:#000000; text-align:left;"
+                                                            bgcolor="#FFFFFF" width="100%" align="left">
+                                                            <table class="module preheader preheader-hide" role="module"
+                                                                data-type="preheader" border="0" cellpadding="0"
+                                                                cellspacing="0" width="100%"
+                                                                style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
+                                                                <tr>
+                                                                    <td role="module-content">
+                                                                        <p></p>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                            <table class="module" role="module" data-type="text"
+                                                                border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                                style="table-layout: fixed;"
+                                                                data-muid="c4b5edb0-46a9-4959-9167-66502cfe4c16"
+                                                                data-mc-module-version="2019-10-22">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="padding:18px 0px 18px 0px; line-height:20px; text-align:inherit;"
+                                                                            height="100%" valign="top" bgcolor=""
+                                                                            role="module-content">
+                                                                            <div>
+                                                                                <div
+                                                                                    style="font-family: inherit; text-align: inherit">
+                                                                                    <span
+                                                                                        style="font-size: 24px"><strong>{{user.get_username}},</strong></span>
+                                                                                </div>
+                                                                                <div></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table class="module" role="module" data-type="text"
+                                                                border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                                style="table-layout: fixed;"
+                                                                data-muid="d9d2369a-5e90-4557-9f33-3c77bcf02701"
+                                                                data-mc-module-version="2019-10-22">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="padding:18px 0px 18px 0px; line-height:40px; text-align:inherit;"
+                                                                            height="100%" valign="top" bgcolor=""
+                                                                            role="module-content">
+                                                                            <div>
+                                                                                <div
+                                                                                    style="font-family: inherit; text-align: center">
+                                                                                    <span style="font-size: 18px">Don't
+                                                                                        forget to lock in your picks
+                                                                                        for&nbsp;</span><span
+                                                                                        style="font-size: 18px"><strong>Week
+                                                                                            {{week.num}}!</strong></span>
+                                                                                </div>
+                                                                                <div style="font-family: inherit; text-align: center">
+                                                                                    <span style="font-size: 14px;"><em>Picks will close at the start of the Thursday Games.</em></span></div>
+                                                                                <div></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table class="wrapper" role="module" data-type="image"
+                                                                border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                                style="table-layout: fixed;"
+                                                                data-muid="92cbbd17-c19e-48f9-94eb-ad862bf8189c">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;"
+                                                                            valign="top" align="center">
+
+                                                                            <a href="http://www.footballshark.net/edit_picks"><img
+                                                                                    class="max-width" border="0"
+                                                                                    style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px; max-width:100% !important; width:100%; height:auto !important;"
+                                                                                    width="600" alt="Edit Your Picks"
+                                                                                    data-proportionally-constrained="true"
+                                                                                    data-responsive="true"
+                                                                                    src="http://cdn.mcauto-images-production.sendgrid.net/4423c291b5d7a4c2/61ff2bc4-5ce9-4ede-a34c-85a94854d8d3/300x150.png"></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table class="module" role="module" data-type="text"
+                                                                border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                                style="table-layout: fixed;"
+                                                                data-muid="2c747a1f-2d55-429c-9175-4b23afe734b8"
+                                                                data-mc-module-version="2019-10-22">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="padding:18px 0px 2px 0px; line-height:20px; text-align:inherit;"
+                                                                            height="100%" valign="top" bgcolor=""
+                                                                            role="module-content">
+                                                                            <div>
+                                                                                <div
+                                                                                    style="font-family: inherit; text-align: center">
+                                                                                    <a href="http://www.footballshark.net/edit_picks">Edit Your Picks Here</a>
+                                                                                </div>
+                                                                                <div></div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table border="0" cellpadding="0" cellspacing="0"
+                                                                align="center" width="100%" role="module"
+                                                                data-type="columns" style="padding:0px 0px 0px 0px;"
+                                                                bgcolor="#FFFFFF">
+                                                                <tbody>
+                                                                    <tr role="module-content">
+                                                                        <td height="100%" valign="top">
+                                                                            <table width="290"
+                                                                                style="width:290px; border-spacing:0; border-collapse:collapse; margin:0px 10px 0px 0px;"
+                                                                                cellpadding="0" cellspacing="0"
+                                                                                align="left" border="0" bgcolor=""
+                                                                                class="column column-0">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td
+                                                                                            style="padding:0px;margin:0px;border-spacing:0;">
+                                                                                            <table class="module"
+                                                                                                role="module"
+                                                                                                data-type="text"
+                                                                                                border="0"
+                                                                                                cellpadding="0"
+                                                                                                cellspacing="0"
+                                                                                                width="100%"
+                                                                                                style="table-layout: fixed;"
+                                                                                                data-muid="c21285e8-1a48-4dbc-8954-733d165aa2f3"
+                                                                                                data-mc-module-version="2019-10-22">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td style="padding:18px 0px 18px 5px; line-height:20px; text-align:inherit;"
+                                                                                                            height="100%"
+                                                                                                            valign="top"
+                                                                                                            bgcolor=""
+                                                                                                            role="module-content">
+                                                                                                            <div>
+                                                                                                                <h4
+                                                                                                                    style="text-align: left">
+                                                                                                                    Sincerely,<br>
+                                                                                                                    The FootballShark Team
+                                                                                                                </h4>
+                                                                                                                <div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                            <table width="290"
+                                                                                style="width:290px; border-spacing:0; border-collapse:collapse; margin:0px 0px 0px 10px;"
+                                                                                cellpadding="0" cellspacing="0"
+                                                                                align="left" border="0" bgcolor=""
+                                                                                class="column column-1">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td
+                                                                                            style="padding:0px;margin:0px;border-spacing:0;">
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table class="module" role="module" data-type="spacer"
+                                                                border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                                style="table-layout: fixed;"
+                                                                data-muid="eac21e2b-ec04-4d31-a503-c5b701e56408">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="padding:0px 0px 30px 0px;"
+                                                                            role="module-content" bgcolor="">
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <!--[if mso]>
+                                  </td>
+                                </tr>
+                              </table>
+                            </center>
+                            <![endif]-->
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
+</body>
+
+</html>
+
+
 {% endautoescape %}
