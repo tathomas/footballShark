@@ -142,9 +142,9 @@
                                                         <td>
                                                             {% if game.printAwaySpreadInfo < 0 %}
                                                             <sup><span
-                                                                    style="color: red;">{{ game.printAwaySpreadInfo }}</span></sup>
+                                                                    style="color: red; font-size: medium;">{{ game.printAwaySpreadInfo }}</span></sup>
                                                             {% elif game.printAwaySpreadInfo > 0 %}
-                                                            <sup><span style="color: green;">+
+                                                            <sup><span style="color: green;font-size: medium;">+
                                                                     {{ game.printAwaySpreadInfo }}</span></sup>
                                                             {% elif game.printAwaySpreadInfo = 0 %}
                                                             <sup>{{ game.printSpreadInfo }}</sup>
@@ -169,11 +169,12 @@
                                                         </td>
                                                         <td> 
                                                             {% if game.printSpreadInfo < 0 %}
-                                                            <sup><span style="color: red;">{{ game.printSpreadInfo }}</span></sup>
+                                                            <sup><span style="color: red; font-size: medium;">{{ game.printSpreadInfo }}</span></sup>
                                                             {% elif game.printSpreadInfo > 0 %}
-                                                            <sup><span style="color: green;">+ {{ game.printSpreadInfo }}</span></sup>
+                                                            <sup><span style="color: green; font-size: medium;">+
+                                                                    {{ game.printSpreadInfo }}</span></sup>
                                                             {% elif game.printSpreadInfo = 0 %}
-                                                            <sup>{{ game.printSpreadInfo }}</sup>
+                                                            <sup style="font-size: medium;">{{ game.printSpreadInfo }}</sup>
                                                             {% endif %}
                                                         </td>      
                                                     </tr>
