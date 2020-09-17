@@ -1,7 +1,7 @@
 from django import forms
 from django.forms.widgets import NumberInput
 from django.core.validators import MaxValueValidator, MinValueValidator
-from app.models import League, Member
+from app.models import League, Member, Game
 
 from django.forms.widgets import NumberInput
 from django.contrib.auth.forms import UserCreationForm

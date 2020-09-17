@@ -142,9 +142,9 @@
                                                         <td>
                                                             {% if game.printAwaySpreadInfo < 0 %}
                                                             <sup><span
-                                                                    style="color: red;">{{ game.printAwaySpreadInfo }}</span></sup>
+                                                                    style="color: red; font-size: medium;">{{ game.printAwaySpreadInfo }}</span></sup>
                                                             {% elif game.printAwaySpreadInfo > 0 %}
-                                                            <sup><span style="color: green;">+
+                                                            <sup><span style="color: green;font-size: medium;">+
                                                                     {{ game.printAwaySpreadInfo }}</span></sup>
                                                             {% elif game.printAwaySpreadInfo = 0 %}
                                                             <sup>{{ game.printSpreadInfo }}</sup>
@@ -154,33 +154,34 @@
                                                             {% with 'app/img/logos/'|add:game.team_1.icon_name|add:'.svg' as image_static %}
                                                             <img src="{% static image_static %}"
                                                                 class="rounded"
-                                                                style="width:45px;height:54px;">
+                                                                style="width:60px;height:60px;">
                                                             {% endwith %}
                                                         </td>
                                                         <td>
-                                                            <h4>@</h4>
+                                                            <h3>@</h3>
                                                         </td>
                                                         <td>
                                                             {% with 'app/img/logos/'|add:game.team_2.icon_name|add:'.svg' as image_static %}
                                                             <img src="{% static image_static %}"
                                                                 class="rounded"
-                                                                style="width:45px;height:54px;">
+                                                                style="width:60px;height:60px;">
                                                             {% endwith %}
                                                         </td>
                                                         <td> 
                                                             {% if game.printSpreadInfo < 0 %}
-                                                            <sup><span style="color: red;">{{ game.printSpreadInfo }}</span></sup>
+                                                            <sup><span style="color: red; font-size: medium;">{{ game.printSpreadInfo }}</span></sup>
                                                             {% elif game.printSpreadInfo > 0 %}
-                                                            <sup><span style="color: green;">+ {{ game.printSpreadInfo }}</span></sup>
+                                                            <sup><span style="color: green; font-size: medium;">+
+                                                                    {{ game.printSpreadInfo }}</span></sup>
                                                             {% elif game.printSpreadInfo = 0 %}
-                                                            <sup>{{ game.printSpreadInfo }}</sup>
+                                                            <sup style="font-size: medium;">{{ game.printSpreadInfo }}</sup>
                                                             {% endif %}
                                                         </td>      
                                                     </tr>
                                                 </table>
                                             </div>
                                             <div class="col-xs-12">
-                                                <p>Total Points: <b>{{game.printOvUnInfo }}</b></p>
+                                                <p style="font-size: large;">Total Points: <b>{{game.printOvUnInfo }}</b></p>
                                             </div>
 
                                             <div class="container">
@@ -200,8 +201,8 @@
                                                             <img id="{{form.game_id.value}}home" src="{% static image_static %}" class="rounded"
                                                                 style="display:none;width:30px;height:36px;border:none;">
                                                             {% endwith %}
-                                                            {% with 'app/img/logos/Blank.svg' as image_static %}
-                                                            <img id="{{form.game_id.value}}blankspread" src="{% static image_static %}" class="rounded"
+                                                            {% with 'app/img/logos/NoBet.png' as image_static %}
+                                                            <img id="{{form.game_id.value}}blankspread" src="{% static image_static %}" 
                                                                 style="display:none;width:30px;height:36px;border:none;">
                                                             {% endwith %}
                                                     </td>
@@ -221,8 +222,8 @@
                                                             <img id="{{form.game_id.value}}over" src="{% static image_static %}" class="rounded"
                                                                 style="display:none;width:30px;height:36px;">
                                                             {% endwith %}
-                                                            {% with 'app/img/logos/Blank.svg' as image_static %}
-                                                            <img id="{{form.game_id.value}}blankou" src="{% static image_static %}" class="rounded"
+                                                            {% with 'app/img/logos/NoBet.png' as image_static %}
+                                                            <img id="{{form.game_id.value}}blankou" src="{% static image_static %}"
                                                                 style="display:none;width:30px;height:36px;">
                                                             {% endwith %}
                                                         </td>
