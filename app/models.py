@@ -1,3 +1,4 @@
+from django.core.management.base import CommandError
 from django.db import models
 from django.contrib.auth.models import User
 
