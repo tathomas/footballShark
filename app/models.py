@@ -1,4 +1,3 @@
-from django.core.management.base import CommandError
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -130,17 +129,6 @@ class Game(models.Model):
 		col_1 = (str(self.team_1.icon_name()), str(self.score_1),  str(self.team_2.icon_name()) , str(self.score_2), " (" + str(self.line_val) + ")")
 		col_2 = ("Over", str(self.score_1+self.score_2), "Under", str(self.score_1+self.score_2),  "(" + str(self.ou_val) + ")")
 		return [col_1, col_2]
-	
-	def get_league_headers(self):
-
-		away_team = str(self.team_1.icon_name())
-		away_score = (self.score_1)
-		home_team = str(self.team_2.icon_name()) 
-		home_score = (self.score_2)
-		spread_val = (self.line_val)
-		total_game_score = (self.score_1+self.score_2)
-		ovun_val = (self.ou_val)
-		return [away_team,away_score,home_team,home_score,spread_val,ovun_val,total_game_score]
 
 	# Get background colors to use for this game. Returns four colors
 	def get_colors(self):
