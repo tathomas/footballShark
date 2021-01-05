@@ -101,12 +101,12 @@
     </div>
 
     <div class="col-md-10">
-      <table id="userTable" class="table table-striped table-bordered btn-table" >
+      <table id="userTable" class="table table-striped table-bordered btn-table " >
         <thead>
           <th class="col-md-1"><i class="fa float-right" aria-hidden="true">Player</i></th>
           <th class="col-md-1"><i class="fa fa-sort float-right" aria-hidden="true">Total</i></th>
           {% for week in inverted_weeks %}
-          <th class="col-md-1"><a href="/league_week/{{league.id}}/{{week.num}}"><button type="button" class="btn btn-success">Week {{ week.num }} Results</button></a></th>
+          <th class="col-md-1"><a href="/league_week/{{league.id}}/{{week.num}}"><button type="button" class="btn btn-success">Week {{ week.num }}</button></a></th>
           {% endfor %}
         </thead>
         <tbody>
@@ -142,14 +142,14 @@
   <script src="{% static 'app/js/addons/datatables.min.js' %}"></script>
   
   <script>
-	$(document).ready(function () {
-	  $('#userTable').DataTable({
-			"scrollX": true,
-			"paging": false,
-			"order": [[ 1, "desc" ]],
-		});
-	  $('.dataTables_length').addClass('bs-select');
-	});
+    $(document).ready(function () {
+      $('#userTable').DataTable({
+        "scrollX": true,
+        "paging": false,
+        "order": [[ 1, "desc" ]],
+      });
+      $('.dataTables_length').addClass('bs-select');
+    });
   </script>
 
   </body>
