@@ -202,8 +202,8 @@ class BetCard(models.Model):
 
 		week_num = self.game.week.num
 		multiplier = 1
-		if week_num > 19:
-			multiplier += week_num - 19
+		if week_num > 20:
+			multiplier += week_num - 20
 
 		self.score *= multiplier
 

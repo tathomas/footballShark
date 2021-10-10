@@ -66,7 +66,7 @@ def render_user(request, person_id):
 	
 	active_weeks = Week.objects.filter(status=1)
 	locked_weeks = Week.objects.filter(status=2)
-	past_weeks = Week.objects.filter(status=3)
+	past_weeks = Week.objects.filter(status=3).order_by('num')
 
 	total_score = 0
 
@@ -167,7 +167,7 @@ def render_league(request, league_id):
 	if request.user not in my_users:
 		raise Http404("User is not a member of requested League.")
 
-	weeks = Week.objects.filter(status__in=[1,2,3])
+	weeks = Week.objects.filter(status__in=[1,2,3]).order_by('num')
 	members = Member.objects.filter(user__in=my_users)
 
 	inverted_weeks = []
@@ -301,7 +301,7 @@ def edit_picks(request):
 @login_required(login_url='/login')
 def league_week(request, league_id, week_num):
 
-	week = Week.objects.get(num=week_num, year=2020)
+	week = Week.objects.get(num=week_num, year=2021)
 	league = League.objects.get(id=league_id)
 	my_users = league.members.all()
 	if request.user not in my_users:
