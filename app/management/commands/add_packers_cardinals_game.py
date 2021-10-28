@@ -9,7 +9,7 @@ class Command(BaseCommand):
 	def add_game(self):
 
 
-		team1 = Team.objects.get(name = "Green Bay  Packers")
+		team1 = Team.objects.get(name = "Green Bay Packers")
 		team2 = Team.objects.get(name = "Arizona Cardinals")
 		
 		week, created = Week.objects.get_or_create(year=2021, num = 8)
