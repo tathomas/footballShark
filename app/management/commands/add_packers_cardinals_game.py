@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from app.models import Team, Week, Game
+from app.models import Team, Week, Game, User, Member
 import pandas as pd
 from datetime import datetime
 
@@ -21,11 +21,15 @@ class Command(BaseCommand):
 
 		game.save()
 
-		members = Member.objects.all()
+		users = User.objects.all()
 
-		for member in members:
-			card = BetCard.objects.create(user=member, game=game)
-			card.save()
+		for user in users:
+			try:
+				member = Member.objects.get(user=user)
+				card = BetCard.objects.create(user=member, game=game)
+				card.save()
+			except Member.DoesNotExist:
+				member = None
 
 
 	def handle(self, *args, **options):
