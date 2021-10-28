@@ -23,9 +23,9 @@ class Command(BaseCommand):
 
 		members = Member.objects.all()
 
-        for member in members:
-            card = BetCard.objects.create(user=member, game=game)
-            card.save()
+		for member in members:
+			card = BetCard.objects.create(user=member, game=game)
+			card.save()
 
 
 	def handle(self, *args, **options):
