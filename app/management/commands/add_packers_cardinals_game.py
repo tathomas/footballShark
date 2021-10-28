@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from app.models import Team, Week, Game, User, Member
+from app.models import Team, Week, Game, User, Member, BetCard
 import pandas as pd
 from datetime import datetime
 
