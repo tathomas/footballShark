@@ -17,7 +17,7 @@ class Command(BaseCommand):
 
 
 	def load_games(self):
-		input_data = pd.read_csv("./app/management/Data/2021Games.csv", header=0).loc[:, :'Line']
+		input_data = pd.read_csv("./app/management/Data/2022Games.csv", header=0).loc[:, :'Line']
 		my_data = input_data.drop(["Line"],axis=1)
 
 		for ind, line in enumerate(my_data.as_matrix()):
