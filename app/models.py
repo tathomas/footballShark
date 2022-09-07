@@ -178,9 +178,6 @@ class Membership(models.Model):
 	date_joined = models.DateField()
 	is_commish = models.BooleanField(default=False)
 
-	def __str__(self):
-		return str(user) + " joined " + str(league) + " on " + str(date_joined)
-
 # Represents a single bet per user, per game. 
 class BetCard(models.Model):
 	game = models.ForeignKey(Game, on_delete=models.CASCADE)
