@@ -99,8 +99,8 @@ class Week(models.Model):
 # Represents a single game. Contains the static information on the game, 
 # and is updated with line/o_u and then scores as the season progresses.
 class Game(models.Model):
-	team_1 = models.ForeignKey(Team, related_name='team_1')
-	team_2 = models.ForeignKey(Team, related_name='team_2')
+	team_1 = models.ForeignKey(Team, related_name='team_1', on_delete=models.CASCADE)
+	team_2 = models.ForeignKey(Team, related_name='team_2', on_delete=models.CASCADE)
 	score_1 = models.IntegerField(default=0)
 	score_2 = models.IntegerField(default=0)
 	date = models.DateField()
