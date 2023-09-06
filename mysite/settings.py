@@ -37,7 +37,7 @@ INSTALLED_APPS = [
 	'django.contrib.admindocs',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
   	'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -78,7 +78,8 @@ db_url = env.get('DATABASE_URL', False)
 
 if db_url != False:
 	SECRET_KEY = config('SECRET_KEY')
-	DEBUG = config('DEBUG', default=False, cast=bool)
+	DEBUG = True
+	# DEBUG = config('DEBUG', default=False, cast=bool)
 	DATABASES = {
 		'default': dj_database_url.config(
 		    default=config('DATABASE_URL')
