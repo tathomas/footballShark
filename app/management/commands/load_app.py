@@ -20,7 +20,7 @@ class Command(BaseCommand):
 		input_data = pd.read_csv("./app/management/Data/2023Games.csv", header=0).loc[:, :'Line']
 		my_data = input_data.drop(["Line"],axis=1)
 
-		for ind, line in enumerate(my_data.as_matrix()):
+		for ind, line in enumerate(my_data.values()):
 			team1 = Team.objects.get(name = line[6])
 			team2 = Team.objects.get(name = line[5])
 			
