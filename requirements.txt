@@ -17,7 +17,7 @@ oauthlib==1.0.3
 # onboard==1.2.0
 padme==1.1.1
 pandas==1.2.4
-psycopg2==2.7.5
+psycopg2==2.9.7
 python-dateutil==2.7.3
 python-decouple==3.1
 pytz==2020.1
