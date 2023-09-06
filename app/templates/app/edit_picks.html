@@ -149,7 +149,7 @@
                             <div class="edit_bet_form">
                                 {{ form.game_id.as_hidden }}
                                 {% for game in games %}
-                                    {% ifequal game.index form.game_id.value|add:"0" %}
+                                    {% if game.index == form.game_id.value|add:"0" %}
                                     <div class="row edit-picks-form">
                                             <div class="col-xs-12 team-title">
                                                 <table>
