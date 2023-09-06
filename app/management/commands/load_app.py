@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from app.models import Team, Week, Game
 import pandas as pd
+import numpy as numpy
 from datetime import datetime
 
 class Command(BaseCommand):
