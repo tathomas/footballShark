@@ -161,7 +161,7 @@
                                                             {% elif game.printAwaySpreadInfo > 0 %}
                                                             <sup><span style="color: green;font-size: medium;">+
                                                                     {{ game.printAwaySpreadInfo }}</span></sup>
-                                                            {% elif game.printAwaySpreadInfo = 0 %}
+                                                            {% elif game.printAwaySpreadInfo == 0 %}
                                                             <sup>{{ game.printSpreadInfo }}</sup>
                                                             {% endif %}
                                                         </td>
