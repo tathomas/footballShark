@@ -17,7 +17,7 @@ oauthlib==1.0.3
 padme==1.1.1
 pandas==1.2.4
 psycopg2==2.7.5
-python-dateutil==2.6.0
+python-dateutil==2.7.3
 python-decouple==3.1
 pytz==2020.1
 requests==2.19.1
