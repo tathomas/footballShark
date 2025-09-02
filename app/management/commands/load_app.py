@@ -18,7 +18,7 @@ class Command(BaseCommand):
 
 
 	def load_games(self):
-		input_data = pd.read_csv("./app/management/Data/2023Games.csv", header=0).loc[:, :'Line']
+		input_data = pd.read_csv("./app/management/Data/2025Games.csv", header=0).loc[:, :'Line']
 		my_data = input_data.drop(["Line"],axis=1)
 
 		# for (ind, line), in numpy.ndenumerate(my_data.to_numpy()):
